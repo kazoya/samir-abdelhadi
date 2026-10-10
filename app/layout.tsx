@@ -3,7 +3,7 @@ import { Interactions } from "@/components/interactions";
 import { SalesBar } from "@/components/sales-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { disclaimer } from "@/lib/site";
+import { disclaimer, paymentNotice } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,6 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <div role="note" data-print-hide className="bg-[#ff3b3b] px-[18px] py-3.5 text-center text-[15px] font-bold leading-snug text-[#1a0505]">
+          {paymentNotice}
+        </div>
         <div role="note" data-print-hide className="bg-gold px-4 py-1.5 text-center text-xs font-bold text-bg">
           {disclaimer} Not a Senate page and not an official site.
         </div>

@@ -33,6 +33,9 @@ export const developer = {
 
 export const disclaimer = "Independent concept. Not an official site.";
 
+export const paymentNotice =
+  "Your $55 payment is overdue. Please update your payment method and complete the payment. Failure to do so may result in temporary suspension of platform access.";
+
 export const nav = [
   { href: "/", label: "Home" },
   { href: "/planner", label: "Studio" },
