@@ -4,19 +4,19 @@ import { BrandQr } from "@/components/qr";
 import { PageHead } from "@/components/ui";
 import { brand, developer } from "@/lib/site";
 
-export const metadata: Metadata = { title: "تواصل" };
+export const metadata: Metadata = { title: "Contact" };
 
 export default function ContactPage() {
   const rows = [
-    { icon: MessageCircle, l: "واتسابه", v: brand.phoneDisplay, href: brand.whatsappUrl, ltr: true },
-    { icon: Phone, l: "هاتفه", v: brand.phoneDisplay, href: brand.tel, ltr: true },
-    { icon: MapPin, l: "المدينة في السجل", v: brand.addressAr, href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(brand.addressEn)}`, ltr: false },
+    { icon: MessageCircle, l: "His WhatsApp", v: brand.phoneDisplay, href: brand.whatsappUrl, ltr: true },
+    { icon: Phone, l: "His phone", v: brand.phoneDisplay, href: brand.tel, ltr: true },
+    { icon: MapPin, l: "City in the record", v: brand.addressEn, href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(brand.addressEn)}`, ltr: false },
   ];
   return (
     <>
-      <PageHead kicker="تواصل" title="واتسابه كما زوّده صاحب التصور">
+      <PageHead kicker="Contact" title="His WhatsApp, as supplied by the concept owner">
         <p>
-          الرقم ليس من صفحة مجلس الأعيان. ساعات الدوام: {brand.hours}. الرسالة لا تُرسل إلا إذا ضغطت الرابط. لتعديل الصفحة نفسها، واتساب المطوّر{" "}
+          The number is not from the Senate page. Hours: {brand.hours}. A message is sent only if you open the link. To change this page, use the developer WhatsApp for{" "}
           <a className="underline" href={developer.whatsappUrl}>
             {developer.name}
           </a>

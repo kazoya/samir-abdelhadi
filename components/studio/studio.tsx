@@ -19,11 +19,11 @@ import { Wizard, type Partial5 } from "./wizard";
 
 type Tab = "recs" | "plan" | "calendar" | "brief" | "compare";
 const TABS: { id: Tab; label: string }[] = [
-  { id: "recs", label: "التوصيات" },
-  { id: "plan", label: "خطة 30 يوماً" },
-  { id: "calendar", label: "تقويم المحتوى" },
-  { id: "brief", label: "الموجز والتصدير" },
-  { id: "compare", label: "مقارنة" },
+  { id: "recs", label: "Recommendations" },
+  { id: "plan", label: "30-day plan" },
+  { id: "calendar", label: "Calendar" },
+  { id: "brief", label: "Brief" },
+  { id: "compare", label: "Compare" },
 ];
 
 const toAnswers = (p: Partial5) => parseAnswers({ schemaVersion: 1, ...p });
@@ -60,20 +60,20 @@ export function Studio() {
   const finishWizard = (p: Partial5) => {
     const r = toAnswers(p);
     if (!r.success) {
-      setNotice({ kind: "error", text: r.errors.map((e) => e.message).join("، ") });
+      setNotice({ kind: "error", text: r.errors.map((e) => e.message).join(", ") });
       return;
     }
     if (!draft) {
       setDraft(newDraft(r.data, todayIso()));
       setEditing(false);
       setTab("recs");
-      setNotice({ kind: "info", text: "جاهزة: توصياتك الأولية وخطة 30 يوماً وتقويم محتوى قابل للتعديل." });
+      setNotice({ kind: "info", text: "Ready: first recommendations, a 30-day plan, and a calendar you can edit." });
     } else if (edited && JSON.stringify(r.data) !== JSON.stringify(draft.answers)) {
-      setPending(r.data); // لا نستبدل تعديلات المستخدم دون سؤال
+      setPending(r.data);
     } else {
       setDraft(applyAnswers(draft, r.data, { regenerateEdited: false }));
       setEditing(false);
-      setNotice({ kind: "info", text: "حُدّثت التوصيات والخطة وفق إجاباتك الجديدة." });
+      setNotice({ kind: "info", text: "Recommendations and the plan were updated from your new answers." });
     }
   };
 
@@ -82,7 +82,7 @@ export function Studio() {
     setDraft(applyAnswers(draft, pending, { regenerateEdited: regenerate }));
     setPending(null);
     setEditing(false);
-    setNotice({ kind: "info", text: regenerate ? "أُعيد توليد المهام والتقويم وفق الإجابات الجديدة." : "حُدّثت التوصيات واحتُفظ بتعديلاتك على المهام والتقويم." });
+    setNotice({ kind: "info", text: regenerate ? "Tasks and the calendar were rebuilt from the new answers." : "Recommendations were updated and your edits to tasks and the calendar were kept." });
   };
 
   const setTasks = (tasks: Task[]) => draft && setDraft({ ...draft, tasks, updatedAt: new Date().toISOString(), userEdited: { ...draft.userEdited, tasks: true } });
@@ -91,7 +91,7 @@ export function Studio() {
   const save = (s: Slot) => {
     if (!draft) return;
     const r = saveDraft(s, { ...draft, updatedAt: new Date().toISOString() });
-    setNotice(r.ok ? { kind: "ok", text: `حُفظت كمسودة ${s} على هذا الجهاز فقط.` } : { kind: "error", text: saveErrorText[r.reason] });
+    setNotice(r.ok ? { kind: "ok", text: `Saved as draft ${s} on this device only.` } : { kind: "error", text: saveErrorText[r.reason] });
     if (r.ok) refreshSlots();
   };
 
@@ -106,11 +106,11 @@ export function Studio() {
   const load = (s: Slot) => {
     const r = loadDraft(s);
     if (!r || !r.success) {
-      setNotice({ kind: "error", text: `تعذّر فتح مسودة ${s}${r && !r.success ? `: ${r.errors[0]?.message}` : ""}.` });
+      setNotice({ kind: "error", text: `Could not open draft ${s}${r && !r.success ? `: ${r.errors[0]?.message}` : ""}.` });
       return;
     }
     if (draft && edited) setConfirm({ kind: "load", slot: s });
-    else openDraft(r.data, `فُتحت مسودة ${s}.`);
+    else openDraft(r.data, `Opened draft ${s}.`);
   };
 
   const importFile = async (f: File) => {
@@ -119,17 +119,17 @@ export function Studio() {
       if (f.size > LIMITS.importBytes) throw new RangeError();
       text = await f.text();
     } catch (e) {
-      setNotice({ kind: "error", text: e instanceof RangeError ? `الملف أكبر من ${LIMITS.importBytes / 1024} KiB. لم يتغير شيء.` : "تعذّرت قراءة الملف. لم يتغير شيء." });
+      setNotice({ kind: "error", text: e instanceof RangeError ? `The file is larger than ${LIMITS.importBytes / 1024} KiB. Nothing changed.` : "The file could not be read. Nothing changed." });
       return;
     }
     const r = parseImportText(text, f.size);
     if (!r.success) {
       const first = r.errors.slice(0, 3).map((e) => (e.path ? `${e.path}: ${e.message}` : e.message));
-      setNotice({ kind: "error", text: `لم يُستورد الملف — خطتك الحالية لم تتغير. ${first.join("؛ ")}${r.errors.length > 3 ? ` (+${r.errors.length - 3})` : ""}` });
+      setNotice({ kind: "error", text: `The file was not imported. Your current plan did not change. ${first.join("; ")}${r.errors.length > 3 ? ` (+${r.errors.length - 3})` : ""}` });
       return;
     }
     if (draft) setConfirm({ kind: "import", draft: r.data });
-    else openDraft(r.data, "استُوردت الخطة من الملف.");
+    else openDraft(r.data, "The plan was imported from the file.");
   };
 
   const doReset = () => {
@@ -146,9 +146,9 @@ export function Studio() {
     setNotice(
       wipeSaved
         ? wiped
-          ? { kind: "ok", text: "صُفّرت الجلسة وحُذفت المسودات المحفوظة على هذا الجهاز." }
-          : { kind: "error", text: "صُفّرت الجلسة، لكن تعذّر حذف المسودات المحفوظة من التخزين." }
-        : { kind: "ok", text: "صُفّرت الجلسة. المسودات المحفوظة بقيت كما هي." },
+          ? { kind: "ok", text: "The session was reset and the saved drafts on this device were deleted." }
+          : { kind: "error", text: "The session was reset, but the saved drafts could not be deleted from storage." }
+        : { kind: "ok", text: "The session was reset. Saved drafts were left as they were." },
     );
     setWipeSaved(false);
   };
@@ -168,11 +168,11 @@ export function Studio() {
             onChange={setPartial}
             onStep={setStep}
             onDone={finishWizard}
-            note={goalFromUrl && !draft ? `الهدف محدد مسبقاً: «${goalLabel[goalFromUrl]}» — يمكنك تغييره في السؤال الثاني.` : undefined}
+            note={goalFromUrl && !draft ? `Goal preset: “${goalLabel[goalFromUrl]}”. You can change it on question 2.` : undefined}
           />
           {draft && (
             <button type="button" onClick={() => setEditing(false)} className="btn mt-4 border border-line text-sm font-normal text-muted hover:text-ink">
-              ارجع إلى خطتي دون تغيير
+              Back to my plan, unchanged
             </button>
           )}
         </div>
@@ -194,7 +194,7 @@ export function Studio() {
           </Panel>
           <Panel idBase="studio" id="plan" active={tab === "plan"}>
             <label className="mb-4 flex flex-wrap items-center gap-3 text-sm">
-              <span className="font-bold">تاريخ البداية</span>
+              <span className="font-bold">Start date</span>
               <input
                 type="date"
                 value={draft.startDate}
@@ -227,7 +227,7 @@ export function Studio() {
               onLoad={load}
               onDelete={(s) => {
                 const ok = deleteDraft(s);
-                setNotice(ok ? { kind: "ok", text: `حُذفت مسودة ${s} من هذا الجهاز.` } : { kind: "error", text: `تعذّر حذف مسودة ${s}.` });
+                setNotice(ok ? { kind: "ok", text: `Draft ${s} was deleted from this device.` } : { kind: "error", text: `Draft ${s} could not be deleted.` });
                 refreshSlots();
               }}
               onImport={importFile}
@@ -242,53 +242,53 @@ export function Studio() {
         </>
       )}
 
-      <Dialog open={!!pending} onClose={closePending} title="لديك تعديلات على الخطة">
-        <p>غيّرت إجاباتك بعد تعديل المهام أو التقويم. التوصيات ستتحدث في الحالتين. ماذا نفعل بتعديلاتك؟</p>
+      <Dialog open={!!pending} onClose={closePending} title="You edited the plan">
+        <p>You changed your answers after editing tasks or the calendar. Recommendations update either way. What should happen to your edits?</p>
         <div className="mt-5 grid gap-2 sm:grid-cols-2">
           <button type="button" autoFocus onClick={() => resolvePending(false)} className="btn btn-primary text-sm">
-            احتفظ بتعديلاتي
+            Keep my edits
           </button>
           <button type="button" onClick={() => resolvePending(true)} className="btn btn-ghost text-sm">
-            أعد توليد المهام والتقويم
+            Rebuild tasks and the calendar
           </button>
         </div>
       </Dialog>
 
-      <Dialog open={confirm?.kind === "reset"} onClose={closeConfirm} title="ابدأ من جديد؟">
-        <p>سيُمسح الاسم والإجابات والخطة المفتوحة الآن. لا يمكن التراجع إلا من ملف JSON مُصدَّر.</p>
+      <Dialog open={confirm?.kind === "reset"} onClose={closeConfirm} title="Start over?">
+        <p>The name, the answers, and the open plan will be cleared. You can restore them only from an exported JSON file.</p>
         <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3 text-sm text-ink">
           <input type="checkbox" checked={wipeSaved} onChange={(e) => setWipeSaved(e.target.checked)} className="size-5 accent-[var(--c-gold)]" />
-          احذف أيضاً المسودات A وB المحفوظة على هذا الجهاز
+          Also delete drafts A and B saved on this device
         </label>
         <div className="mt-5 grid gap-2 sm:grid-cols-2">
           <button type="button" onClick={doReset} className="btn btn-primary text-sm">
-            نعم، صفّر
+            Yes, reset
           </button>
           <button type="button" autoFocus onClick={() => setConfirm(null)} className="btn btn-ghost text-sm">
-            إلغاء
+            Cancel
           </button>
         </div>
       </Dialog>
 
-      <Dialog open={confirm?.kind === "import" || confirm?.kind === "load"} onClose={closeConfirm} title="استبدال الخطة المفتوحة؟">
-        <p>الملف صالح. فتحه سيستبدل الخطة المفتوحة الآن وتعديلاتها غير المحفوظة. احفظها أو صدّرها أولاً إن أردت الاحتفاظ بها.</p>
+      <Dialog open={confirm?.kind === "import" || confirm?.kind === "load"} onClose={closeConfirm} title="Replace the open plan?">
+        <p>The file is valid. Opening it replaces the plan that is open now, including unsaved edits. Save or export first if you want to keep them.</p>
         <div className="mt-5 grid gap-2 sm:grid-cols-2">
           <button
             type="button"
             onClick={() => {
-              if (confirm?.kind === "import") openDraft(confirm.draft, "استُوردت الخطة من الملف.");
+              if (confirm?.kind === "import") openDraft(confirm.draft, "The plan was imported from the file.");
               else if (confirm?.kind === "load") {
                 const r = loadDraft(confirm.slot);
-                if (r && r.success) openDraft(r.data, `فُتحت مسودة ${confirm.slot}.`);
+                if (r && r.success) openDraft(r.data, `Opened draft ${confirm.slot}.`);
               }
               setConfirm(null);
             }}
             className="btn btn-primary text-sm"
           >
-            استبدل
+            Replace
           </button>
           <button type="button" autoFocus onClick={() => setConfirm(null)} className="btn btn-ghost text-sm">
-            إلغاء
+            Cancel
           </button>
         </div>
       </Dialog>

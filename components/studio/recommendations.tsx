@@ -11,8 +11,8 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
     <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
       <div className="grid content-start gap-4">
         <p className="rounded-2xl border border-line bg-bg/40 px-4 py-3 text-xs leading-6 text-muted">
-          توصيات أولية ناتجة عن قواعد ثابتة معلنة (إصدار القواعد {RULE_VERSION}) تربط كل خدمة بإجابة محددة — ليست تحليلاً بالذكاء الاصطناعي
-          ولا بياناً من مكتب العين. أعلى {plan.recommendations.filter((r) => r.tier === "core").length} مسارات أساسية ومسار اختياري كحد أقصى.
+          First recommendations from published fixed rules (rule version {RULE_VERSION}). Each path is tied to a specific answer. This is not an AI analysis
+          and not a statement from an office. At most {plan.recommendations.filter((r) => r.tier === "core").length} core paths and one optional path.
         </p>
         <ol className="grid gap-4">
           {plan.recommendations.map((r) => {
@@ -23,13 +23,13 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
                   <span className="grid size-9 place-items-center rounded-full bg-gold-soft text-sm font-bold text-gold-strong">{r.rank}</span>
                   <h3 className="text-lg font-bold">{s.ar}</h3>
                   <span className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${r.tier === "core" ? "bg-gold text-bg" : "border border-line text-muted"}`}>
-                    {r.tier === "core" ? "أساسية" : "اختيارية"}
+                    {r.tier === "core" ? "Core" : "Optional"}
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-muted" dir="ltr">
                   {s.en}
                 </p>
-                <p className="mt-4 text-sm font-bold">لماذا؟</p>
+                <p className="mt-4 text-sm font-bold">Why?</p>
                 <ul className="mt-2 grid gap-2 text-sm leading-7">
                   {r.reasons.map((why, i) => (
                     <li key={r.reasonCodes[i]} className="flex gap-2" data-reason={r.reasonCodes[i]}>
@@ -40,7 +40,7 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
                 </ul>
                 <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
                   <div>
-                    <p className="font-bold text-muted">ماذا تحتاج للبدء</p>
+                    <p className="font-bold text-muted">What you need to start</p>
                     <ul className="mt-1 list-inside list-disc leading-7 text-muted marker:text-gold">
                       {r.prerequisites.map((p) => (
                         <li key={p}>{p}</li>
@@ -48,7 +48,7 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
                     </ul>
                   </div>
                   <div>
-                    <p className="font-bold text-muted">مخرج ملموس</p>
+                    <p className="font-bold text-muted">A concrete output</p>
                     <p className="mt-1 leading-7">{r.deliverable}</p>
                   </div>
                 </div>
@@ -58,7 +58,7 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
         </ol>
         <details className="card group p-5">
           <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 font-bold">
-            لماذا لا نبدأ بالخدمات الأخرى؟
+            Why not start with the other paths?
             <span className="text-gold transition-transform group-open:rotate-45" aria-hidden>
               +
             </span>
@@ -66,7 +66,7 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
           <ul className="mt-3 grid gap-2 text-sm leading-7 text-muted">
             {plan.notChosen.map((n) => (
               <li key={n.serviceId}>
-                <b className="text-ink">{svc(n.serviceId)?.ar}:</b> {n.why}
+                <b className="text-ink">{svc(n.serviceId)?.en}:</b> {n.why}
               </li>
             ))}
           </ul>
@@ -76,29 +76,29 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
       <aside className="grid content-start gap-4">
         <div className="card p-5">
           <p className="font-bold">
-            قائمة الجاهزية: {done} من {plan.checklist.length}
+            Readiness list: {done} of {plan.checklist.length}
           </p>
-          <p className="mt-1 text-xs text-muted">عدٌّ بسيط لما ذكرته في إجاباتك — ليس درجة ولا توقعاً للمبيعات.</p>
+          <p className="mt-1 text-xs text-muted">A simple count of what you said in your answers. Not a score and not a forecast.</p>
           <ul className="mt-3 grid gap-2 text-sm">
             {plan.checklist.map((c) => (
               <li key={c.code} className="flex items-center gap-2">
                 {c.ok ? <Check size={16} className="text-ok" aria-hidden /> : <CircleDashed size={16} className="text-muted" aria-hidden />}
                 <span className={c.ok ? "" : "text-muted"}>{c.label}</span>
-                <span className="sr-only">{c.ok ? "متوفر" : "غير متوفر"}</span>
+                <span className="sr-only">{c.ok ? "Present" : "Missing"}</span>
               </li>
             ))}
           </ul>
         </div>
         {plan.gaps.length > 0 && (
           <div className="card p-5">
-            <p className="font-bold">نقاط للنقاش</p>
+            <p className="font-bold">Points to discuss</p>
             <ul className="mt-3 grid gap-2 text-sm leading-7 text-muted">
               {plan.gaps.map((g) => (
                 <li key={g.code} className="flex gap-2" data-gap={g.code}>
                   <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
                   <span>
                     {g.text}
-                    {g.linkedServiceId && <span className="text-gold-strong"> ← {svc(g.linkedServiceId)?.ar}</span>}
+                    {g.linkedServiceId && <span className="text-gold-strong"> → {svc(g.linkedServiceId)?.en}</span>}
                   </span>
                 </li>
               ))}
@@ -107,7 +107,7 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
         )}
         <div className="rounded-2xl border border-line p-5 text-xs leading-6 text-muted">
           <p className="mb-2 flex items-center gap-2 font-bold text-ink">
-            <Info size={14} aria-hidden /> افتراضات
+            <Info size={14} aria-hidden /> Assumptions
           </p>
           <ul className="grid gap-1">
             {plan.assumptions.map((x) => (
@@ -116,7 +116,7 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
           </ul>
         </div>
         <button type="button" onClick={onEdit} className="btn btn-ghost">
-          عدّل إجاباتي
+          Edit my answers
         </button>
       </aside>
     </div>

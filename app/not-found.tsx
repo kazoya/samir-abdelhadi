@@ -4,9 +4,9 @@ export default function NotFound() {
   return (
     <div className="grid place-items-center py-24 text-center">
       <p className="gold-text text-6xl font-bold">404</p>
-      <p className="mt-4 text-muted">هذه الصفحة غير موجودة.</p>
+      <p className="mt-4 text-muted">This page does not exist.</p>
       <div className="mt-6">
-        <CtaLink href="/">العودة للرئيسية</CtaLink>
+        <CtaLink href="/">Back home</CtaLink>
       </div>
     </div>
   );

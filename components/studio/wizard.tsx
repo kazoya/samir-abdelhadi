@@ -53,7 +53,7 @@ export function Wizard({
       </div>
       {note && <p className="mt-4 rounded-xl border border-gold/40 bg-gold-soft px-4 py-2 text-sm text-gold-strong">{note}</p>}
       <p className="mt-6 text-sm text-muted">
-        سؤال {step + 1} من {questions.length}
+        Question {step + 1} of {questions.length}
       </p>
       <h2 ref={heading} tabIndex={-1} id="q" className="mt-1 text-2xl font-bold outline-none">
         {q.q}
@@ -78,7 +78,7 @@ export function Wizard({
       <div className="mt-8 flex flex-wrap gap-3">
         {step > 0 && (
           <button type="button" onClick={() => onStep(step - 1)} className="btn border border-line text-sm font-normal text-muted hover:text-ink">
-            السابق
+            Back
           </button>
         )}
         {q.multi && (
@@ -88,7 +88,7 @@ export function Wizard({
             onClick={() => (last ? onDone(value) : onStep(step + 1))}
             className="btn btn-primary text-sm"
           >
-            التالي
+            Next
           </button>
         )}
       </div>

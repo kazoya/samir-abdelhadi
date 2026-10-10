@@ -3,28 +3,28 @@ import { ExternalLink } from "lucide-react";
 import { PageHead, Source } from "@/components/ui";
 import { activities, relationships, ZAD } from "@/lib/site";
 
-export const metadata: Metadata = { title: "السجل العلني" };
+export const metadata: Metadata = { title: "Public record" };
 
 const relationNote: Record<(typeof relationships)[number], string> = {
-  "سيرة منشورة": "صياغة مأخوذة من الصفحة المذكورة، لا من ذاكرة هذا التصور.",
-  "عطاء مذكور": "مشاريع ومنح ذكرتها الصفحة. لا نضيف مبلغاً ولا تاريخاً لم يُكتب فيها.",
-  "عضوية مذكورة": "مجالس وجوائز كما سمّتها الصفحة.",
-  "ما اختلفت فيه المصادر": "الاختلاف معروض كما هو. لا نختار رقماً ليبدو السجل أنظف.",
+  "Published biography": "Wording taken from the cited page, not from the memory of this concept.",
+  "Giving mentioned": "Projects and grants named on the page. No amount or date is added if the page did not write it.",
+  "Membership mentioned": "Boards and prizes as the page named them.",
+  "Where sources differ": "The difference stays visible. This page does not pick a number to make the record look cleaner.",
 };
 
 const story = [
-  { k: "السياق", v: "جملة تعريف بلا مصدر، وصورة بلا إذن." },
-  { k: "المساهمة", v: "ربط الجملة بصفحة، وتأجيل الصورة حتى يصل الإذن." },
-  { k: "المخرجات", v: "بند في السجل ورابط، لا منشور يُرسل وحده." },
-  { k: "الدليل", v: "في حالة حقيقية: رابط الصفحة المنشورة." },
-  { k: "النتيجة", v: "لا تُذكر نتيجة إلا برقم يوافق صاحبه على نشره." },
+  { k: "Context", v: "A defining sentence with no source, and a photograph with no permission." },
+  { k: "Contribution", v: "Tie the sentence to a page, and hold the photograph until permission arrives." },
+  { k: "Outputs", v: "An item in the record and a link. Not a post that sends itself." },
+  { k: "Evidence", v: "In a real case: the link to the published page." },
+  { k: "Result", v: "A result is named only with a number its owner agrees to publish." },
 ];
 
 export default function ActivitiesPage() {
   return (
     <>
-      <PageHead kicker="السجل العلني" title="ما كُتب في صفحات يمكن فتحها">
-        <p>كل بند يحمل رابطه. المشاركة في ذكر اسم ليست شراكة، والاختلاف بين المصادر يبقى ظاهراً.</p>
+      <PageHead kicker="Public record" title="What was written on pages you can open">
+        <p>Every item carries its link. Being named together is not a partnership, and a difference between sources stays visible.</p>
       </PageHead>
       <div className="grid gap-12">
         {relationships.map((rel) => {
@@ -42,7 +42,7 @@ export default function ActivitiesPage() {
                   <li key={a.text} className="card grid gap-3 p-5 leading-8">
                     <span>{a.text}</span>
                     <a href={a.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center gap-1 text-xs text-muted underline-offset-4 hover:text-gold-strong hover:underline">
-                      المصدر <ExternalLink size={12} aria-hidden />
+                      Source <ExternalLink size={12} aria-hidden />
                     </a>
                   </li>
                 ))}
@@ -52,10 +52,10 @@ export default function ActivitiesPage() {
         })}
       </div>
       <section aria-labelledby="story" className="mt-16">
-        <h2 id="story" className="text-xl font-bold">قالب مادة صادقة</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">لا نعرض عميلاً ولا نتيجة. هذا قالب لما يمكن أن يُكتب لاحقاً بإذن.</p>
+        <h2 id="story" className="text-xl font-bold">A template for an honest piece</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">No client and no result are shown. This is a template for what could be written later, with permission.</p>
         <div className="card mt-5 p-6" data-illustrative>
-          <p className="mb-4 inline-block rounded-full bg-gold-soft px-3 py-1 text-xs font-bold text-gold-strong">حالة توضيحية — ليست عميلاً حقيقياً ولا نتيجة فعلية</p>
+          <p className="mb-4 inline-block rounded-full bg-gold-soft px-3 py-1 text-xs font-bold text-gold-strong">Illustrative case. Not a real client and not an actual result.</p>
           <dl className="grid gap-3 sm:grid-cols-[8rem_1fr]">
             {story.map((s) => (
               <div key={s.k} className="contents">
@@ -66,7 +66,7 @@ export default function ActivitiesPage() {
           </dl>
         </div>
       </section>
-      <Source page="زاد الفنون، صندوق سمير عبدالهادي" href={ZAD} />
+      <Source page="Zad for Arts, Samir Abdelhadi Fund" href={ZAD} />
     </>
   );
 }

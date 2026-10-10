@@ -10,37 +10,37 @@ export const GHINA_ENGINE = "https://github.com/kazoya/ghina-media-concept";
 export const SKILLS_REPO = "https://github.com/coreyhaines31/marketingskills";
 
 export const brand = {
-  nameAr: "حضور عبدالهادي",
+  nameAr: "Abdelhadi Presence",
   nameEn: "Abdelhadi Presence",
-  lead: "سمير نعيم عبدالهادي",
+  lead: "Samir Yasser Abdelhadi",
   site: ZAD,
   phoneDisplay: "+962 7 9555 5772",
   phoneDigits: "962795555772",
   tel: "tel:+962795555772",
   whatsappUrl: "https://wa.me/962795555772",
   email: "",
-  addressAr: "عمّان، الأردن",
+  addressAr: "Amman, Jordan",
   addressEn: "Amman, Jordan",
-  hours: "غير منشورة",
+  hours: "Not published",
   socials: [] as { label: string; href: string }[],
 } as const;
 
 export const developer = {
-  name: "م. صهيب الصالح",
+  name: "Eng. Suhaib Al-Saleh",
   whatsappDigits: "962787523192",
   whatsappUrl: "https://wa.me/962787523192",
 } as const;
 
-export const disclaimer = "تصوّر تجريبي مستقل — غير تابع للموقع الرسمي";
+export const disclaimer = "Independent concept. Not an official site.";
 
 export const nav = [
-  { href: "/", label: "الرئيسية" },
-  { href: "/planner", label: "الاستوديو" },
-  { href: "/services", label: "المسارات" },
-  { href: "/activities", label: "السجل" },
-  { href: "/training", label: "المنهج" },
-  { href: "/opportunities", label: "الفرص" },
-  { href: "/contact", label: "تواصل" },
+  { href: "/", label: "Home" },
+  { href: "/planner", label: "Studio" },
+  { href: "/services", label: "Paths" },
+  { href: "/activities", label: "Record" },
+  { href: "/training", label: "Method" },
+  { href: "/opportunities", label: "Next" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export function waLink(text: string, digits: string = brand.phoneDigits) {
@@ -48,11 +48,11 @@ export function waLink(text: string, digits: string = brand.phoneDigits) {
 }
 
 export const published = {
-  experience: "المهندس سمير نعيم عبدالهادي، كما تصفه صفحة زاد الفنون: مواليد القدس، ومهندس مدني، ومؤسس شركة في الأردن عام 1980",
-  specialties: ["هندسة ومشاريع", "ثقافة وفنون", "تعليم", "عطاء موثّق"],
-  vision: "حضور عام يُقرأ من السجل قبل أن يُروى. الرسالة واحدة، والأدلة من صفحات منشورة، والدعوة واضحة.",
-  mission: "ترتيب ما يُقال عن الاسم حتى يصل الباحث إلى مصدر، لا إلى جملة عائمة.",
-  meta: "الصورة في هذه الصفحة زوّدها صاحب التصور. السجل المكتوب من الصفحات العلنية المذكورة، ولا ندّعي أن الصورة منشورة فيها.",
+  experience: "Samir Yasser Abdelhadi, as the Zad for Arts page describes the engineer: born in Jerusalem, a civil engineer, and founder of a Jordan company in 1980",
+  specialties: ["Engineering and projects", "Culture and arts", "Education", "Documented giving"],
+  vision: "A public presence that is read from the record before it is told. One message, evidence from published pages, and one clear ask.",
+  mission: "Arrange what is said about the name so a searcher reaches a source, not a floating sentence.",
+  meta: "The portrait on this page was supplied by the owner of the concept. The written record comes from the public pages cited here. This page does not claim the portrait appears on those pages.",
 };
 
 export type ServiceId =
@@ -69,92 +69,92 @@ export type ServiceId =
   | "coaching";
 
 export const services: { id: ServiceId; ar: string; en: string; desc: string; group: "grow" | "create" | "learn" }[] = [
-  { id: "sem", ar: "ظهور عند البحث عن الاسم", en: "Name search", desc: "جملة واحدة تظهر لمن يبحث عن الاسم الآن، مع رابط إلى السجل.", group: "grow" },
-  { id: "seo", ar: "صفحة مرجع قابلة للاقتباس", en: "Citable record", desc: "حقائق منسوبة إلى مصادرها حتى يقتبسها البحث والمساعدات من صفحة واحدة.", group: "grow" },
-  { id: "social", ar: "حضور على المنصات", en: "Public channels", desc: "منصة أو منصتان، بإيقاع يحتمله المكتب، لا بنشر يومي مفروض.", group: "grow" },
-  { id: "graphic", ar: "قوالب بصرية هادئة", en: "Quiet templates", desc: "قالب واحد للنص والصورة، بلا حملة لونية تنافس الاسم.", group: "create" },
-  { id: "photo", ar: "أرشيف صور بإذن", en: "Permitted archive", desc: "لا تُنشر صورة إلا بإذن صاحبها. الصورة الحالية مرفقة من صاحب التصور.", group: "create" },
-  { id: "web", ar: "صفحة ثابتة للاسم", en: "Standing page", desc: "عنوان واحد يجمع السيرة والمصادر وطريقة المراسلة.", group: "create" },
-  { id: "training", ar: "لقاءات نقل خبرة", en: "Knowledge sessions", desc: "لقاء يشرح مشروعاً منشوراً، لا دورة بشهادة مخترعة.", group: "learn" },
-  { id: "meta", ar: "رصد ما يُقال", en: "What is being said", desc: "جمع ما يظهر عن الاسم وتصنيفه: مؤكد، مختلف فيه، أو غير مصدر.", group: "learn" },
-  { id: "courses", ar: "سلسلة شرح قصيرة", en: "Short explainers", desc: "قطع قصيرة تجيب سؤالاً واحداً، وكل قطعة تشير إلى مصدر.", group: "learn" },
-  { id: "consult", ar: "ترتيب الرسالة", en: "Message house", desc: "جملة وعد، وثلاثة أدلة، ودعوة واحدة. تُعتمد قبل أي نشر.", group: "grow" },
-  { id: "coaching", ar: "مرافقة المكتب", en: "Office rhythm", desc: "ساعة ثابتة لمراجعة ما سيُنشر، لا نشر من هذه الصفحة.", group: "learn" },
+  { id: "sem", ar: "Name search", en: "Name search", desc: "One sentence for people searching the name now, with a link into the record.", group: "grow" },
+  { id: "seo", ar: "Citable record", en: "Citable record", desc: "Facts attributed to their sources, so search and assistants quote one page.", group: "grow" },
+  { id: "social", ar: "Public channels", en: "Public channels", desc: "One or two platforms, at a pace the office can keep. No forced daily posts.", group: "grow" },
+  { id: "graphic", ar: "Quiet templates", en: "Quiet templates", desc: "One template for text and image. No colour campaign competing with the name.", group: "create" },
+  { id: "photo", ar: "Permitted archive", en: "Permitted archive", desc: "No photograph is published without permission. The current portrait was supplied by the concept owner.", group: "create" },
+  { id: "web", ar: "Standing page", en: "Standing page", desc: "One address that gathers the biography, the sources, and how to write.", group: "create" },
+  { id: "training", ar: "Knowledge sessions", en: "Knowledge sessions", desc: "A session that explains one published project. Not a course with an invented certificate.", group: "learn" },
+  { id: "meta", ar: "What is being said", en: "What is being said", desc: "Collect what appears about the name and mark it confirmed, disputed, or unsourced.", group: "learn" },
+  { id: "courses", ar: "Short explainers", en: "Short explainers", desc: "Short pieces that answer one question. Each piece points to a source.", group: "learn" },
+  { id: "consult", ar: "Message house", en: "Message house", desc: "One promise, three proofs, one ask. Approved before anything is published.", group: "grow" },
+  { id: "coaching", ar: "Office rhythm", en: "Office rhythm", desc: "A fixed hour to review what will be published. This page does not publish it.", group: "learn" },
 ];
 
 export const groups = {
-  grow: "ظهور ورسالة",
-  create: "مواد وأرشيف",
-  learn: "تعلّم وتمكين",
+  grow: "Reach and message",
+  create: "Materials",
+  learn: "Learn and enable",
 } as const;
 
 export const trainings = [
-  "رسالة واحدة في الجملة الأولى",
-  "ثلاثة أدلة من السجل فقط",
-  "جمهور واحد في كل قطعة",
-  "دعوة واحدة: اقرأ المصدر أو راسل خط النقاش",
-  "ما اختلفت فيه المصادر يُعرض اختلافاً لا حقيقة",
-  "لا رقم ولا شريك ولا نتيجة بلا صفحة منشورة",
-  "الصورة بإذن، والتعليق يقول من زوّدها",
-  "الموجة التالية تنتظر اعتماد المكتب",
+  "One message in the first sentence",
+  "Three proofs, and only from the record",
+  "One audience in each piece",
+  "One ask: read the source, or write on the discussion line",
+  "Where sources differ, show the difference, not a single fact",
+  "No number, partner, or result without a published page",
+  "A photograph needs permission, and the caption says who supplied it",
+  "The next wave waits for the office to approve it",
 ];
 
-export type Relationship = "سيرة منشورة" | "عطاء مذكور" | "عضوية مذكورة" | "ما اختلفت فيه المصادر";
-export const relationships: Relationship[] = ["سيرة منشورة", "عطاء مذكور", "عضوية مذكورة", "ما اختلفت فيه المصادر"];
+export type Relationship = "Published biography" | "Giving mentioned" | "Membership mentioned" | "Where sources differ";
+export const relationships: Relationship[] = ["Published biography", "Giving mentioned", "Membership mentioned", "Where sources differ"];
 
 export const activities: {
   text: string;
   relationship: Relationship;
-  theme: "سيرة" | "عطاء" | "تعليم" | "عضوية";
+  theme: "Biography" | "Giving" | "Education" | "Membership";
   sourceUrl: string;
   evidence: "published";
 }[] = [
-  { text: "صفحة زاد الفنون تقول إن المهندس سمير عبدالهادي وُلد في القدس عام 1942، ودرس الهندسة المدنية في الجامعة الأميركية في بيروت.", relationship: "سيرة منشورة", theme: "سيرة", sourceUrl: ZAD, evidence: "published" },
-  { text: "الصفحة نفسها تقول إن والده نعيم عبدالهادي تولى مناصب سياسية وإدارية، وإن سمير تلقى تعليمه في مدارس الفرندز في رام الله.", relationship: "سيرة منشورة", theme: "سيرة", sourceUrl: ZAD, evidence: "published" },
-  { text: "في عام 1980 أسس شركة في الأردن باسم علمي وعبدالهادي، بعد عمل في ليبيا والإمارات مع الاتحاد الهندسي، خطيب وعلمي.", relationship: "سيرة منشورة", theme: "سيرة", sourceUrl: ZAD, evidence: "published" },
-  { text: "صندوق سمير عبدالهادي للثقافة والفنون قدّم منحة للجمعية الثقافية العربية ساهمت في تأسيس زاد الفنون عام 2023.", relationship: "عطاء مذكور", theme: "عطاء", sourceUrl: ZAD, evidence: "published" },
-  { text: "من العطاء المذكور في الصفحة: مركز فنون في الزرقاء مع وزارة الثقافة، ومبنى كلية الرياضيات في جامعة بيرزيت، وملعب ومركز لياقة في مخيم حطين، ومركز تدريب مهني في مخيم غزة بجرش، ومختبر عمارة في جامعة الحسين التقنية.", relationship: "عطاء مذكور", theme: "تعليم", sourceUrl: ZAD, evidence: "published" },
-  { text: "الصفحة تذكر تبرعاً لمركز الحسين للسرطان ومؤسسة نهر الأردن وصندوق أمان لرعاية الأيتام خلال عضويته في الأعيان.", relationship: "عطاء مذكور", theme: "عطاء", sourceUrl: ZAD, evidence: "published" },
-  { text: "تذكر الصفحة عضوية مجالس أمناء منها جامعة الحسين التقنية، وبيرزيت، والنجاح الوطنية، ومؤسسة التعاون، ومركز دراسات الوحدة العربية، والمنظمة العربية لمكافحة الفساد.", relationship: "عضوية مذكورة", theme: "تعليم", sourceUrl: ZAD, evidence: "published" },
-  { text: "جائزة نعيم عبدالهادي للأعمال الثقافية أُطلقت مع شقيقه الدكتور عمر عبدالهادي ضمن مؤسسة التعاون، حسب الصفحة نفسها.", relationship: "عضوية مذكورة", theme: "عطاء", sourceUrl: ZAD, evidence: "published" },
-  { text: "زاد الفنون تقول إنه عُيّن في مجلس الأعيان السابع عشر وترأس لجنة الصداقة مع الإمارات. دليل الحياة السياسية يدرجه في مجلس أعيان سابق (السابع والعشرون) ويذكر سنة تخرج 1962. لا نختار رقماً واحداً.", relationship: "ما اختلفت فيه المصادر", theme: "عضوية", sourceUrl: DIRECTORY, evidence: "published" },
-  { text: "صفحة أعضاء المجلس الحالي على موقع مجلس الأعيان، بما فيها التعديلات المنشورة حتى 2026، لم تُظهر اسم سمير نعيم عبدالهادي في النص الذي فُحص. لذلك لا يصفه هذا التصور عضواً حالياً.", relationship: "ما اختلفت فيه المصادر", theme: "عضوية", sourceUrl: SENATE_NOW, evidence: "published" },
+  { text: "The Zad for Arts page says engineer Samir Abdelhadi was born in Jerusalem in 1942 and studied civil engineering at the American University of Beirut.", relationship: "Published biography", theme: "Biography", sourceUrl: ZAD, evidence: "published" },
+  { text: "The same page says his father, Naeem Abdelhadi, held political and administrative posts, and that Samir was educated at the Friends School in Ramallah. This concept uses Yasser as the middle name supplied for the page. The cited pages print Naeem.", relationship: "Published biography", theme: "Biography", sourceUrl: ZAD, evidence: "published" },
+  { text: "In 1980 he founded a Jordan company named Ilmi and Abdelhadi, after work in Libya and the UAE with the Engineering Consortium, Khateeb and Alami.", relationship: "Published biography", theme: "Biography", sourceUrl: ZAD, evidence: "published" },
+  { text: "The Samir Abdelhadi Fund for Culture and Arts gave a grant to the Arab Cultural Society that helped found Zad for Arts in 2023.", relationship: "Giving mentioned", theme: "Giving", sourceUrl: ZAD, evidence: "published" },
+  { text: "Giving named on the page includes an arts centre in Zarqa with the Ministry of Culture, the mathematics faculty building at Birzeit University, a pitch and fitness centre at Hittin camp, a vocational centre at Gaza camp in Jerash, and an architecture lab at Al-Hussein Technical University.", relationship: "Giving mentioned", theme: "Education", sourceUrl: ZAD, evidence: "published" },
+  { text: "The page mentions donations to the King Hussein Cancer Center, the Jordan River Foundation, and the Aman orphans fund during his senate membership.", relationship: "Giving mentioned", theme: "Giving", sourceUrl: ZAD, evidence: "published" },
+  { text: "The page names trustee boards including Al-Hussein Technical University, Birzeit, An-Najah, the Welfare Association, the Centre for Arab Unity Studies, and the Arab Anti-Corruption Organization.", relationship: "Membership mentioned", theme: "Education", sourceUrl: ZAD, evidence: "published" },
+  { text: "The Naeem Abdelhadi Prize for cultural work was launched with his brother, Dr Omar Abdelhadi, inside the Welfare Association, according to the same page. The prize name is printed as Naeem.", relationship: "Membership mentioned", theme: "Giving", sourceUrl: ZAD, evidence: "published" },
+  { text: "Zad for Arts says he was appointed to the 17th Senate and chaired the friendship committee with the UAE. The Jordan politics directory lists him in a previous senate (the 27th) and gives 1962 as the graduation year. This page does not pick one number.", relationship: "Where sources differ", theme: "Membership", sourceUrl: DIRECTORY, evidence: "published" },
+  { text: "The current members page on the Senate website, including amendments published through 2026, did not show Samir Yasser Abdelhadi in the text that was checked. The pages that print a middle name use Naeem. This concept does not describe him as a sitting member.", relationship: "Where sources differ", theme: "Membership", sourceUrl: SENATE_NOW, evidence: "published" },
 ];
 
 export const trainingPaths: { id: "beginner" | "owner" | "team"; title: string; forWho: string; trainingIdx: number[]; serviceIds: ServiceId[] }[] = [
   {
     id: "beginner",
-    title: "مسار الرسالة",
-    forWho: "لمن يريد جملة أولى يفهمها الزائر في عشر ثوانٍ",
+    title: "The message path",
+    forWho: "For a first sentence a visitor understands in ten seconds",
     trainingIdx: [0, 1, 3],
     serviceIds: ["consult", "courses"],
   },
   {
     id: "owner",
-    title: "مسار الدليل",
-    forWho: "لمن يريد أن يبقى كل ادعاء مربوطاً بصفحة",
+    title: "The evidence path",
+    forWho: "For keeping every claim tied to a page",
     trainingIdx: [4, 5, 6],
     serviceIds: ["seo", "meta"],
   },
   {
     id: "team",
-    title: "مسار المكتب",
-    forWho: "لفريق يعدّ المواد ثم ينتظر الاعتماد قبل النشر",
+    title: "The office path",
+    forWho: "For a team that prepares materials and waits for approval before publishing",
     trainingIdx: [2, 7],
     serviceIds: ["coaching", "social"],
   },
 ];
 
 export const serviceGuide: Record<ServiceId, { when: string; needs: string; next: string; goal: GoalId }> = {
-  sem: { when: "الاسم يُبحث عنه والنتيجة الأولى لا تشرح من هو.", needs: "جملة معتمدة ورابط السجل.", next: "اكتب الجملة وراجعها مع المكتب.", goal: "search" },
-  seo: { when: "الحقائق مبعثرة بين صفحات لا يتفق بعضها.", needs: "قائمة مصادر لا تُزاد عليها واقعة جديدة.", next: "افتح السجل وعلّم ما تريد إبرازه.", goal: "search" },
-  social: { when: "هناك منصة قائمة أو قرار بالبدء بواحدة.", needs: "من يرد، وإيقاع أسبوعي يحتمله.", next: "اختر منصة واحدة لهذا الشهر.", goal: "social" },
-  graphic: { when: "المواد تبدو من مكاتب مختلفة.", needs: "لون ونوع خط معتمدان.", next: "اجمع ثلاث مواد حالية قبل أي قالب.", goal: "identity" },
-  photo: { when: "ستُستخدم صورة في مادة عامة.", needs: "إذن مكتوب أو رسالة من صاحب الصورة.", next: "لا تجدول صورة قبل الإذن.", goal: "identity" },
-  web: { when: "لا يوجد عنوان ثابت يحيل إليه الناس.", needs: "اسم النطاق وقرار من يملكه.", next: "حدد الصفحات الثلاث الأولى فقط.", goal: "website" },
-  training: { when: "جهة تريد سماع مشروع منشور لا سيرة عامة.", needs: "مشروع واحد من السجل ومحور واحد.", next: "سمِّ الجهة والمدة قبل الموعد.", goal: "training" },
-  meta: { when: "يظهر كلام عن الاسم ولا تعرف مصدره.", needs: "روابط ما ظهر هذا الأسبوع.", next: "صنّف كل رابط: مؤكد، مختلف، أو بلا مصدر.", goal: "training" },
-  courses: { when: "الشرح الطويل لا يُقرأ.", needs: "سؤال واحد لكل قطعة.", next: "اكتب ثلاثة أسئلة يطرحها الزائر.", goal: "training" },
-  consult: { when: "الرسائل كثيرة والدعوة غير واضحة.", needs: "ساعة مع من يعتمد النص.", next: "ابدأ الاستوديو ثم أرسل الموجز بنفسك.", goal: "leads" },
-  coaching: { when: "المكتب صغير والنشر يتوقف على شخص واحد.", needs: "موعد أسبوعي ثابت.", next: "سمِّ المسؤول عن المسودة.", goal: "social" },
+  sem: { when: "People search the name and the first result does not explain who he is.", needs: "An approved sentence and a link to the record.", next: "Write the sentence and review it with the office.", goal: "search" },
+  seo: { when: "Facts are scattered across pages that do not agree.", needs: "A source list, with no new fact added on top.", next: "Open the record and mark what you want in front.", goal: "search" },
+  social: { when: "A platform already exists, or there is a decision to start one.", needs: "Someone who replies, and a weekly pace they can keep.", next: "Choose one platform for this month.", goal: "social" },
+  graphic: { when: "Materials look as if they came from different offices.", needs: "An approved colour and typeface.", next: "Gather three current pieces before any template.", goal: "identity" },
+  photo: { when: "A photograph will be used in a public piece.", needs: "Written permission, or a message from the person in the picture.", next: "Do not schedule a photograph before permission.", goal: "identity" },
+  web: { when: "There is no standing address people can point to.", needs: "A domain name and a decision about who owns it.", next: "Name the first three pages only.", goal: "website" },
+  training: { when: "A host wants one published project, not a general biography.", needs: "One project from the record and one theme.", next: "Name the host and the length before the date.", goal: "training" },
+  meta: { when: "Talk about the name appears and you do not know the source.", needs: "Links to what appeared this week.", next: "Mark each link confirmed, disputed, or unsourced.", goal: "training" },
+  courses: { when: "The long explanation is not being read.", needs: "One question per piece.", next: "Write three questions a visitor asks.", goal: "training" },
+  consult: { when: "There are many messages and the ask is unclear.", needs: "An hour with the person who approves the text.", next: "Start the studio, then send the brief yourself.", goal: "leads" },
+  coaching: { when: "The office is small and publishing stops on one person.", needs: "A fixed weekly time.", next: "Name the person who owns the draft.", goal: "social" },
 };

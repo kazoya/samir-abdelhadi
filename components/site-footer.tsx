@@ -8,25 +8,23 @@ export function SiteFooter() {
     <footer className="border-t border-line bg-paper">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
         <div className="md:col-span-2">
-          <p className="gold-text text-xl font-bold">
-            {brand.nameAr} · {brand.nameEn}
-          </p>
+          <p className="gold-text text-xl font-bold">{brand.nameEn}</p>
           <p className="mt-3 max-w-md text-sm leading-7 text-muted">
-            السجل المكتوب من صفحات علنية مذكورة في صفحة السجل. الصورة ورقم الواتساب زوّدهما صاحب التصور، وليسا من موقع المجلس. لا تسعير ولا حفظ على خادم.
+            The written record comes from public pages named on the record. The portrait and the WhatsApp number were supplied by the concept owner. They are not from the Senate website. No prices, and nothing is stored on a server.
           </p>
           <ul className="mt-4 grid gap-1 text-sm">
             <li>
               <a className="hover:text-gold-strong" href={brand.tel} dir="ltr">
                 {brand.phoneDisplay}
               </a>
-              <span className="text-muted"> واتسابه</span>
+              <span className="text-muted"> his WhatsApp</span>
             </li>
-            <li className="text-muted">{brand.addressAr}</li>
+            <li className="text-muted">{brand.addressEn}</li>
           </ul>
           <AmmanClock className="mt-5 w-fit" />
         </div>
         <div className="text-sm">
-          <p className="font-bold">المنصة</p>
+          <p className="font-bold">The site</p>
           <ul className="mt-3 grid gap-2 text-muted">
             {nav.map((n) => (
               <li key={n.href}>
@@ -37,13 +35,13 @@ export function SiteFooter() {
             ))}
             <li>
               <Link className="hover:text-ink" href="/developer">
-                فكرة المنصة ومطوّرها
+                The concept and its developer
               </Link>
             </li>
           </ul>
         </div>
         <div className="text-sm">
-          <p className="mb-3 font-bold">مطوّر التصور: {developer.name}</p>
+          <p className="mb-3 font-bold">Developer: {developer.name}</p>
           <DevQr />
         </div>
       </div>

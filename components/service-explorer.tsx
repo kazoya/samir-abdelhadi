@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { groups, serviceGuide, services, waLink } from "@/lib/site";
 
 type Filter = "all" | keyof typeof groups;
@@ -10,11 +10,14 @@ type Filter = "all" | keyof typeof groups;
 export function ServiceExplorer() {
   const [filter, setFilter] = useState<Filter>("all");
   const list = services.filter((s) => filter === "all" || s.group === filter);
-  const chips: { id: Filter; label: string }[] = [{ id: "all", label: `الكل (${services.length})` }, ...(Object.keys(groups) as (keyof typeof groups)[]).map((g) => ({ id: g, label: `${groups[g]} (${services.filter((s) => s.group === g).length})` }))];
+  const chips: { id: Filter; label: string }[] = [
+    { id: "all", label: `All (${services.length})` },
+    ...(Object.keys(groups) as (keyof typeof groups)[]).map((g) => ({ id: g, label: `${groups[g]} (${services.filter((s) => s.group === g).length})` })),
+  ];
 
   return (
     <div>
-      <div role="group" aria-label="رشّح حسب المسار" className="flex flex-wrap gap-2">
+      <div role="group" aria-label="Filter by path" className="flex flex-wrap gap-2">
         {chips.map((c) => (
           <button
             key={c.id}
@@ -28,7 +31,7 @@ export function ServiceExplorer() {
         ))}
       </div>
       <p className="mt-3 text-xs text-muted" aria-live="polite">
-        يُعرض {list.length} من {services.length} خدمة.
+        Showing {list.length} of {services.length}.
       </p>
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((s) => {
@@ -36,40 +39,37 @@ export function ServiceExplorer() {
           return (
             <article key={s.id} data-service={s.id} data-spotlight className="card card-hover flex flex-col p-6">
               <p className="text-xs font-bold text-gold">{groups[s.group]}</p>
-              <h3 className="mt-1 text-lg font-bold">{s.ar}</h3>
-              <p className="text-xs text-muted" dir="ltr">
-                {s.en}
-              </p>
+              <h3 className="mt-1 text-lg font-bold">{s.en}</h3>
               <p className="mt-3 text-sm leading-7 text-muted">{s.desc}</p>
               <details className="group mt-3 rounded-xl border border-line bg-bg/40 px-4">
                 <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between text-sm font-bold">
-                  متى تحتاجها؟
+                  When do you need it?
                   <span className="text-gold transition-transform duration-200 group-open:rotate-45" aria-hidden>
                     +
                   </span>
                 </summary>
                 <dl className="grid gap-2 pb-4 text-sm leading-7">
-                  <dt className="font-bold text-muted">تحتاجها عندما</dt>
+                  <dt className="font-bold text-muted">You need it when</dt>
                   <dd>{g.when}</dd>
-                  <dt className="font-bold text-muted">ماذا يلزمك</dt>
+                  <dt className="font-bold text-muted">What you need</dt>
                   <dd>{g.needs}</dd>
-                  <dt className="font-bold text-muted">خطوة تالية</dt>
+                  <dt className="font-bold text-muted">A next step</dt>
                   <dd>{g.next}</dd>
                 </dl>
               </details>
               <div className="mt-auto grid gap-2 pt-4">
                 <Link href={`/planner?goal=${g.goal}`} className="btn btn-ghost text-sm">
-                  ابدأ خطة بهذا الاتجاه <ArrowLeft size={16} aria-hidden />
+                  Start a plan in this direction <ArrowRight size={16} aria-hidden />
                 </Link>
-                <a href={waLink(`مرحباً، أستفسر عن مسار في تصور حضور عبدالهادي: ${s.ar}`)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 text-sm font-bold text-gold-strong hover:underline">
-                  <MessageCircle size={16} aria-hidden /> اسأل عنها على واتساب
+                <a href={waLink(`Hello, I am asking about a path in the Abdelhadi presence concept: ${s.en}`)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 text-sm font-bold text-gold-strong hover:underline">
+                  <MessageCircle size={16} aria-hidden /> Ask on WhatsApp
                 </a>
               </div>
             </article>
           );
         })}
       </div>
-      <p className="mt-6 text-xs leading-6 text-muted">«متى تحتاجها» شرح كتبته هذه المنصة لاختيار المسار. ليس عرض أسعار ولا نطاقاً رسمياً لمكتب العين.</p>
+      <p className="mt-6 text-xs leading-6 text-muted">“When do you need it” is written by this site to help choose a path. It is not a price list and not an official scope for an office.</p>
     </div>
   );
 }

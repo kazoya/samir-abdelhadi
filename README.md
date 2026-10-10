@@ -1,15 +1,11 @@
-# حضور عبدالهادي
+# Abdelhadi Presence
 
-تصور تجريبي مستقل للحضور العام للمهندس سمير نعيم عبدالهادي. ليس موقع مجلس الأعيان وليس موقعاً رسمياً، ومضبوط على `noindex`.
+An independent concept for the public presence of Samir Yasser Abdelhadi. It is not the Senate website and not an official site. It is set to `noindex`. English is the default language.
 
-المحرك (خمسة أسئلة، توصيات ثابتة، خطة 30 يوماً) مأخوذ من [ghina-media-concept](https://github.com/kazoya/ghina-media-concept) وأعيدت نصوصه. منهج الجذب مختصر من [marketingskills](https://github.com/coreyhaines31/marketingskills) برخصة MIT.
+The engine (five questions, fixed recommendations, a 30-day plan) comes from [ghina-media-concept](https://github.com/kazoya/ghina-media-concept), with the words rewritten. The attraction method is a short adaptation of [marketingskills](https://github.com/coreyhaines31/marketingskills) under the MIT licence.
 
-السجل المكتوب ومصادره في [SOURCES.md](SOURCES.md). الصورة `public/samir-portrait.png` زوّدها صاحب التصور في 2026-10-10.
+The written record and its sources are in [SOURCES.md](SOURCES.md). The portrait `public/samir-portrait.png` was supplied by the concept owner on 2026-10-10. This concept uses Yasser as the middle name supplied for the page. The cited pages print Naeem. The father's name and the Naeem Abdelhadi Prize stay as published.
 
-```bash
-npm ci
-npm test
-npm run build
-```
+His WhatsApp is +962 7 9555 5772, supplied by the concept owner. The developer WhatsApp stays +962 78 752 3192. Nothing is sent from the server.
 
-واتسابه: +962 7 9555 5772، زوّده صاحب التصور. واتساب المطوّر يبقى +962 78 752 3192. لا إرسال من الخادم.
+Live: https://samir-abdelhadi.vercel.app

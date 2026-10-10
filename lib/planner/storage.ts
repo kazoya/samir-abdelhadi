@@ -42,7 +42,7 @@ export function loadDraft(slot: Slot, s: StorageLike | null = store()): ParseRes
   try {
     return parseDraft(JSON.parse(raw));
   } catch {
-    return { success: false, errors: [{ path: "", message: "المسودة المحفوظة تالفة" }] };
+    return { success: false, errors: [{ path: "", message: "The saved draft is damaged" }] };
   }
 }
 
@@ -57,7 +57,7 @@ export function deleteDraft(slot: Slot, s: StorageLike | null = store()): boolea
 }
 
 export const saveErrorText: Record<Exclude<SaveResult, { ok: true }>["reason"], string> = {
-  unavailable: "لم يُحفظ: التخزين على هذا الجهاز غير متاح (قد يكون التصفح خاصاً أو محظوراً). خطتك ما زالت مفتوحة — صدّرها JSON للاحتفاظ بها.",
-  quota: "لم يُحفظ: مساحة التخزين ممتلئة. احذف مسودة أخرى أو صدّر خطتك JSON.",
-  unknown: "لم يُحفظ بسبب خطأ غير متوقع في التخزين. خطتك ما زالت مفتوحة.",
+  unavailable: "Not saved: storage on this device is unavailable (private browsing, or storage is blocked). Your plan is still open. Export JSON to keep it.",
+  quota: "Not saved: storage is full. Delete another draft or export the plan as JSON.",
+  unknown: "Not saved, because storage returned an unexpected error. Your plan is still open.",
 };

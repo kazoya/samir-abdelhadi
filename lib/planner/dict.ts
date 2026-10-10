@@ -1,72 +1,71 @@
-// القاموس العربي للمعرّفات. أي نص يظهر للزائر عن الإجابات يأتي من هنا.
 import type { BusinessId, ChannelId, GoalId, PostChannel, PostStatus, TeamId, TimelineId } from "./types.ts";
 
 export const businessLabel: Record<BusinessId, string> = {
-  startup: "شباب ومبادرات",
-  sme: "مؤسسة ثقافية",
-  ecommerce: "جمهور عام",
-  medical: "صحة وعطاء",
-  education: "تعليم وطلبة",
-  personal: "السيرة نفسها",
+  startup: "Youth and initiatives",
+  sme: "A cultural institution",
+  ecommerce: "General public",
+  medical: "Health and giving",
+  education: "Education and students",
+  personal: "The biography itself",
 };
 
 export const goalLabel: Record<GoalId, string> = {
-  leads: "حوار ومتابعة أوضح",
-  search: "ظهور موثّق في البحث",
-  social: "حضور على المنصات",
-  identity: "رسالة واحدة واضحة",
-  website: "صفحة مرجع ثابتة",
-  training: "نقل الخبرة",
+  leads: "Clearer dialogue",
+  search: "A sourced search result",
+  social: "A presence on platforms",
+  identity: "One clear message",
+  website: "A standing reference page",
+  training: "Share experience",
 };
 
 export const channelLabel: Record<ChannelId, string> = {
-  facebook: "صفحة فيسبوك",
-  instagram: "إنستغرام",
-  linkedin: "لينكدإن",
-  website: "موقع إلكتروني",
-  whatsapp: "واتساب للأعمال",
-  none: "لا شيء بعد",
+  facebook: "A Facebook page",
+  instagram: "Instagram",
+  linkedin: "LinkedIn",
+  website: "A website",
+  whatsapp: "WhatsApp",
+  none: "Nothing yet",
 };
 
 export const teamLabel: Record<TeamId, string> = {
-  solo: "شخص واحد",
-  one: "مساعد واحد",
-  team: "مكتب صغير",
-  nobody: "لا أحد بعد",
+  solo: "One person",
+  one: "One assistant",
+  team: "A small office",
+  nobody: "Nobody yet",
 };
 
 export const timelineLabel: Record<TimelineId, string> = {
-  week: "هذا الأسبوع",
-  month: "خلال شهر",
-  exploring: "أستكشف فقط",
+  week: "This week",
+  month: "Within a month",
+  exploring: "Just exploring",
 };
 
 export const postChannelLabel: Record<PostChannel, string> = {
-  facebook: "فيسبوك",
-  instagram: "إنستغرام",
-  linkedin: "لينكدإن",
-  whatsapp: "واتساب",
-  website: "الموقع",
+  facebook: "Facebook",
+  instagram: "Instagram",
+  linkedin: "LinkedIn",
+  whatsapp: "WhatsApp",
+  website: "Website",
 };
 
 export const postStatusLabel: Record<PostStatus, string> = {
-  idea: "فكرة",
-  draft: "مسودة",
-  review: "للمراجعة",
-  ready: "جاهز",
+  idea: "Idea",
+  draft: "Draft",
+  review: "In review",
+  ready: "Ready",
 };
 
 export const phaseLabel: Record<1 | 2 | 3 | 4, string> = {
-  1: "الأيام 1–7 · التأسيس",
-  2: "الأيام 8–14 · الإطلاق",
-  3: "الأيام 15–21 · التعلّم",
-  4: "الأيام 22–30 · التثبيت",
+  1: "Days 1–7. Foundation",
+  2: "Days 8–14. First release",
+  3: "Days 15–21. Learning",
+  4: "Days 22–30. Hold the rhythm",
 };
 
 export const questions = [
-  { key: "businessId", q: "من تخاطب أولاً؟", labels: businessLabel, multi: false },
-  { key: "goalId", q: "ما الهدف الأهم في الأشهر الثلاثة القادمة؟", labels: goalLabel, multi: false },
-  { key: "channelIds", q: "ما القنوات القائمة الآن؟ (اختر كل ما ينطبق)", labels: channelLabel, multi: true },
-  { key: "teamId", q: "من يعدّ المواد اليوم؟", labels: teamLabel, multi: false },
-  { key: "timelineId", q: "متى تريد البدء؟", labels: timelineLabel, multi: false },
+  { key: "businessId", q: "Who are you speaking to first?", labels: businessLabel, multi: false },
+  { key: "goalId", q: "What matters most in the next three months?", labels: goalLabel, multi: false },
+  { key: "channelIds", q: "Which channels exist today? Choose every one that applies.", labels: channelLabel, multi: true },
+  { key: "teamId", q: "Who prepares the materials today?", labels: teamLabel, multi: false },
+  { key: "timelineId", q: "When do you want to start?", labels: timelineLabel, multi: false },
 ] as const;

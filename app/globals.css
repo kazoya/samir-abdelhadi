@@ -32,7 +32,7 @@
   --color-line: var(--c-line);
   --color-line-strong: var(--c-line-strong);
   --color-ok: var(--c-ok);
-  --font-sans: var(--font-kufi), system-ui, sans-serif;
+  --font-sans: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
 }
 
 html {

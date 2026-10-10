@@ -13,11 +13,11 @@ export function SiteHeader() {
   return (
     <header data-header className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <Link href="/" className="flex items-center gap-3" aria-label={`${brand.nameAr} — الرئيسية`}>
-          <span className="gold-text text-xl font-bold tracking-wide">{brand.nameAr}</span>
-          <span className="hidden rounded-full border border-gold/40 px-2 py-0.5 text-[11px] text-gold-strong sm:inline">تصوّر تجريبي</span>
+        <Link href="/" className="flex items-center gap-3" aria-label={`${brand.nameEn} — Home`}>
+          <span className="gold-text text-xl font-bold tracking-wide">{brand.nameEn}</span>
+          <span className="hidden rounded-full border border-gold/40 px-2 py-0.5 text-[11px] text-gold-strong sm:inline">Concept</span>
         </Link>
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="التنقل الرئيسي">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           {nav.map((n) => (
             <Link
               key={n.href}
@@ -37,7 +37,7 @@ export function SiteHeader() {
             rel="noopener noreferrer"
             className="btn btn-primary hidden px-4 text-sm sm:inline-flex"
           >
-            واتساب مباشر
+            WhatsApp
           </a>
           <button
             type="button"
@@ -45,14 +45,14 @@ export function SiteHeader() {
             className="grid size-11 cursor-pointer place-items-center rounded-xl text-ink transition hover:bg-raised lg:hidden"
             aria-expanded={open}
             aria-controls="mnav"
-            aria-label="القائمة"
+            aria-label="Menu"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
       {open && (
-        <nav id="mnav" className="border-t border-line px-4 py-3 lg:hidden" aria-label="التنقل">
+        <nav id="mnav" className="border-t border-line px-4 py-3 lg:hidden" aria-label="Menu">
           <ul className="grid gap-1">
             {nav.map((n) => (
               <li key={n.href}>

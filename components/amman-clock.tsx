@@ -10,7 +10,7 @@ const timeFmt = new Intl.DateTimeFormat("en-GB", {
   second: "2-digit",
   hour12: false,
 });
-const dateFmt = new Intl.DateTimeFormat("ar-JO-u-nu-latn", {
+const dateFmt = new Intl.DateTimeFormat("en-GB", {
   timeZone: "Asia/Amman",
   weekday: "long",
   day: "numeric",
@@ -59,8 +59,8 @@ export function AmmanClock({ className = "" }: { className?: string }) {
   const t = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return (
-    <div className={`amman-clock ${className}`} role="group" aria-label="توقيت عمّان">
-      <span className="text-[11px] font-bold text-gold">توقيت عمّان</span>
+    <div className={`amman-clock ${className}`} role="group" aria-label="Amman time">
+      <span className="text-[11px] font-bold text-gold">Amman time</span>
       <time dateTime={t?.iso} className="font-mono text-base font-bold tabular-nums tracking-wider text-ink" dir="ltr">
         {t ? (
           <>

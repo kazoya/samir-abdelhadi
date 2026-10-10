@@ -14,38 +14,38 @@ const has = (a: AnswersV1, c: AnswersV1["channelIds"][number]) => a.channelIds.i
 
 // كل قاعدة تشرح نفسها بالإجابة التي أطلقتها
 export const RULES: Rule[] = [
-  { when: (a) => a.goalId === "leads", code: "goal:leads", add: { social: 3, sem: 3, consult: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يحتاج جملة بحث واضحة ومكاناً يصل منه الحوار، لا حملة مفتوحة.` },
-  { when: (a) => a.goalId === "search", code: "goal:search", add: { seo: 3, sem: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}»: الصفحة المرجعية أولاً، ثم جملة تظهر لمن يبحث عن الاسم.` },
-  { when: (a) => a.goalId === "social", code: "goal:social", add: { social: 3, graphic: 2, photo: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يعتمد على إيقاع ثابت وقالب واحد وصور بإذن.` },
-  { when: (a) => a.goalId === "identity", code: "goal:identity", add: { graphic: 3, photo: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يبدأ بالنص المعتمد والصورة المسموحة قبل أي نشر.` },
-  { when: (a) => a.goalId === "website", code: "goal:website", add: { web: 3, seo: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}»: عنوان ثابت يجمع السجل، وبنية تساعد الاقتباس.` },
-  { when: (a) => a.goalId === "training", code: "goal:training", add: { training: 3, meta: 2, coaching: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يقدّم لقاء شرح ورصد ما يُقال على التنفيذ الواسع.` },
-  { when: (a) => a.businessId === "startup", code: "business:startup", add: { coaching: 1, consult: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}»: الرسالة والتشخيص يسبقان كثرة المواد.` },
-  { when: (a) => a.businessId === "ecommerce", code: "business:ecommerce", add: { web: 1, sem: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}» يحتاج صفحة يجدها وعبارة يبحث بها.` },
-  { when: (a) => a.businessId === "medical", code: "business:medical", add: { social: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}»: المواد التوضيحية تُراجع قبل النشر، بلا وعد طبي.` },
-  { when: (a) => a.businessId === "education", code: "business:education", add: { training: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}» أقرب إلى لقاء يشرح مشروعاً منشوراً.` },
-  { when: (a) => a.businessId === "personal", code: "business:personal", add: { coaching: 1, photo: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}»: الصورة بإذن، والمرافقة لمن يعتمد النص.` },
-  { when: (a) => a.teamId === "solo" || a.teamId === "nobody", code: "team:solo-or-nobody", add: { coaching: 2 }, reason: (a) => `إجابتك «${teamLabel[a.teamId]}» تعني أن التسويق يحتاج إيقاعاً يستطيع شخص واحد الالتزام به.` },
-  { when: (a) => a.teamId === "team", code: "team:team", add: { meta: 1, training: 1 }, reason: (a) => `لديك «${teamLabel[a.teamId]}»: رفع مهارات الفريق يضاعف أثر أي خدمة.` },
-  { when: (a) => !has(a, "website") && a.goalId !== "training", code: "channel:no-website", add: { web: 1 }, reason: () => `لم تختر «${channelLabel.website}» ضمن قنواتك الحالية.` },
-  { when: (a) => has(a, "none"), code: "channel:none", add: { social: 1 }, reason: () => `اخترت «${channelLabel.none}»: أقرب قناة للبدء عادة صفحة على التواصل الاجتماعي.` },
-  { when: () => true, code: "baseline:consult", add: { consult: 1 }, reason: () => "جلسة تشخيص قصيرة نقطة بداية مشتركة لأي خطة." },
+  { when: (a) => a.goalId === "leads", code: "goal:leads", add: { social: 3, sem: 3, consult: 1 }, reason: (a) => `Your goal “${goalLabel[a.goalId]}” needs a clear search sentence and a place the dialogue can start. Not an open campaign.` },
+  { when: (a) => a.goalId === "search", code: "goal:search", add: { seo: 3, sem: 2 }, reason: (a) => `Your goal “${goalLabel[a.goalId]}”: the reference page first, then a sentence for people searching the name.` },
+  { when: (a) => a.goalId === "social", code: "goal:social", add: { social: 3, graphic: 2, photo: 1 }, reason: (a) => `Your goal “${goalLabel[a.goalId]}” depends on a steady pace, one template, and photographs with permission.` },
+  { when: (a) => a.goalId === "identity", code: "goal:identity", add: { graphic: 3, photo: 2 }, reason: (a) => `Your goal “${goalLabel[a.goalId]}” starts with approved text and a permitted photograph, before anything is published.` },
+  { when: (a) => a.goalId === "website", code: "goal:website", add: { web: 3, seo: 2 }, reason: (a) => `Your goal “${goalLabel[a.goalId]}”: a standing address that gathers the record, and a structure that can be quoted.` },
+  { when: (a) => a.goalId === "training", code: "goal:training", add: { training: 3, meta: 2, coaching: 1 }, reason: (a) => `Your goal “${goalLabel[a.goalId]}” puts a teaching session and a watch on what is said ahead of a wide rollout.` },
+  { when: (a) => a.businessId === "startup", code: "business:startup", add: { coaching: 1, consult: 1 }, reason: (a) => `Your audience “${businessLabel[a.businessId]}”: the message and the diagnosis come before a pile of materials.` },
+  { when: (a) => a.businessId === "ecommerce", code: "business:ecommerce", add: { web: 1, sem: 1 }, reason: (a) => `Your audience “${businessLabel[a.businessId]}” needs a page they can find and a phrase they can search.` },
+  { when: (a) => a.businessId === "medical", code: "business:medical", add: { social: 1 }, reason: (a) => `Your audience “${businessLabel[a.businessId]}”: explanatory materials are reviewed before publishing. No medical promise.` },
+  { when: (a) => a.businessId === "education", code: "business:education", add: { training: 1 }, reason: (a) => `Your audience “${businessLabel[a.businessId]}” is closer to a session that explains one published project.` },
+  { when: (a) => a.businessId === "personal", code: "business:personal", add: { coaching: 1, photo: 1 }, reason: (a) => `Your audience “${businessLabel[a.businessId]}”: the photograph needs permission, and the accompaniment is for the person who approves the text.` },
+  { when: (a) => a.teamId === "solo" || a.teamId === "nobody", code: "team:solo-or-nobody", add: { coaching: 2 }, reason: (a) => `Your answer “${teamLabel[a.teamId]}” means the work needs a pace one person can keep.` },
+  { when: (a) => a.teamId === "team", code: "team:team", add: { meta: 1, training: 1 }, reason: (a) => `You have “${teamLabel[a.teamId]}”: raising the team’s skill raises the effect of any path.` },
+  { when: (a) => !has(a, "website") && a.goalId !== "training", code: "channel:no-website", add: { web: 1 }, reason: () => `You did not choose “${channelLabel.website}” among the channels you have now.` },
+  { when: (a) => has(a, "none"), code: "channel:none", add: { social: 1 }, reason: () => `You chose “${channelLabel.none}”: the nearest place to start is usually one social page.` },
+  { when: () => true, code: "baseline:consult", add: { consult: 1 }, reason: () => "A short diagnosis session is a shared starting point for any plan." },
 ];
 
 const catalogOrder = new Map(services.map((s, i) => [s.id, i]));
 
 const detail: Record<ServiceId, { prerequisites: string[]; deliverable: string }> = {
-  sem: { prerequisites: ["جملة معتمدة عن الاسم", "رابط السجل"], deliverable: "عبارة بحث ورابط، بلا ميزانية إعلان في هذا التصور" },
-  seo: { prerequisites: ["قائمة مصادر مكتوبة", "من يعتمد الإضافة"], deliverable: "صفحة مرجع كل بند فيها مصدر" },
-  social: { prerequisites: ["منصة مختارة", "من يرد"], deliverable: "جدول نشر ينتظر الاعتماد" },
-  graphic: { prerequisites: ["أمثلة مواد حالية"], deliverable: "قالب واحد للنص والصورة" },
-  photo: { prerequisites: ["إذن استخدام الصورة"], deliverable: "أرشيف لا يُنشر منه إلا المسموح" },
-  web: { prerequisites: ["قرار النطاق", "ثلاث صفحات أولى"], deliverable: "صفحة ثابتة للاسم" },
-  training: { prerequisites: ["جهة ومدة", "مشروع واحد من السجل"], deliverable: "محاور لقاء بلا شهادة مخترعة" },
-  meta: { prerequisites: ["روابط ما ظهر هذا الأسبوع"], deliverable: "تصنيف: مؤكد، مختلف فيه، أو بلا مصدر" },
-  courses: { prerequisites: ["ثلاثة أسئلة يطرحها الزائر"], deliverable: "ثلاث قطع شرح قصيرة" },
-  consult: { prerequisites: ["من يعتمد النص"], deliverable: "رسالة: وعد، ثلاثة أدلة، دعوة واحدة" },
-  coaching: { prerequisites: ["موعد أسبوعي"], deliverable: "مراجعة مسودات لا نشر آلي" },
+  sem: { prerequisites: ["An approved sentence about the name", "A link to the record"], deliverable: "A search phrase and a link. No advertising budget in this concept." },
+  seo: { prerequisites: ["A written source list", "Someone who approves an addition"], deliverable: "A reference page where every item has a source" },
+  social: { prerequisites: ["A chosen platform", "Someone who replies"], deliverable: "A publishing table that waits for approval" },
+  graphic: { prerequisites: ["Examples of current materials"], deliverable: "One template for text and image" },
+  photo: { prerequisites: ["Permission to use the photograph"], deliverable: "An archive that publishes only what is allowed" },
+  web: { prerequisites: ["A domain decision", "The first three pages"], deliverable: "A standing page for the name" },
+  training: { prerequisites: ["A host and a length", "One project from the record"], deliverable: "Session themes, with no invented certificate" },
+  meta: { prerequisites: ["Links to what appeared this week"], deliverable: "A classification: confirmed, disputed, or unsourced" },
+  courses: { prerequisites: ["Three questions a visitor asks"], deliverable: "Three short explainers" },
+  consult: { prerequisites: ["The person who approves the text"], deliverable: "A message: a promise, three proofs, one ask" },
+  coaching: { prerequisites: ["A weekly time"], deliverable: "A review of drafts. No automatic publishing." },
 };
 
 export function recommend(a: AnswersV1): { recommendations: Recommendation[]; notChosen: PlanV1["notChosen"] } {
@@ -83,7 +83,7 @@ export function recommend(a: AnswersV1): { recommendations: Recommendation[]; no
       const hit = acc.get(s.id);
       return {
         serviceId: s.id,
-        why: hit ? `ارتبطت بإجاباتك بدرجة أقل (${hit.score}) من الخدمات المختارة؛ مرشّحة لمرحلة لاحقة.` : "لم ترتبط بأي من إجاباتك؛ يمكن إضافتها لاحقاً إن تغيّر الهدف.",
+        why: hit ? `It scored lower (${hit.score}) than the paths that were chosen. It can wait for a later phase.` : "It did not connect to any of your answers. It can be added later if the goal changes.",
       };
     });
   return { recommendations, notChosen };
@@ -91,21 +91,21 @@ export function recommend(a: AnswersV1): { recommendations: Recommendation[]; no
 
 export function checklist(a: AnswersV1): ChecklistItem[] {
   return [
-    { code: "social", label: "حساب على منصة تواصل اجتماعي", ok: has(a, "facebook") || has(a, "instagram") || has(a, "linkedin") },
-    { code: "website", label: "موقع إلكتروني", ok: has(a, "website") },
-    { code: "whatsapp", label: "واتساب للأعمال لاستقبال الطلبات", ok: has(a, "whatsapp") },
-    { code: "owner", label: "شخص يدير التسويق", ok: a.teamId !== "nobody" },
-    { code: "timeline", label: "موعد بدء محدد", ok: a.timelineId !== "exploring" },
+    { code: "social", label: "A social platform account", ok: has(a, "facebook") || has(a, "instagram") || has(a, "linkedin") },
+    { code: "website", label: "A website", ok: has(a, "website") },
+    { code: "whatsapp", label: "WhatsApp ready to receive questions", ok: has(a, "whatsapp") },
+    { code: "owner", label: "A person who runs the work", ok: a.teamId !== "nobody" },
+    { code: "timeline", label: "A start date", ok: a.timelineId !== "exploring" },
   ];
 }
 
 export function gaps(a: AnswersV1): Gap[] {
   const out: Gap[] = [];
   if (!has(a, "website") && a.goalId !== "training")
-    out.push({ code: "no-website", text: "قد لا يوجد مكان ثابت يجمع الزوار ويحوّلهم إلى طلبات — للنقاش حسب طبيعة نشاطك.", linkedServiceId: "web" });
-  if (!has(a, "whatsapp")) out.push({ code: "no-whatsapp", text: "قد تضيع استفسارات دون قناة واتساب منظّمة لاستقبالها." });
-  if (has(a, "none")) out.push({ code: "no-channels", text: "لا توجد قناة قائمة بعد؛ البداية بقناة واحدة أسهل من عدة قنوات.", linkedServiceId: "social" });
-  if (a.teamId === "nobody" || a.teamId === "solo") out.push({ code: "single-owner", text: "التسويق يعتمد على شخص واحد أو لا أحد؛ الإيقاع الثابت أهم من الكثافة.", linkedServiceId: "coaching" });
+    out.push({ code: "no-website", text: "There may be no standing page that gathers visitors. Worth discussing for this audience. A standing page is the linked path.", linkedServiceId: "web" });
+  if (!has(a, "whatsapp")) out.push({ code: "no-whatsapp", text: "Questions may be lost without a WhatsApp line ready to receive them." });
+  if (has(a, "none")) out.push({ code: "no-channels", text: "There is no channel yet. Starting with one is easier than starting with several.", linkedServiceId: "social" });
+  if (a.teamId === "nobody" || a.teamId === "solo") out.push({ code: "single-owner", text: "The work depends on one person, or on nobody. A steady pace matters more than volume.", linkedServiceId: "coaching" });
   return out;
 }
 
@@ -119,9 +119,9 @@ export function buildPlan(a: AnswersV1): PlanV1 {
     gaps: gaps(a),
     checklist: checklist(a),
     assumptions: [
-      "التوصيات ناتجة عن قواعد ثابتة معلنة في هذه المنصة، وليست تحليلاً بالذكاء الاصطناعي ولا بياناً من مكتب العين.",
-      "لا أسعار ولا وعود بنتائج. أي نشر لاحق يعتمد بشرياً. رابط الواتساب يفتح محادثة ولا يرسل وحده.",
-      "الخطة والتقويم قوالب أولية قابلة للتعديل الكامل.",
+      "The recommendations come from fixed rules published on this site. This is not an AI analysis and not a statement from an office.",
+      "No prices and no promises of results. Later publishing is approved by a person. The WhatsApp link opens a chat and does not send by itself.",
+      "The plan and the calendar are first drafts you can edit completely.",
     ],
   };
 }

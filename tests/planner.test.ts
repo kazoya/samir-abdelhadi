@@ -88,7 +88,7 @@ test("consult is never silently dropped by insertion order (baseline rule is ran
   const p = buildPlan(A({ goalId: "search", businessId: "sme", channelIds: ["website"], teamId: "team" }));
   // consult has score 1; it appears only if within top 4 by score, and its absence is explained in notChosen
   const inRecs = p.recommendations.some((r) => r.serviceId === "consult");
-  const explained = p.notChosen.some((x) => x.serviceId === "consult" && /بدرجة أقل/.test(x.why));
+  const explained = p.notChosen.some((x) => x.serviceId === "consult" && /scored lower/.test(x.why));
   assert.ok(inRecs || explained);
 });
 
@@ -113,7 +113,7 @@ test("parseAnswers boundaries", () => {
   for (const b of bad) {
     const r = parseAnswers(b);
     assert.equal(r.success, false, JSON.stringify(b));
-    if (!r.success) assert.ok(r.errors.every((e) => /[؀-ۿ]/.test(e.message)), "Arabic field errors");
+    if (!r.success) assert.ok(r.errors.every((e) => /[A-Za-z]/.test(e.message)), "English field errors");
   }
 });
 
@@ -217,8 +217,8 @@ test("compareDrafts reports input and ranking differences", () => {
 
 test("whatsapp message: known recipient content, concept origin, no plan dump", () => {
   const d = newDraft(A(), START, new Date(), seqId);
-  const m = whatsappMessage(d, buildPlan(d.answers), "سارة");
-  assert.ok(m.includes("أنا سارة.") && m.includes("تصوّر تجريبي مستقل"));
+  const m = whatsappMessage(d, buildPlan(d.answers), "Sara");
+  assert.ok(m.includes("I am Sara.") && m.includes("Independent concept"));
   assert.ok(m.length < 700);
 });
 

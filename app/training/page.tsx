@@ -3,20 +3,20 @@ import { GraduationCap, MessageCircle } from "lucide-react";
 import { CtaLink, PageHead, Source } from "@/components/ui";
 import { published, services, SKILLS_REPO, trainingPaths, trainings, waLink } from "@/lib/site";
 
-export const metadata: Metadata = { title: "منهج الجذب" };
+export const metadata: Metadata = { title: "Method" };
 
 export default function TrainingPage() {
   return (
     <>
-      <PageHead kicker="منهج الجذب" title="قواعد علنية، لا وعود حملة">
-        <p>{published.meta} المسارات تجميع من هذا التصور. ليست برامج معلنة باسم العين، ولا مواعيد ولا شهادات.</p>
+      <PageHead kicker="Method" title="Public rules, not campaign promises">
+        <p>{published.meta} The paths are assembled for this concept. They are not programmes announced in his name, and there are no dates and no certificates.</p>
       </PageHead>
       <section aria-labelledby="paths">
-        <h2 id="paths" className="text-xl font-bold">ثلاثة مسارات</h2>
+        <h2 id="paths" className="text-xl font-bold">Three paths</h2>
         <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">
-          مأخوذة من أفكار مهارات التسويق المفتوحة في{" "}
+          Drawn from the open marketing skills in{" "}
           <a className="underline" href={SKILLS_REPO}>marketingskills</a>
-          {" "}(نص، بحث، وعرض) بعد اختصارها لما يليق بحضور عام. ليست برامج معلنة من غنى ميديا ولا من أي مكتب.
+          {" "}(copy, research, and presentation), shortened for a public presence. These are not programmes announced by Ghina Media or by any office.
         </p>
         <div className="mt-5 grid gap-4 lg:grid-cols-[1.2fr_1fr_1fr]">
           {trainingPaths.map((p) => (
@@ -31,21 +31,21 @@ export default function TrainingPage() {
                   <li key={t}>{trainings[t]}</li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm">{p.serviceIds.map((id) => services.find((s) => s.id === id)?.ar).join("، ")}</p>
+              <p className="mt-4 text-sm">{p.serviceIds.map((id) => services.find((s) => s.id === id)?.en).join(", ")}</p>
               <a
-                href={waLink(`مرحباً، أراجع مسار «${p.title}» في تصور حضور عبدالهادي.`)}
+                href={waLink(`Hello, I am reviewing the path “${p.title}” in the Abdelhadi presence concept.`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-ghost mt-5 text-sm"
               >
-                <MessageCircle size={16} aria-hidden /> راجع هذا المسار
+                <MessageCircle size={16} aria-hidden /> Review this path
               </a>
             </article>
           ))}
         </div>
       </section>
       <section aria-labelledby="delivered" className="mt-14">
-        <h2 id="delivered" className="text-xl font-bold">القواعد الثماني</h2>
+        <h2 id="delivered" className="text-xl font-bold">The eight rules</h2>
         <ol className="mt-5 grid gap-3 md:grid-cols-2">
           {trainings.map((t, i) => (
             <li key={t} className="card flex items-start gap-4 p-5">
@@ -57,12 +57,12 @@ export default function TrainingPage() {
       </section>
       <section className="mt-12 flex flex-col items-start gap-4 rounded-3xl border border-gold/40 bg-gold-soft p-8 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-lg font-bold">تريد تطبيق المنهج على مادة محددة؟</p>
-          <p className="mt-1 text-sm text-muted">الرابط يفتح واتسابه. لا موعد يُحجز من هذه الصفحة.</p>
+          <p className="text-lg font-bold">Want to apply the method to one piece?</p>
+          <p className="mt-1 text-sm text-muted">The link opens his WhatsApp. This page does not book a time.</p>
         </div>
-        <CtaLink href={waLink("مرحباً، أريد مراجعة منهج حضور عبدالهادي على مادة محددة.")}>افتح واتساب</CtaLink>
+        <CtaLink href={waLink("Hello, I want to review the Abdelhadi presence method on one specific piece.")}>Open WhatsApp</CtaLink>
       </section>
-      <Source page="marketingskills على GitHub، التزام مفتوح برخصة MIT" href={SKILLS_REPO} />
+      <Source page="marketingskills on GitHub, MIT licence" href={SKILLS_REPO} />
     </>
   );
 }

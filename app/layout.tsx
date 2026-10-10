@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import { Interactions } from "@/components/interactions";
 import { SalesBar } from "@/components/sales-bar";
 import { SiteFooter } from "@/components/site-footer";
@@ -7,19 +6,10 @@ import { SiteHeader } from "@/components/site-header";
 import { disclaimer } from "@/lib/site";
 import "./globals.css";
 
-const kufi = localFont({
-  src: [
-    { path: "./fonts/DroidArabicKufi-Regular.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/DroidArabicKufi-Bold.woff2", weight: "700", style: "normal" },
-  ],
-  variable: "--font-kufi",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: { default: "حضور عبدالهادي — تصوّر تجريبي مستقل", template: "%s | حضور عبدالهادي" },
+  title: { default: "Abdelhadi Presence — independent concept", template: "%s | Abdelhadi Presence" },
   description:
-    "تصور مستقل للحضور العام للمهندس سمير نعيم عبدالهادي: سجل علني منسوب إلى مصادره، واستوديو خطة لا يرسل شيئاً وحده. ليس موقع مجلس الأعيان.",
+    "An independent concept for the public presence of Samir Yasser Abdelhadi: a sourced public record, and a planning studio that sends nothing by itself. Not the Senate website.",
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
 };
 
@@ -27,9 +17,8 @@ export const viewport: Viewport = { themeColor: "#110f0d" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ar" dir="rtl" className={kufi.variable} suppressHydrationWarning>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <head>
-        {/* يُفعَّل الصنف js قبل الرسم ليُخفى محتوى الظهور الناعم فقط حين يعمل JavaScript */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body className="min-h-screen font-sans antialiased">
@@ -37,10 +26,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[80] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:text-bg"
         >
-          تخطَّ إلى المحتوى
+          Skip to content
         </a>
         <div role="note" data-print-hide className="bg-gold px-4 py-1.5 text-center text-xs font-bold text-bg">
-          {disclaimer}. ليس صفحة مجلس الأعيان ولا موقعاً رسمياً للعين.
+          {disclaimer} Not a Senate page and not an official site.
         </div>
         <SiteHeader />
         <main id="main" className="mx-auto max-w-6xl px-4 pb-24 pt-8">

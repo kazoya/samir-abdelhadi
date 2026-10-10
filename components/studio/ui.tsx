@@ -59,7 +59,10 @@ export function Tabs<T extends string>({ tabs, value, onChange, idBase }: { tabs
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const onKey = (e: KeyboardEvent, i: number) => {
     const last = tabs.length - 1;
-    const map: Record<string, number> = { ArrowLeft: i === last ? 0 : i + 1, ArrowRight: i === 0 ? last : i - 1, Home: 0, End: last };
+    const rtl = typeof document !== "undefined" && document.documentElement.dir === "rtl";
+    const next = rtl ? "ArrowLeft" : "ArrowRight";
+    const prev = rtl ? "ArrowRight" : "ArrowLeft";
+    const map: Record<string, number> = { [next]: i === last ? 0 : i + 1, [prev]: i === 0 ? last : i - 1, Home: 0, End: last };
     if (!(e.key in map)) return;
     e.preventDefault();
     const j = map[e.key];
@@ -67,7 +70,7 @@ export function Tabs<T extends string>({ tabs, value, onChange, idBase }: { tabs
     refs.current[j]?.focus();
   };
   return (
-    <div role="tablist" aria-label="أقسام الخطة" className="flex gap-1 overflow-x-auto rounded-2xl border border-line bg-paper p-1 print:hidden">
+    <div role="tablist" aria-label="Plan sections" className="flex gap-1 overflow-x-auto rounded-2xl border border-line bg-paper p-1 print:hidden">
       {tabs.map((t, i) => {
         const on = t.id === value;
         return (

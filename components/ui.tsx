@@ -13,9 +13,9 @@ export function PageHead({ kicker, title, children }: { kicker: string; title: s
 export function Source({ page, href }: { page: string; href: string }) {
   return (
     <p className="mt-8 text-xs text-muted">
-      المصدر: {page}{" "}
+      Source: {page}{" "}
       <a className="underline hover:text-gold-strong" href={href} target="_blank" rel="noopener noreferrer">
-        الرابط
+        link
       </a>
     </p>
   );

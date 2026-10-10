@@ -31,32 +31,32 @@ export function toggleChannel(current: ChannelId[], id: ChannelId): ChannelId[] 
 
 function str(v: unknown, path: string, max: number, errors: FieldError[], required = false): string {
   if (v === undefined || v === null) {
-    if (required) errors.push({ path, message: "حقل مطلوب" });
+    if (required) errors.push({ path, message: "Required field" });
     return "";
   }
   if (typeof v !== "string") {
-    errors.push({ path, message: "يجب أن يكون نصاً" });
+    errors.push({ path, message: "Must be text" });
     return "";
   }
-  if (v.length > max) errors.push({ path, message: `أطول من ${max} حرفاً` });
-  if (required && !v.trim()) errors.push({ path, message: "لا يمكن أن يكون فارغاً" });
+  if (v.length > max) errors.push({ path, message: `Longer than ${max} characters` });
+  if (required && !v.trim()) errors.push({ path, message: "Cannot be empty" });
   return v;
 }
 
 export function parseAnswers(v: unknown, path = "answers"): ParseResult<AnswersV1> {
   const errors: FieldError[] = [];
-  if (!isObj(v)) return { success: false, errors: [{ path, message: "يجب أن يكون كائناً" }] };
-  if (v.schemaVersion !== 1) errors.push({ path: `${path}.schemaVersion`, message: `إصدار غير مدعوم: ${String(v.schemaVersion)}` });
-  if (!oneOf(BUSINESS_IDS, v.businessId)) errors.push({ path: `${path}.businessId`, message: "نوع نشاط غير معروف" });
-  if (!oneOf(GOAL_IDS, v.goalId)) errors.push({ path: `${path}.goalId`, message: "هدف غير معروف" });
-  if (!oneOf(TEAM_IDS, v.teamId)) errors.push({ path: `${path}.teamId`, message: "قيمة فريق غير معروفة" });
-  if (!oneOf(TIMELINE_IDS, v.timelineId)) errors.push({ path: `${path}.timelineId`, message: "موعد بدء غير معروف" });
+  if (!isObj(v)) return { success: false, errors: [{ path, message: "Must be an object" }] };
+  if (v.schemaVersion !== 1) errors.push({ path: `${path}.schemaVersion`, message: `Unsupported version: ${String(v.schemaVersion)}` });
+  if (!oneOf(BUSINESS_IDS, v.businessId)) errors.push({ path: `${path}.businessId`, message: "Unknown audience" });
+  if (!oneOf(GOAL_IDS, v.goalId)) errors.push({ path: `${path}.goalId`, message: "Unknown goal" });
+  if (!oneOf(TEAM_IDS, v.teamId)) errors.push({ path: `${path}.teamId`, message: "Unknown team value" });
+  if (!oneOf(TIMELINE_IDS, v.timelineId)) errors.push({ path: `${path}.timelineId`, message: "Unknown start" });
   const ch = v.channelIds;
-  if (!Array.isArray(ch) || ch.length === 0) errors.push({ path: `${path}.channelIds`, message: "اختر قناة واحدة على الأقل أو «لا شيء بعد»" });
+  if (!Array.isArray(ch) || ch.length === 0) errors.push({ path: `${path}.channelIds`, message: "Choose at least one channel, or Nothing yet" });
   else {
-    ch.forEach((c, i) => !oneOf(CHANNEL_IDS, c) && errors.push({ path: `${path}.channelIds[${i}]`, message: "قناة غير معروفة" }));
-    if (new Set(ch).size !== ch.length) errors.push({ path: `${path}.channelIds`, message: "قنوات مكررة" });
-    if (ch.includes("none") && ch.length > 1) errors.push({ path: `${path}.channelIds`, message: "لا يمكن الجمع بين «لا شيء بعد» وقناة فعلية" });
+    ch.forEach((c, i) => !oneOf(CHANNEL_IDS, c) && errors.push({ path: `${path}.channelIds[${i}]`, message: "Unknown channel" }));
+    if (new Set(ch).size !== ch.length) errors.push({ path: `${path}.channelIds`, message: "Duplicate channels" });
+    if (ch.includes("none") && ch.length > 1) errors.push({ path: `${path}.channelIds`, message: "Nothing yet cannot be combined with a real channel" });
   }
   if (errors.length) return { success: false, errors };
   return {
@@ -74,12 +74,12 @@ export function parseAnswers(v: unknown, path = "answers"): ParseResult<AnswersV
 
 function parseTask(v: unknown, path: string, errors: FieldError[]): Task | null {
   if (!isObj(v)) {
-    errors.push({ path, message: "مهمة غير صالحة" });
+    errors.push({ path, message: "Invalid task" });
     return null;
   }
   const phase = v.phase;
-  if (phase !== 1 && phase !== 2 && phase !== 3 && phase !== 4) errors.push({ path: `${path}.phase`, message: "المرحلة يجب أن تكون 1–4" });
-  if (typeof v.done !== "boolean") errors.push({ path: `${path}.done`, message: "قيمة منطقية مطلوبة" });
+  if (phase !== 1 && phase !== 2 && phase !== 3 && phase !== 4) errors.push({ path: `${path}.phase`, message: "Phase must be 1–4" });
+  if (typeof v.done !== "boolean") errors.push({ path: `${path}.done`, message: "A true or false value is required" });
   return {
     id: str(v.id, `${path}.id`, 64, errors, true),
     phase: phase as Task["phase"],
@@ -94,12 +94,12 @@ function parseTask(v: unknown, path: string, errors: FieldError[]): Task | null 
 
 function parsePost(v: unknown, path: string, errors: FieldError[]): Post | null {
   if (!isObj(v)) {
-    errors.push({ path, message: "منشور غير صالح" });
+    errors.push({ path, message: "Invalid post" });
     return null;
   }
-  if (!isIsoDate(v.date)) errors.push({ path: `${path}.date`, message: "تاريخ بصيغة YYYY-MM-DD مطلوب" });
-  if (!oneOf(POST_CHANNEL_IDS, v.channel)) errors.push({ path: `${path}.channel`, message: "قناة غير معروفة" });
-  if (!oneOf(POST_STATUS_IDS, v.status)) errors.push({ path: `${path}.status`, message: "حالة غير معروفة" });
+  if (!isIsoDate(v.date)) errors.push({ path: `${path}.date`, message: "A date in YYYY-MM-DD is required" });
+  if (!oneOf(POST_CHANNEL_IDS, v.channel)) errors.push({ path: `${path}.channel`, message: "Unknown channel" });
+  if (!oneOf(POST_STATUS_IDS, v.status)) errors.push({ path: `${path}.status`, message: "Unknown status" });
   return {
     id: str(v.id, `${path}.id`, 64, errors, true),
     date: v.date as string,
@@ -112,27 +112,27 @@ function parsePost(v: unknown, path: string, errors: FieldError[]): Post | null 
 }
 
 export function parseDraft(v: unknown): ParseResult<DraftV1> {
-  if (!isObj(v)) return { success: false, errors: [{ path: "", message: "الملف لا يحتوي كائن JSON صالحاً" }] };
-  if (v.schemaVersion !== 1) return { success: false, errors: [{ path: "schemaVersion", message: `إصدار ملف غير مدعوم: ${String(v.schemaVersion)} (المدعوم: 1)` }] };
+  if (!isObj(v)) return { success: false, errors: [{ path: "", message: "The file does not contain a valid JSON object" }] };
+  if (v.schemaVersion !== 1) return { success: false, errors: [{ path: "schemaVersion", message: `Unsupported file version: ${String(v.schemaVersion)} (supported: 1)` }] };
   const errors: FieldError[] = [];
   const answers = parseAnswers(v.answers);
   if (!answers.success) errors.push(...answers.errors);
-  if (!isIsoDate(v.startDate)) errors.push({ path: "startDate", message: "تاريخ بداية بصيغة YYYY-MM-DD مطلوب" });
+  if (!isIsoDate(v.startDate)) errors.push({ path: "startDate", message: "A start date in YYYY-MM-DD is required" });
   const tasksIn = v.tasks;
   const postsIn = v.posts;
-  if (!Array.isArray(tasksIn)) errors.push({ path: "tasks", message: "قائمة مهام مطلوبة" });
-  else if (tasksIn.length > LIMITS.tasks) errors.push({ path: "tasks", message: `أكثر من ${LIMITS.tasks} مهمة` });
-  if (!Array.isArray(postsIn)) errors.push({ path: "posts", message: "قائمة منشورات مطلوبة" });
-  else if (postsIn.length > LIMITS.posts) errors.push({ path: "posts", message: `أكثر من ${LIMITS.posts} منشوراً` });
+  if (!Array.isArray(tasksIn)) errors.push({ path: "tasks", message: "A task list is required" });
+  else if (tasksIn.length > LIMITS.tasks) errors.push({ path: "tasks", message: `More than ${LIMITS.tasks} tasks` });
+  if (!Array.isArray(postsIn)) errors.push({ path: "posts", message: "A post list is required" });
+  else if (postsIn.length > LIMITS.posts) errors.push({ path: "posts", message: `More than ${LIMITS.posts} posts` });
   if (errors.length) return { success: false, errors };
 
   const tasks = (tasksIn as unknown[]).map((t, i) => parseTask(t, `tasks[${i}]`, errors)).filter((t): t is Task => !!t);
   const posts = (postsIn as unknown[]).map((p, i) => parsePost(p, `posts[${i}]`, errors)).filter((p): p is Post => !!p);
   const ids = [...tasks.map((t) => t.id), ...posts.map((p) => p.id)];
-  if (new Set(ids).size !== ids.length) errors.push({ path: "ids", message: "معرّفات مكررة داخل الملف" });
+  if (new Set(ids).size !== ids.length) errors.push({ path: "ids", message: "Duplicate ids inside the file" });
   const start = v.startDate as string;
   posts.forEach((p, i) => {
-    if (isIsoDate(p.date) && p.date < start) errors.push({ path: `posts[${i}].date`, message: "قبل تاريخ بداية الخطة" });
+    if (isIsoDate(p.date) && p.date < start) errors.push({ path: `posts[${i}].date`, message: "Before the plan start date" });
   });
   const ue = isObj(v.userEdited) ? v.userEdited : {};
   const draft: DraftV1 = {
@@ -153,12 +153,12 @@ export function parseDraft(v: unknown): ParseResult<DraftV1> {
 
 /** قراءة ملف استيراد: الحجم أولاً ثم JSON ثم المخطط. لا يلمس أي حالة قائمة. */
 export function parseImportText(text: string, byteLength: number): ParseResult<DraftV1> {
-  if (byteLength > LIMITS.importBytes) return { success: false, errors: [{ path: "", message: `الملف أكبر من ${LIMITS.importBytes / 1024} KiB` }] };
+  if (byteLength > LIMITS.importBytes) return { success: false, errors: [{ path: "", message: `The file is larger than ${LIMITS.importBytes / 1024} KiB` }] };
   let json: unknown;
   try {
     json = JSON.parse(text);
   } catch {
-    return { success: false, errors: [{ path: "", message: "الملف ليس JSON صالحاً" }] };
+    return { success: false, errors: [{ path: "", message: "The file is not valid JSON" }] };
   }
   return parseDraft(json);
 }

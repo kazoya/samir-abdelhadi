@@ -29,7 +29,7 @@ export function todayIso(timeZone?: string, now: Date = new Date()): string {
   return `${g("year")}-${g("month")}-${g("day")}`;
 }
 
-const weekday = new Intl.DateTimeFormat("ar-JO-u-nu-latn", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+const weekday = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
 export function formatDayAr(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   return weekday.format(new Date(Date.UTC(y, m - 1, d)));

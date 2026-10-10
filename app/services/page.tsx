@@ -3,19 +3,19 @@ import { ServiceExplorer } from "@/components/service-explorer";
 import { CtaLink, PageHead, Source } from "@/components/ui";
 import { GHINA_ENGINE } from "@/lib/site";
 
-export const metadata: Metadata = { title: "المسارات" };
+export const metadata: Metadata = { title: "Paths" };
 
 export default function ServicesPage() {
   return (
     <>
-      <PageHead kicker="مسارات الحضور" title="أحد عشر مساراً تختار منها، ولا تشتريها من هنا">
-        <p>الأسماء كُتبت لهذا التصور فوق محرك التوصيات المأخوذ من تصور غنى ميديا. افتح «متى تحتاجها؟» أو ابدأ خطة. لا أسعار.</p>
+      <PageHead kicker="Presence paths" title="Eleven paths to choose from. Nothing is sold here.">
+        <p>The names were written for this concept on top of the recommendation engine taken from the Ghina Media concept. Open “When do you need it?” or start a plan. No prices.</p>
       </PageHead>
       <ServiceExplorer />
       <div className="mt-10">
-        <CtaLink href="/planner">ابدأ من خمسة أسئلة</CtaLink>
+        <CtaLink href="/planner">Start with five questions</CtaLink>
       </div>
-      <Source page="محرك ghina-media-concept" href={GHINA_ENGINE} />
+      <Source page="ghina-media-concept engine" href={GHINA_ENGINE} />
     </>
   );
 }

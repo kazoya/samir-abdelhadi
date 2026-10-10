@@ -19,7 +19,7 @@ export function csvCell(value: string): string {
 }
 
 export function postsToCsv(d: DraftV1): string {
-  const head = ["التاريخ", "القناة", "الفكرة", "الهدف", "الدعوة للفعل", "الحالة"];
+  const head = ["Date", "Channel", "Idea", "Goal", "Ask", "Status"];
   const rows = [...d.posts]
     .sort((a, b) => a.date.localeCompare(b.date))
     .map((p) => [p.date, postChannelLabel[p.channel], p.idea, p.goal, p.cta, postStatusLabel[p.status]]);
@@ -30,25 +30,25 @@ export function postsToCsv(d: DraftV1): string {
 export function answersSummary(d: DraftV1): string[] {
   const a = d.answers;
   return [
-    `النشاط: ${businessLabel[a.businessId]}`,
-    `الهدف: ${goalLabel[a.goalId]}`,
-    `القنوات الحالية: ${a.channelIds.map((c) => channelLabel[c]).join("، ")}`,
-    `إدارة التسويق: ${teamLabel[a.teamId]}`,
-    `موعد البدء: ${timelineLabel[a.timelineId]}`,
+    `Audience: ${businessLabel[a.businessId]}`,
+    `Goal: ${goalLabel[a.goalId]}`,
+    `Channels now: ${a.channelIds.map((c) => channelLabel[c]).join(", ")}`,
+    `Who prepares the work: ${teamLabel[a.teamId]}`,
+    `Start: ${timelineLabel[a.timelineId]}`,
   ];
 }
 
 export function briefText(d: DraftV1, plan: PlanV1, name = ""): string {
   const lines = [
-    "موجز حضور عام. تصور تجريبي مستقل، ليس موقعاً رسمياً.",
-    name.trim() ? `الاسم: ${name.trim()}` : "",
+    "Presence brief. Independent concept. Not an official site.",
+    name.trim() ? `Name: ${name.trim()}` : "",
     ...answersSummary(d),
     "",
-    "التوصيات الأولية (قواعد ثابتة، ليست ذكاءً اصطناعياً):",
-    ...plan.recommendations.map((r) => `${r.rank}. ${serviceName(r.serviceId)}${r.tier === "optional" ? " (اختيارية)" : ""}`),
+    "First recommendations (fixed rules, not an AI analysis):",
+    ...plan.recommendations.map((r) => `${r.rank}. ${serviceName(r.serviceId)}${r.tier === "optional" ? " (optional)" : ""}`),
     "",
-    `خطة 30 يوماً تبدأ ${formatDayAr(d.startDate)} — ${d.tasks.length} مهمة، ${d.posts.length} منشوراً مقترحاً.`,
-    ...([1, 2, 3, 4] as const).map((ph) => `${phaseLabel[ph]}: ${d.tasks.filter((t) => t.phase === ph).map((t) => t.title).join("؛ ") || "—"}`),
+    `A 30-day plan starting ${formatDayAr(d.startDate)}. ${d.tasks.length} tasks, ${d.posts.length} suggested posts.`,
+    ...([1, 2, 3, 4] as const).map((ph) => `${phaseLabel[ph]}: ${d.tasks.filter((t) => t.phase === ph).map((t) => t.title).join("; ") || "—"}`),
   ];
   return lines.filter((l, i) => l !== "" || lines[i - 1] !== "").join("\n").trim();
 }
@@ -56,11 +56,11 @@ export function briefText(d: DraftV1, plan: PlanV1, name = ""): string {
 /** رسالة واتساب قصيرة للمراجعة قبل الإرسال — بلا تفاصيل الخطة الكاملة. */
 export function whatsappMessage(d: DraftV1, plan: PlanV1, name = ""): string {
   return [
-    "مرحباً، وصلت من تصور حضور عبدالهادي.",
-    name.trim() ? `أنا ${name.trim()}.` : "",
+    "Hello, I came from the Abdelhadi presence concept.",
+    name.trim() ? `I am ${name.trim()}.` : "",
     ...answersSummary(d),
-    `المسارات المقترحة للنقاش: ${plan.recommendations.map((r) => serviceName(r.serviceId)).join("، ")}`,
-    "تصوّر تجريبي مستقل. أرغب بمراجعة هذا الموجز.",
+    `Paths suggested for discussion: ${plan.recommendations.map((r) => serviceName(r.serviceId)).join(", ")}`,
+    "Independent concept. I would like to review this brief.",
   ]
     .filter(Boolean)
     .join("\n");

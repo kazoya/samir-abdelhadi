@@ -6,31 +6,31 @@ import type { DraftV1, PlanV1 } from "@/lib/planner/types";
 
 // نسخة الطباعة فقط (مخفية على الشاشة). بلا أزرار أو مؤثرات؛ يحفظها الزائر PDF من نافذة الطباعة.
 export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1; name: string }) {
-  const svc = (id: string) => services.find((s) => s.id === id)?.ar ?? id;
+  const svc = (id: string) => services.find((s) => s.id === id)?.en ?? id;
   return (
     <article className="print-brief hidden print:block">
-      <p className="pb-note">تصوّر تجريبي مستقل — غير تابع للموقع الرسمي</p>
-      <h1>موجز خطة نمو — 30 يوماً</h1>
-      {name.trim() && <p>الاسم: {name.trim()}</p>}
+      <p className="pb-note">Independent concept. Not an official site.</p>
+      <h1>Presence brief, 30 days</h1>
+      {name.trim() && <p>Name: {name.trim()}</p>}
       <ul>
         {answersSummary(draft).map((l) => (
           <li key={l}>{l}</li>
         ))}
-        <li>بداية الخطة: {formatDayAr(draft.startDate)}</li>
+        <li>Plan start: {formatDayAr(draft.startDate)}</li>
       </ul>
-      <h2>التوصيات الأولية (قواعد ثابتة، ليست ذكاءً اصطناعياً)</h2>
+      <h2>First recommendations (fixed rules, not an AI analysis)</h2>
       <ol>
         {plan.recommendations.map((r) => (
           <li key={r.serviceId}>
             <b>
               {svc(r.serviceId)}
-              {r.tier === "optional" ? " (اختيارية)" : ""}
+              {r.tier === "optional" ? " (optional)" : ""}
             </b>
             : {r.reasons.join(" ")}
           </li>
         ))}
       </ol>
-      <h2>خطة 30 يوماً</h2>
+      <h2>30-day plan</h2>
       {([1, 2, 3, 4] as const).map((ph) => (
         <section key={ph}>
           <h3>{phaseLabel[ph]}</h3>
@@ -41,21 +41,21 @@ export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1
                 <li key={t.id}>
                   {t.done ? "☑ " : "☐ "}
                   {t.title}
-                  {t.owner && ` — المسؤول: ${t.owner}`}
-                  {t.metric && ` — المقياس: ${t.metric}`}
+                  {t.owner && ` — owner: ${t.owner}`}
+                  {t.metric && ` — measure: ${t.metric}`}
                 </li>
               ))}
           </ul>
         </section>
       ))}
-      <h2>تقويم المحتوى</h2>
+      <h2>Content calendar</h2>
       <table>
         <thead>
           <tr>
-            <th>اليوم</th>
-            <th>القناة</th>
-            <th>الفكرة</th>
-            <th>الحالة</th>
+            <th>Day</th>
+            <th>Channel</th>
+            <th>Idea</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@ export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1
             ))}
         </tbody>
       </table>
-      <p className="pb-note">لا أسعار ولا وعود بنتائج. النشر لاحقاً يعتمد بشرياً.</p>
+      <p className="pb-note">No prices and no promises of results. Later publishing is approved by a person.</p>
     </article>
   );
 }

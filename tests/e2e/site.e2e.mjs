@@ -16,7 +16,7 @@ const ok = (name, cond, extra = "") => {
 
 const routes = ["/", "/planner", "/services", "/training", "/activities", "/opportunities", "/contact", "/developer"];
 const allowedExternal = ["wa.me", "www.zadforarts.com", "www.jordanpolitics.org", "senate.jo", "github.com", "www.google.com"];
-const LABEL = "تصوّر تجريبي مستقل — غير تابع للموقع الرسمي";
+const LABEL = "Independent concept. Not an official site.";
 
 const b = await chromium.launch();
 
@@ -49,7 +49,7 @@ for (const [vp, w, h] of [["desktop", 1366, 900], ["mobile", 390, 844]]) {
       fontDir: getComputedStyle(document.body).direction,
     }));
     ok(`${vp} ${r} status 200`, res.status() === 200, String(res.status()));
-    ok(`${vp} ${r} lang=ar dir=rtl`, info.lang === "ar" && info.dir === "rtl" && info.fontDir === "rtl");
+    ok(`${vp} ${r} lang=en dir=ltr`, info.lang === "en" && info.dir === "ltr" && info.fontDir === "ltr");
     ok(`${vp} ${r} noindex meta`, /noindex/.test(info.robots), info.robots);
     ok(`${vp} ${r} X-Robots-Tag`, /noindex/.test(res.headers()["x-robots-tag"] ?? ""));
     ok(`${vp} ${r} concept label visible`, info.body.includes(LABEL));
@@ -60,8 +60,8 @@ for (const [vp, w, h] of [["desktop", 1366, 900], ["mobile", 390, 844]]) {
   // التنقل
   await p.goto(BASE + "/", { waitUntil: "networkidle" });
   for (const r of routes.slice(1, 7)) {
-    if (vp === "mobile") await p.getByRole("button", { name: "القائمة" }).click();
-    const scope = vp === "mobile" ? p.locator("#mnav") : p.getByRole("navigation", { name: "التنقل الرئيسي" });
+    if (vp === "mobile") await p.getByRole("button", { name: "Menu" }).click();
+    const scope = vp === "mobile" ? p.locator("#mnav") : p.getByRole("navigation", { name: "Main" });
     await scope.locator(`a[href="${r}"]`).click();
     await p.waitForURL(BASE + r);
     ok(`${vp} nav → ${r}`, p.url() === BASE + r);
@@ -69,8 +69,8 @@ for (const [vp, w, h] of [["desktop", 1366, 900], ["mobile", 390, 844]]) {
 
   // المخطِّط: تغطيه tests/e2e/studio.e2e.mjs في المستودع؛ هنا فحص دخان فقط
   await p.goto(BASE + "/planner", { waitUntil: "networkidle" });
-  await p.getByRole("button", { name: "جمهور عام" }).click();
-  ok(`${vp} planner studio loads and advances`, (await p.locator("main").innerText()).includes("سؤال 2 من 5"));
+  await p.getByRole("button", { name: "General public" }).click();
+  ok(`${vp} planner studio loads and advances`, (await p.locator("main").innerText()).includes("Question 2 of 5"));
 
   // الروابط
   const links = new Set();
