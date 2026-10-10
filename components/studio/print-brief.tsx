@@ -1,30 +1,33 @@
-import { services } from "@/lib/site";
+"use client";
+
+import { useCopy } from "@/components/prefs";
+import { serviceName } from "@/lib/i18n/lookup";
 import { formatDayAr } from "@/lib/planner/dates";
-import { phaseLabel, postChannelLabel, postStatusLabel } from "@/lib/planner/dict";
 import { answersSummary } from "@/lib/planner/export";
 import type { DraftV1, PlanV1 } from "@/lib/planner/types";
 
-// نسخة الطباعة فقط (مخفية على الشاشة). بلا أزرار أو مؤثرات؛ يحفظها الزائر PDF من نافذة الطباعة.
 export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1; name: string }) {
-  const svc = (id: string) => services.find((s) => s.id === id)?.en ?? id;
+  const t = useCopy();
   return (
     <article className="print-brief hidden print:block">
-      <p className="pb-note">Independent concept. Not an official site.</p>
+      <p className="pb-note">{t.disclaimer}</p>
       <h1>Presence brief, 30 days</h1>
       {name.trim() && <p>Name: {name.trim()}</p>}
       <ul>
         {answersSummary(draft).map((l) => (
           <li key={l}>{l}</li>
         ))}
-        <li>Plan start: {formatDayAr(draft.startDate)}</li>
+        <li>
+          {t.studio.planStart}: {formatDayAr(draft.startDate)}
+        </li>
       </ul>
       <h2>First recommendations (fixed rules, not an AI analysis)</h2>
       <ol>
         {plan.recommendations.map((r) => (
           <li key={r.serviceId}>
             <b>
-              {svc(r.serviceId)}
-              {r.tier === "optional" ? " (optional)" : ""}
+              {serviceName(t, r.serviceId)}
+              {r.tier === "optional" ? ` ${t.optional}` : ""}
             </b>
             : {r.reasons.join(" ")}
           </li>
@@ -33,16 +36,16 @@ export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1
       <h2>30-day plan</h2>
       {([1, 2, 3, 4] as const).map((ph) => (
         <section key={ph}>
-          <h3>{phaseLabel[ph]}</h3>
+          <h3>{t.phases[ph]}</h3>
           <ul>
             {draft.tasks
-              .filter((t) => t.phase === ph)
-              .map((t) => (
-                <li key={t.id}>
-                  {t.done ? "☑ " : "☐ "}
-                  {t.title}
-                  {t.owner && ` — owner: ${t.owner}`}
-                  {t.metric && ` — measure: ${t.metric}`}
+              .filter((task) => task.phase === ph)
+              .map((task) => (
+                <li key={task.id}>
+                  {task.done ? "☑ " : "☐ "}
+                  {task.title}
+                  {task.owner && ` — ${t.studio.owner}: ${task.owner}`}
+                  {task.metric && ` — ${t.studio.measure}: ${task.metric}`}
                 </li>
               ))}
           </ul>
@@ -52,10 +55,10 @@ export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1
       <table>
         <thead>
           <tr>
-            <th>Day</th>
-            <th>Channel</th>
-            <th>Idea</th>
-            <th>Status</th>
+            <th>{t.studio.day}</th>
+            <th>{t.studio.channel}</th>
+            <th>{t.studio.idea}</th>
+            <th>{t.studio.status}</th>
           </tr>
         </thead>
         <tbody>
@@ -64,9 +67,9 @@ export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1
             .map((p) => (
               <tr key={p.id}>
                 <td>{formatDayAr(p.date)}</td>
-                <td>{postChannelLabel[p.channel]}</td>
+                <td>{t.postChannels[p.channel]}</td>
                 <td>{p.idea}</td>
-                <td>{postStatusLabel[p.status]}</td>
+                <td>{t.statuses[p.status]}</td>
               </tr>
             ))}
         </tbody>

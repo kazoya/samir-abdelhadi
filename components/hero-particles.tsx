@@ -12,7 +12,6 @@ import { useEffect, useRef } from "react";
 
 type Node = { x: number; y: number; a: number };
 
-const COLOR = "196,149,106";
 const LINK = 130;
 const PUSH = 90;
 
@@ -24,6 +23,8 @@ export function HeroParticles() {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
+    const readGlow = () => getComputedStyle(document.documentElement).getPropertyValue("--c-glow").trim().replace(/\s+/g, ",") || "196,149,106";
+    let color = readGlow();
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
     const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -76,7 +77,7 @@ export function HeroParticles() {
           const b = nodes[j];
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < LINK) {
-            ctx.strokeStyle = `rgba(${COLOR},${(0.22 * (1 - d / LINK)).toFixed(3)})`;
+            ctx.strokeStyle = `rgba(${color},${(0.22 * (1 - d / LINK)).toFixed(3)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -84,7 +85,7 @@ export function HeroParticles() {
             ctx.stroke();
           }
         }
-        ctx.fillStyle = `rgba(${COLOR},0.45)`;
+        ctx.fillStyle = `rgba(${color},0.45)`;
         ctx.beginPath();
         ctx.arc(a.x, a.y, 1.8, 0, Math.PI * 2);
         ctx.fill();
@@ -133,9 +134,15 @@ export function HeroParticles() {
       host.addEventListener("pointerleave", onLeave);
     }
     start();
+    const mo = new MutationObserver(() => {
+      color = readGlow();
+      if (reduce) draw(0);
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
     return () => {
       stop();
+      mo.disconnect();
       ro.disconnect();
       io.disconnect();
       document.removeEventListener("visibilitychange", onVis);

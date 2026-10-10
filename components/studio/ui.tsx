@@ -55,7 +55,7 @@ export function Dialog({ open, onClose, title, children }: { open: boolean; onCl
 export type TabDef<T extends string> = { id: T; label: string };
 
 /** تبويبات WAI-ARIA: الأسهم تتبع اتجاه RTL (يسار = التالي)، Home/End للطرفين. */
-export function Tabs<T extends string>({ tabs, value, onChange, idBase }: { tabs: TabDef<T>[]; value: T; onChange: (t: T) => void; idBase: string }) {
+export function Tabs<T extends string>({ tabs, value, onChange, idBase, ariaLabel = "Plan sections" }: { tabs: TabDef<T>[]; value: T; onChange: (t: T) => void; idBase: string; ariaLabel?: string }) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const onKey = (e: KeyboardEvent, i: number) => {
     const last = tabs.length - 1;
@@ -70,7 +70,7 @@ export function Tabs<T extends string>({ tabs, value, onChange, idBase }: { tabs
     refs.current[j]?.focus();
   };
   return (
-    <div role="tablist" aria-label="Plan sections" className="flex gap-1 overflow-x-auto rounded-2xl border border-line bg-paper p-1 print:hidden">
+    <div role="tablist" aria-label={ariaLabel} className="flex gap-1 overflow-x-auto rounded-2xl border border-line bg-paper p-1 print:hidden">
       {tabs.map((t, i) => {
         const on = t.id === value;
         return (

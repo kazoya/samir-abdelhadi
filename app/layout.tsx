@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Interactions } from "@/components/interactions";
-import { SalesBar } from "@/components/sales-bar";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { disclaimer, paymentNotice } from "@/lib/site";
+import { PrefsProvider } from "@/components/prefs";
+import { Shell } from "@/components/shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,32 +12,18 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#110f0d" };
 
+const boot = `(function(){var d=document.documentElement;d.classList.add("js");try{var l=localStorage.getItem("abdelhadi-locale");var t=localStorage.getItem("abdelhadi-theme");if(l==="en"||l==="ar"||l==="tr"||l==="de"){d.lang=l;d.dir=l==="ar"?"rtl":"ltr"}if(t==="night"||t==="light"||t==="desert"||t==="aqua")d.dataset.theme=t}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html lang="en" dir="ltr" data-theme="night" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script dangerouslySetInnerHTML={{ __html: boot }} />
       </head>
       <body className="min-h-screen font-sans antialiased">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[80] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:text-bg"
-        >
-          Skip to content
-        </a>
-        <div role="note" data-print-hide className="bg-[#ff3b3b] px-[18px] py-3.5 text-center text-[15px] font-bold leading-snug text-[#1a0505]">
-          {paymentNotice}
-        </div>
-        <div role="note" data-print-hide className="bg-gold px-4 py-1.5 text-center text-xs font-bold text-bg">
-          {disclaimer} Not a Senate page and not an official site.
-        </div>
-        <SiteHeader />
-        <main id="main" className="mx-auto max-w-6xl px-4 pb-24 pt-8">
-          {children}
-        </main>
-        <SiteFooter />
-        <SalesBar />
-        <Interactions />
+        <PrefsProvider>
+          <Shell>{children}</Shell>
+        </PrefsProvider>
       </body>
     </html>
   );

@@ -2,7 +2,8 @@
 
 /* هوية غنى ميديا: ذهبي الشعار (#c4956a) على فحمي دافئ.
    كل أزواج النص/الخلفية أدناه ≥ 4.5:1 (muted على bg ≈ 8.9:1، gold على bg ≈ 6.9:1، bg على gold ≈ 6.9:1). */
-:root {
+:root,
+[data-theme="night"] {
   --c-bg: #110f0d;
   --c-paper: #181512;
   --c-raised: #211d19;
@@ -14,10 +15,65 @@
   --c-line: #2f2822;
   --c-line-strong: #4a3d31;
   --c-ok: #86cfa6;
+  --c-glow: 196 149 106;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --shadow-card: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 12px 32px -18px rgb(0 0 0 / 0.7);
   --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 22px 44px -20px rgb(0 0 0 / 0.8), 0 0 0 1px rgb(196 149 106 / 0.25);
   color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --c-bg: #f7f4ef;
+  --c-paper: #fffcf8;
+  --c-raised: #ffffff;
+  --c-ink: #1c1612;
+  --c-muted: #5c534c;
+  --c-gold: #8a5524;
+  --c-gold-strong: #6d3e14;
+  --c-gold-soft: #f3e6d4;
+  --c-line: #e4d9cc;
+  --c-line-strong: #c9b49a;
+  --c-ok: #1c7a45;
+  --c-glow: 138 85 36;
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 12px 28px -18px rgb(60 40 20 / 0.28);
+  --shadow-lift: 0 18px 36px -22px rgb(60 40 20 / 0.35), 0 0 0 1px rgb(138 85 36 / 0.2);
+  color-scheme: light;
+}
+
+[data-theme="desert"] {
+  --c-bg: #f3e2c8;
+  --c-paper: #fff4e4;
+  --c-raised: #fff9f0;
+  --c-ink: #3a2415;
+  --c-muted: #6d5140;
+  --c-gold: #b85c38;
+  --c-gold-strong: #8a3e22;
+  --c-gold-soft: #f6d3bf;
+  --c-line: #e4c7a8;
+  --c-line-strong: #c9a27a;
+  --c-ok: #2d6b45;
+  --c-glow: 184 92 56;
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 14px 30px -18px rgb(90 50 20 / 0.3);
+  --shadow-lift: 0 20px 36px -20px rgb(90 50 20 / 0.38), 0 0 0 1px rgb(184 92 56 / 0.22);
+  color-scheme: light;
+}
+
+[data-theme="aqua"] {
+  --c-bg: #e5f5f4;
+  --c-paper: #f5fffe;
+  --c-raised: #ffffff;
+  --c-ink: #073238;
+  --c-muted: #3c646a;
+  --c-gold: #0c7f86;
+  --c-gold-strong: #085e64;
+  --c-gold-soft: #d2f1f0;
+  --c-line: #b7dedc;
+  --c-line-strong: #7fbfbc;
+  --c-ok: #0f7a4b;
+  --c-glow: 12 127 134;
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 14px 30px -18px rgb(8 60 70 / 0.28);
+  --shadow-lift: 0 20px 36px -20px rgb(8 60 70 / 0.34), 0 0 0 1px rgb(12 127 134 / 0.22);
+  color-scheme: light;
 }
 
 @theme inline {
@@ -32,7 +88,7 @@
   --color-line: var(--c-line);
   --color-line-strong: var(--c-line-strong);
   --color-ok: var(--c-ok);
-  --font-sans: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  --font-sans: "Iowan Old Style", Palatino, "Palatino Linotype", "Segoe UI", Tahoma, Georgia, serif;
 }
 
 html {
@@ -58,7 +114,7 @@ p {
 }
 
 ::selection {
-  background: rgb(196 149 106 / 0.35);
+  background: rgb(var(--c-glow) / 0.35);
   color: var(--c-ink);
 }
 
@@ -67,10 +123,14 @@ button {
   touch-action: manipulation;
 }
 
+html[lang="ar"] body {
+  font-family: "Segoe UI", Tahoma, "Noto Naskh Arabic", "Geeza Pro", sans-serif;
+}
+
 .grain {
   background-image:
-    radial-gradient(60rem 30rem at 85% -10%, rgb(196 149 106 / 0.16), transparent 60%),
-    radial-gradient(40rem 25rem at 0% 110%, rgb(196 149 106 / 0.08), transparent 60%);
+    radial-gradient(60rem 30rem at 85% -10%, rgb(var(--c-glow) / 0.16), transparent 60%),
+    radial-gradient(40rem 25rem at 0% 110%, rgb(var(--c-glow) / 0.08), transparent 60%);
 }
 
 .gold-text {
@@ -112,7 +172,7 @@ button {
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(196 149 106 / 0.14), transparent 65%);
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--c-glow) / 0.14), transparent 65%);
   transition: opacity 250ms var(--ease-out);
 }
 

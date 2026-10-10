@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { goalLabel } from "@/lib/planner/dict";
+import { useCopy } from "@/components/prefs";
 import { addDays, diffDays, todayIso } from "@/lib/planner/dates";
 import { applyAnswers, makeId, newDraft, planOf } from "@/lib/planner/draft";
 import { deleteDraft, loadDraft, saveDraft, saveErrorText, SLOTS, type Slot } from "@/lib/planner/storage";
@@ -18,17 +18,12 @@ import { Dialog, Panel, StatusLine, Tabs, type Notice } from "./ui";
 import { Wizard, type Partial5 } from "./wizard";
 
 type Tab = "recs" | "plan" | "calendar" | "brief" | "compare";
-const TABS: { id: Tab; label: string }[] = [
-  { id: "recs", label: "Recommendations" },
-  { id: "plan", label: "30-day plan" },
-  { id: "calendar", label: "Calendar" },
-  { id: "brief", label: "Brief" },
-  { id: "compare", label: "Compare" },
-];
+const TAB_IDS: Tab[] = ["recs", "plan", "calendar", "brief", "compare"];
 
 const toAnswers = (p: Partial5) => parseAnswers({ schemaVersion: 1, ...p });
 
 export function Studio() {
+  const t = useCopy();
   const params = useSearchParams();
   const presetGoal = params.get("goal");
   const goalFromUrl = GOAL_IDS.find((g) => g === presetGoal);
@@ -67,13 +62,13 @@ export function Studio() {
       setDraft(newDraft(r.data, todayIso()));
       setEditing(false);
       setTab("recs");
-      setNotice({ kind: "info", text: "Ready: first recommendations, a 30-day plan, and a calendar you can edit." });
+      setNotice({ kind: "info", text: t.studio.ready });
     } else if (edited && JSON.stringify(r.data) !== JSON.stringify(draft.answers)) {
       setPending(r.data);
     } else {
       setDraft(applyAnswers(draft, r.data, { regenerateEdited: false }));
       setEditing(false);
-      setNotice({ kind: "info", text: "Recommendations and the plan were updated from your new answers." });
+      setNotice({ kind: "info", text: t.studio.updated });
     }
   };
 
@@ -82,7 +77,7 @@ export function Studio() {
     setDraft(applyAnswers(draft, pending, { regenerateEdited: regenerate }));
     setPending(null);
     setEditing(false);
-    setNotice({ kind: "info", text: regenerate ? "Tasks and the calendar were rebuilt from the new answers." : "Recommendations were updated and your edits to tasks and the calendar were kept." });
+    setNotice({ kind: "info", text: regenerate ? t.studio.rebuilt : t.studio.kept });
   };
 
   const setTasks = (tasks: Task[]) => draft && setDraft({ ...draft, tasks, updatedAt: new Date().toISOString(), userEdited: { ...draft.userEdited, tasks: true } });
@@ -91,7 +86,7 @@ export function Studio() {
   const save = (s: Slot) => {
     if (!draft) return;
     const r = saveDraft(s, { ...draft, updatedAt: new Date().toISOString() });
-    setNotice(r.ok ? { kind: "ok", text: `Saved as draft ${s} on this device only.` } : { kind: "error", text: saveErrorText[r.reason] });
+    setNotice(r.ok ? { kind: "ok", text: t.studio.savedAs(s) } : { kind: "error", text: saveErrorText[r.reason] });
     if (r.ok) refreshSlots();
   };
 
@@ -106,11 +101,11 @@ export function Studio() {
   const load = (s: Slot) => {
     const r = loadDraft(s);
     if (!r || !r.success) {
-      setNotice({ kind: "error", text: `Could not open draft ${s}${r && !r.success ? `: ${r.errors[0]?.message}` : ""}.` });
+      setNotice({ kind: "error", text: t.studio.couldNotOpen(s, r && !r.success ? `: ${r.errors[0]?.message}` : "") });
       return;
     }
     if (draft && edited) setConfirm({ kind: "load", slot: s });
-    else openDraft(r.data, `Opened draft ${s}.`);
+    else openDraft(r.data, t.studio.openedDraft(s));
   };
 
   const importFile = async (f: File) => {
@@ -119,17 +114,17 @@ export function Studio() {
       if (f.size > LIMITS.importBytes) throw new RangeError();
       text = await f.text();
     } catch (e) {
-      setNotice({ kind: "error", text: e instanceof RangeError ? `The file is larger than ${LIMITS.importBytes / 1024} KiB. Nothing changed.` : "The file could not be read. Nothing changed." });
+      setNotice({ kind: "error", text: e instanceof RangeError ? t.studio.fileLarger(LIMITS.importBytes / 1024) : t.studio.fileUnreadable });
       return;
     }
     const r = parseImportText(text, f.size);
     if (!r.success) {
       const first = r.errors.slice(0, 3).map((e) => (e.path ? `${e.path}: ${e.message}` : e.message));
-      setNotice({ kind: "error", text: `The file was not imported. Your current plan did not change. ${first.join("; ")}${r.errors.length > 3 ? ` (+${r.errors.length - 3})` : ""}` });
+      setNotice({ kind: "error", text: t.studio.notImported(`${first.join("; ")}${r.errors.length > 3 ? ` (+${r.errors.length - 3})` : ""}`) });
       return;
     }
     if (draft) setConfirm({ kind: "import", draft: r.data });
-    else openDraft(r.data, "The plan was imported from the file.");
+    else openDraft(r.data, t.studio.imported);
   };
 
   const doReset = () => {
@@ -146,9 +141,9 @@ export function Studio() {
     setNotice(
       wipeSaved
         ? wiped
-          ? { kind: "ok", text: "The session was reset and the saved drafts on this device were deleted." }
-          : { kind: "error", text: "The session was reset, but the saved drafts could not be deleted from storage." }
-        : { kind: "ok", text: "The session was reset. Saved drafts were left as they were." },
+          ? { kind: "ok", text: t.studio.resetDeleted }
+          : { kind: "error", text: t.studio.resetPartial }
+        : { kind: "ok", text: t.studio.resetKept },
     );
     setWipeSaved(false);
   };
@@ -168,19 +163,23 @@ export function Studio() {
             onChange={setPartial}
             onStep={setStep}
             onDone={finishWizard}
-            note={goalFromUrl && !draft ? `Goal preset: “${goalLabel[goalFromUrl]}”. You can change it on question 2.` : undefined}
+            note={goalFromUrl && !draft ? t.studio.goalPreset(t.goals[goalFromUrl]) : undefined}
           />
           {draft && (
             <button type="button" onClick={() => setEditing(false)} className="btn mt-4 border border-line text-sm font-normal text-muted hover:text-ink">
-              Back to my plan, unchanged
+              {t.studio.backToPlan}
             </button>
           )}
         </div>
       ) : (
         <>
-          <Tabs tabs={TABS} value={tab} onChange={(t) => {
-            setTab(t);
-            if (t === "compare" && !slots) refreshSlots();
+          <Tabs
+            tabs={TAB_IDS.map((id, i) => ({ id, label: t.studio.tabs[i] }))}
+            value={tab}
+            ariaLabel={t.studio.planSections}
+            onChange={(id) => {
+            setTab(id);
+            if (id === "compare" && !slots) refreshSlots();
           }} idBase="studio" />
           <Panel idBase="studio" id="recs" active={tab === "recs"}>
             <Recommendations
@@ -194,7 +193,7 @@ export function Studio() {
           </Panel>
           <Panel idBase="studio" id="plan" active={tab === "plan"}>
             <label className="mb-4 flex flex-wrap items-center gap-3 text-sm">
-              <span className="font-bold">Start date</span>
+              <span className="font-bold">{t.studio.startDate}</span>
               <input
                 type="date"
                 value={draft.startDate}
@@ -227,7 +226,7 @@ export function Studio() {
               onLoad={load}
               onDelete={(s) => {
                 const ok = deleteDraft(s);
-                setNotice(ok ? { kind: "ok", text: `Draft ${s} was deleted from this device.` } : { kind: "error", text: `Draft ${s} could not be deleted.` });
+                setNotice(ok ? { kind: "ok", text: t.studio.deletedDraft(s) } : { kind: "error", text: t.studio.deleteFail(s) });
                 refreshSlots();
               }}
               onImport={importFile}
@@ -242,53 +241,53 @@ export function Studio() {
         </>
       )}
 
-      <Dialog open={!!pending} onClose={closePending} title="You edited the plan">
-        <p>You changed your answers after editing tasks or the calendar. Recommendations update either way. What should happen to your edits?</p>
+      <Dialog open={!!pending} onClose={closePending} title={t.studio.editedTitle}>
+        <p>{t.studio.editedBody}</p>
         <div className="mt-5 grid gap-2 sm:grid-cols-2">
           <button type="button" autoFocus onClick={() => resolvePending(false)} className="btn btn-primary text-sm">
-            Keep my edits
+            {t.studio.keepEdits}
           </button>
           <button type="button" onClick={() => resolvePending(true)} className="btn btn-ghost text-sm">
-            Rebuild tasks and the calendar
+            {t.studio.rebuild}
           </button>
         </div>
       </Dialog>
 
-      <Dialog open={confirm?.kind === "reset"} onClose={closeConfirm} title="Start over?">
-        <p>The name, the answers, and the open plan will be cleared. You can restore them only from an exported JSON file.</p>
+      <Dialog open={confirm?.kind === "reset"} onClose={closeConfirm} title={t.studio.startOverTitle}>
+        <p>{t.studio.startOverBody}</p>
         <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3 text-sm text-ink">
           <input type="checkbox" checked={wipeSaved} onChange={(e) => setWipeSaved(e.target.checked)} className="size-5 accent-[var(--c-gold)]" />
-          Also delete drafts A and B saved on this device
+          {t.studio.alsoDelete}
         </label>
         <div className="mt-5 grid gap-2 sm:grid-cols-2">
           <button type="button" onClick={doReset} className="btn btn-primary text-sm">
-            Yes, reset
+            {t.studio.yesReset}
           </button>
           <button type="button" autoFocus onClick={() => setConfirm(null)} className="btn btn-ghost text-sm">
-            Cancel
+            {t.studio.cancel}
           </button>
         </div>
       </Dialog>
 
-      <Dialog open={confirm?.kind === "import" || confirm?.kind === "load"} onClose={closeConfirm} title="Replace the open plan?">
-        <p>The file is valid. Opening it replaces the plan that is open now, including unsaved edits. Save or export first if you want to keep them.</p>
+      <Dialog open={confirm?.kind === "import" || confirm?.kind === "load"} onClose={closeConfirm} title={t.studio.replaceTitle}>
+        <p>{t.studio.replaceBody}</p>
         <div className="mt-5 grid gap-2 sm:grid-cols-2">
           <button
             type="button"
             onClick={() => {
-              if (confirm?.kind === "import") openDraft(confirm.draft, "The plan was imported from the file.");
+              if (confirm?.kind === "import") openDraft(confirm.draft, t.studio.imported);
               else if (confirm?.kind === "load") {
                 const r = loadDraft(confirm.slot);
-                if (r && r.success) openDraft(r.data, `Opened draft ${confirm.slot}.`);
+                if (r && r.success) openDraft(r.data, t.studio.openedDraft(confirm.slot));
               }
               setConfirm(null);
             }}
             className="btn btn-primary text-sm"
           >
-            Replace
+            {t.studio.replace}
           </button>
           <button type="button" autoFocus onClick={() => setConfirm(null)} className="btn btn-ghost text-sm">
-            Cancel
+            {t.studio.cancel}
           </button>
         </div>
       </Dialog>

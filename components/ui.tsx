@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useCopy } from "@/components/prefs";
 
 export function PageHead({ kicker, title, children }: { kicker: string; title: string; children?: React.ReactNode }) {
   return (
@@ -11,11 +14,12 @@ export function PageHead({ kicker, title, children }: { kicker: string; title: s
 }
 
 export function Source({ page, href }: { page: string; href: string }) {
+  const c = useCopy();
   return (
     <p className="mt-8 text-xs text-muted">
-      Source: {page}{" "}
+      {c.activities.source}: {page}{" "}
       <a className="underline hover:text-gold-strong" href={href} target="_blank" rel="noopener noreferrer">
-        link
+        {c.activities.link}
       </a>
     </p>
   );

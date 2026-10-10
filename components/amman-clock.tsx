@@ -2,6 +2,8 @@
 
 // مقتبس ومكيَّف من initDigitalClock في C:\apcasystems\apca-script.js (Intl + Asia/Amman)
 import { useSyncExternalStore } from "react";
+import { usePrefs } from "@/components/prefs";
+import { dateLocales } from "@/lib/i18n";
 
 const timeFmt = new Intl.DateTimeFormat("en-GB", {
   timeZone: "Asia/Amman",
@@ -57,10 +59,14 @@ const getServerSnapshot = () => null;
 
 export function AmmanClock({ className = "" }: { className?: string }) {
   const t = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const { locale, copy } = usePrefs();
+  const date = t
+    ? new Intl.DateTimeFormat(dateLocales[locale], { timeZone: "Asia/Amman", weekday: "long", day: "numeric", month: "long" }).format(new Date(t.iso))
+    : "\u00a0";
 
   return (
-    <div className={`amman-clock ${className}`} role="group" aria-label="Amman time">
-      <span className="text-[11px] font-bold text-gold">Amman time</span>
+    <div className={`amman-clock ${className}`} role="group" aria-label={copy.amman}>
+      <span className="text-[11px] font-bold text-gold">{copy.amman}</span>
       <time dateTime={t?.iso} className="font-mono text-base font-bold tabular-nums tracking-wider text-ink" dir="ltr">
         {t ? (
           <>
@@ -74,7 +80,7 @@ export function AmmanClock({ className = "" }: { className?: string }) {
           "--:--:--"
         )}
       </time>
-      <span className="text-[11px] text-muted">{t?.date ?? "\u00a0"}</span>
+      <span className="text-[11px] text-muted">{date}</span>
     </div>
   );
 }
