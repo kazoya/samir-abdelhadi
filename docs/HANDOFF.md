@@ -1,3 +1,7 @@
+# Handoff archive
+
+The deployment table below belongs to the original Ghina Media concept. This folder is now the Abdelhadi presence concept and ships separately.
+
 # Handoff — growth-plan studio (P0 + P1) and LCP
 
 ## Version

@@ -14,17 +14,17 @@ const has = (a: AnswersV1, c: AnswersV1["channelIds"][number]) => a.channelIds.i
 
 // كل قاعدة تشرح نفسها بالإجابة التي أطلقتها
 export const RULES: Rule[] = [
-  { when: (a) => a.goalId === "leads", code: "goal:leads", add: { social: 3, sem: 3, consult: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يحتاج قناة تجلب طلبات الآن: إعلانات بحث أو محتوى وإعلانات على التواصل الاجتماعي.` },
-  { when: (a) => a.goalId === "search", code: "goal:search", add: { seo: 3, sem: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}»: الترتيب العضوي يبني ظهوراً دائماً، وإعلانات البحث تسد الفجوة حتى يتحسن.` },
-  { when: (a) => a.goalId === "social", code: "goal:social", add: { social: 3, graphic: 2, photo: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يعتمد على محتوى منتظم وصور وتصاميم متسقة.` },
-  { when: (a) => a.goalId === "identity", code: "goal:identity", add: { graphic: 3, photo: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يبدأ بالتصميم والصورة قبل أي حملة.` },
-  { when: (a) => a.goalId === "website", code: "goal:website", add: { web: 3, seo: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}»: الموقع أولاً، مع بنية تساعد الظهور في البحث من البداية.` },
-  { when: (a) => a.goalId === "training", code: "goal:training", add: { training: 3, meta: 2, coaching: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يجعل التدريب أولوية على التنفيذ.` },
-  { when: (a) => a.businessId === "startup", code: "business:startup", add: { coaching: 1, consult: 1 }, reason: (a) => `نشاطك «${businessLabel[a.businessId]}»: الإرشاد والتشخيص يوفّران تجارب مكلفة في البداية.` },
-  { when: (a) => a.businessId === "ecommerce", code: "business:ecommerce", add: { web: 1, sem: 1 }, reason: (a) => `نشاطك «${businessLabel[a.businessId]}» يعتمد على متجر يعمل جيداً وعلى من يبحث عن المنتج.` },
-  { when: (a) => a.businessId === "medical", code: "business:medical", add: { social: 1 }, reason: (a) => `نشاطك «${businessLabel[a.businessId]}»: المحتوى التوعوي على التواصل الاجتماعي خيار شائع — للنقاش حسب أنظمة القطاع.` },
-  { when: (a) => a.businessId === "education", code: "business:education", add: { training: 1 }, reason: (a) => `نشاطك «${businessLabel[a.businessId]}» قريب من ورش التدريب التي تقدمها الوكالة.` },
-  { when: (a) => a.businessId === "personal", code: "business:personal", add: { coaching: 1, photo: 1 }, reason: (a) => `نشاطك «${businessLabel[a.businessId]}» يعتمد على حضورك أنت: صورة احترافية ومرافقة شخصية.` },
+  { when: (a) => a.goalId === "leads", code: "goal:leads", add: { social: 3, sem: 3, consult: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يحتاج جملة بحث واضحة ومكاناً يصل منه الحوار، لا حملة مفتوحة.` },
+  { when: (a) => a.goalId === "search", code: "goal:search", add: { seo: 3, sem: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}»: الصفحة المرجعية أولاً، ثم جملة تظهر لمن يبحث عن الاسم.` },
+  { when: (a) => a.goalId === "social", code: "goal:social", add: { social: 3, graphic: 2, photo: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يعتمد على إيقاع ثابت وقالب واحد وصور بإذن.` },
+  { when: (a) => a.goalId === "identity", code: "goal:identity", add: { graphic: 3, photo: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يبدأ بالنص المعتمد والصورة المسموحة قبل أي نشر.` },
+  { when: (a) => a.goalId === "website", code: "goal:website", add: { web: 3, seo: 2 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}»: عنوان ثابت يجمع السجل، وبنية تساعد الاقتباس.` },
+  { when: (a) => a.goalId === "training", code: "goal:training", add: { training: 3, meta: 2, coaching: 1 }, reason: (a) => `هدفك «${goalLabel[a.goalId]}» يقدّم لقاء شرح ورصد ما يُقال على التنفيذ الواسع.` },
+  { when: (a) => a.businessId === "startup", code: "business:startup", add: { coaching: 1, consult: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}»: الرسالة والتشخيص يسبقان كثرة المواد.` },
+  { when: (a) => a.businessId === "ecommerce", code: "business:ecommerce", add: { web: 1, sem: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}» يحتاج صفحة يجدها وعبارة يبحث بها.` },
+  { when: (a) => a.businessId === "medical", code: "business:medical", add: { social: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}»: المواد التوضيحية تُراجع قبل النشر، بلا وعد طبي.` },
+  { when: (a) => a.businessId === "education", code: "business:education", add: { training: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}» أقرب إلى لقاء يشرح مشروعاً منشوراً.` },
+  { when: (a) => a.businessId === "personal", code: "business:personal", add: { coaching: 1, photo: 1 }, reason: (a) => `جمهورك «${businessLabel[a.businessId]}»: الصورة بإذن، والمرافقة لمن يعتمد النص.` },
   { when: (a) => a.teamId === "solo" || a.teamId === "nobody", code: "team:solo-or-nobody", add: { coaching: 2 }, reason: (a) => `إجابتك «${teamLabel[a.teamId]}» تعني أن التسويق يحتاج إيقاعاً يستطيع شخص واحد الالتزام به.` },
   { when: (a) => a.teamId === "team", code: "team:team", add: { meta: 1, training: 1 }, reason: (a) => `لديك «${teamLabel[a.teamId]}»: رفع مهارات الفريق يضاعف أثر أي خدمة.` },
   { when: (a) => !has(a, "website") && a.goalId !== "training", code: "channel:no-website", add: { web: 1 }, reason: () => `لم تختر «${channelLabel.website}» ضمن قنواتك الحالية.` },
@@ -35,17 +35,17 @@ export const RULES: Rule[] = [
 const catalogOrder = new Map(services.map((s, i) => [s.id, i]));
 
 const detail: Record<ServiceId, { prerequisites: string[]; deliverable: string }> = {
-  sem: { prerequisites: ["صفحة هبوط أو رقم واتساب يستقبل الطلب", "ميزانية إعلانية تحددها أنت"], deliverable: "حملة بحث بكلمات مفتاحية وقياس للنقرات والطلبات" },
-  seo: { prerequisites: ["موقع قائم أو قيد الإنشاء", "وصول لإدارة الموقع"], deliverable: "تدقيق وقائمة تحسينات مرتبة حسب الأثر" },
-  social: { prerequisites: ["حسابات على المنصات المختارة", "من يرد على الرسائل"], deliverable: "خطة محتوى وإعلانات بجدول نشر" },
-  graphic: { prerequisites: ["الشعار والألوان إن وُجدت"], deliverable: "قوالب منشورات وهوية بصرية متسقة" },
-  photo: { prerequisites: ["موعد ومكان للتصوير"], deliverable: "مكتبة صور للمنتجات أو المكان أو الفريق" },
-  web: { prerequisites: ["نطاق واستضافة أو قرار بشأنهما", "محتوى الصفحات الأساسية"], deliverable: "موقع أو متجر بصفحات تحوّل الزيارة إلى طلب" },
-  training: { prerequisites: ["تحديد المشاركين وموعد مناسب"], deliverable: "ورشة عملية بمحاور متفق عليها" },
-  meta: { prerequisites: ["أعضاء فريق يديرون حسابات Meta"], deliverable: "تحضير عملي لشهادات Meta" },
-  courses: { prerequisites: ["وقت أسبوعي للتعلم"], deliverable: "مسار تعلم ذاتي" },
-  consult: { prerequisites: ["روابط قنواتك الحالية"], deliverable: "تشخيص وقائمة أولويات" },
-  coaching: { prerequisites: ["ساعة أسبوعية ثابتة"], deliverable: "جلسات مرافقة بمهام أسبوعية" },
+  sem: { prerequisites: ["جملة معتمدة عن الاسم", "رابط السجل"], deliverable: "عبارة بحث ورابط، بلا ميزانية إعلان في هذا التصور" },
+  seo: { prerequisites: ["قائمة مصادر مكتوبة", "من يعتمد الإضافة"], deliverable: "صفحة مرجع كل بند فيها مصدر" },
+  social: { prerequisites: ["منصة مختارة", "من يرد"], deliverable: "جدول نشر ينتظر الاعتماد" },
+  graphic: { prerequisites: ["أمثلة مواد حالية"], deliverable: "قالب واحد للنص والصورة" },
+  photo: { prerequisites: ["إذن استخدام الصورة"], deliverable: "أرشيف لا يُنشر منه إلا المسموح" },
+  web: { prerequisites: ["قرار النطاق", "ثلاث صفحات أولى"], deliverable: "صفحة ثابتة للاسم" },
+  training: { prerequisites: ["جهة ومدة", "مشروع واحد من السجل"], deliverable: "محاور لقاء بلا شهادة مخترعة" },
+  meta: { prerequisites: ["روابط ما ظهر هذا الأسبوع"], deliverable: "تصنيف: مؤكد، مختلف فيه، أو بلا مصدر" },
+  courses: { prerequisites: ["ثلاثة أسئلة يطرحها الزائر"], deliverable: "ثلاث قطع شرح قصيرة" },
+  consult: { prerequisites: ["من يعتمد النص"], deliverable: "رسالة: وعد، ثلاثة أدلة، دعوة واحدة" },
+  coaching: { prerequisites: ["موعد أسبوعي"], deliverable: "مراجعة مسودات لا نشر آلي" },
 };
 
 export function recommend(a: AnswersV1): { recommendations: Recommendation[]; notChosen: PlanV1["notChosen"] } {
@@ -119,8 +119,8 @@ export function buildPlan(a: AnswersV1): PlanV1 {
     gaps: gaps(a),
     checklist: checklist(a),
     assumptions: [
-      "التوصيات ناتجة عن قواعد ثابتة معلنة في هذه المنصة، وليست تحليلاً بالذكاء الاصطناعي ولا تقييماً من غنى ميديا.",
-      "لا تتضمن أسعاراً أو وعوداً بنتائج؛ العرض والسعر يحددهما غنى ميديا بعد التواصل.",
+      "التوصيات ناتجة عن قواعد ثابتة معلنة في هذه المنصة، وليست تحليلاً بالذكاء الاصطناعي ولا بياناً من مكتب العين.",
+      "لا أسعار ولا وعود بنتائج. أي نشر لاحق يعتمد بشرياً، وخط الواتساب هنا لمطوّر التصور.",
       "الخطة والتقويم قوالب أولية قابلة للتعديل الكامل.",
     ],
   };

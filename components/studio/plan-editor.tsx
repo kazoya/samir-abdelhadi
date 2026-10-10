@@ -16,7 +16,7 @@ export function PlanEditor({ tasks, onChange, newId }: { tasks: Task[]; onChange
   return (
     <div className="grid gap-6">
       <p className="text-sm leading-7 text-muted">
-        قالب أولي من أربع مراحل. كل حقل قابل للتعديل: حدّد المسؤول والمقياس بنفسك. لا يمثل هذا التزاماً أو موعداً من غنى ميديا.
+        قالب أولي من أربع مراحل. كل حقل قابل للتعديل: حدّد المسؤول والمقياس بنفسك. ليس موعداً ولا التزاماً من أي مكتب.
       </p>
       <datalist id="metric-suggestions">
         {metricSuggestions.map((m) => (

@@ -108,7 +108,7 @@ async function downloadText(p, trigger) {
   await p.getByLabel("عنوان المسودة (اختياري)").fill("خطة الطلبات");
   await p.locator('[data-save="A"]').click();
   ok("save: slot A success notice", (await status(p)).includes("حُفظت كمسودة A"));
-  const stored = await p.evaluate(() => localStorage.getItem("ghina-studio:v1:draft:A"));
+  const stored = await p.evaluate(() => localStorage.getItem("abdelhadi-studio:v1:draft:A"));
   ok("save: name is not stored", !!stored && !stored.includes("سارة"));
   ok("save: edits stored", stored.includes("مهمة معدّلة للاختبار"));
 
@@ -128,7 +128,7 @@ async function downloadText(p, trigger) {
   // واتساب: الرابط فقط، لا نقر
   const wa = await p.locator("[data-wa]").getAttribute("href");
   const msg = decodeURIComponent(wa.split("text=")[1]);
-  ok("whatsapp: published recipient + encoded short message", wa.startsWith("https://wa.me/962781385015?text=") && msg.includes("أنا سارة.") && msg.includes("تصوّر تجريبي مستقل") && msg.length < 700);
+  ok("whatsapp: concept line + encoded short message", wa.startsWith("https://wa.me/962787523192?text=") && msg.includes("أنا سارة.") && msg.includes("تصوّر تجريبي مستقل") && msg.length < 700);
 
   // reload → استعادة من المسودة
   await p.reload({ waitUntil: "networkidle" });
@@ -198,7 +198,7 @@ async function downloadText(p, trigger) {
   await rd.getByLabel(/احذف أيضاً المسودات/).check();
   await rd.getByRole("button", { name: "نعم، صفّر" }).click();
   await p.reload({ waitUntil: "networkidle" });
-  const left = await p.evaluate(() => [localStorage.getItem("ghina-studio:v1:draft:A"), localStorage.getItem("ghina-studio:v1:draft:B")]);
+  const left = await p.evaluate(() => [localStorage.getItem("abdelhadi-studio:v1:draft:A"), localStorage.getItem("abdelhadi-studio:v1:draft:B")]);
   ok("reset: saved drafts gone after refresh", left.every((x) => x === null));
   ok("reset: wizard fresh after refresh", (await p.locator("main").innerText()).includes("سؤال 1 من 5"));
 
@@ -293,18 +293,18 @@ for (const [w, h] of [[320, 700], [390, 844], [768, 1024], [1440, 900], [640, 45
   ok("services: details disclose when/needs/next", (await p.locator('[data-service="meta"]').innerText()).includes("ماذا يلزمك"));
   await p.locator('[data-service="meta"]').getByRole("link", { name: /ابدأ خطة/ }).click();
   await p.waitForURL(/goal=training/);
-  ok("services → planner with safe goal mapping", (await p.locator("main").innerText()).includes("«تدريب فريقي»"));
+  ok("services → planner with safe goal mapping", (await p.locator("main").innerText()).includes("«نقل الخبرة»"));
   await p.goto(BASE + "/planner?goal=<script>", { waitUntil: "networkidle" });
   ok("planner ignores unknown ?goal", !(await p.locator("main").innerText()).includes("الهدف محدد مسبقاً"));
   await p.goto(BASE + "/training", { waitUntil: "networkidle" });
   ok("training: three guided paths labelled non-official", (await p.locator("[data-path]").count()) === 3 && (await p.locator("main").innerText()).includes("ليست برامج معلنة من غنى ميديا"));
   await p.goto(BASE + "/activities", { waitUntil: "networkidle" });
   const t = await p.locator("main").innerText();
-  ok("activities: grouped by evidenced relationship + source links", t.includes("اتفاقية وقّعتها الشركة") && t.includes("لا يعني شراكة تجارية") && (await p.locator('a[href="https://ghinamedia.com/our-activities/"]').count()) === 16);
+  ok("activities: sourced record and disagreement stay visible", t.includes("سيرة منشورة") && t.includes("ما اختلفت فيه المصادر") && (await p.locator('a[href*="zadforarts.com"]').count()) >= 1);
   ok("activities: illustrative story clearly labelled", (await p.locator("[data-illustrative]").innerText()).includes("ليست عميلاً حقيقياً"));
   await p.goto(BASE + "/", { waitUntil: "networkidle" });
   ok("home: sample output labelled illustrative", (await p.locator("#sample").locator("..").innerText()).length > 0 && (await p.locator("main").innerText()).includes("مثال توضيحي — بيانات افتراضية"));
-  ok("home: photo + founder anchor kept", await p.locator('img[src*="ghina-fahmawi"]').count() === 1 && (await p.locator("#founder").count()) === 1);
+  ok("home: photo + founder anchor kept", await p.locator('img[src*="samir-portrait"]').count() === 1 && (await p.locator("#founder").count()) === 1);
   ok("home: Amman clock not announced every second", (await p.locator(".amman-clock time").first().getAttribute("aria-live")) === null && (await p.locator(".amman-clock [aria-live]").count()) === 0);
   await c.close();
 }

@@ -61,7 +61,7 @@ export function ServiceExplorer() {
                 <Link href={`/planner?goal=${g.goal}`} className="btn btn-ghost text-sm">
                   ابدأ خطة بهذا الاتجاه <ArrowLeft size={16} aria-hidden />
                 </Link>
-                <a href={waLink(`مرحباً غنى ميديا، أستفسر عن خدمة: ${s.ar}`)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 text-sm font-bold text-gold-strong hover:underline">
+                <a href={waLink(`مرحباً، أستفسر عن مسار في تصور حضور عبدالهادي: ${s.ar}`)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 text-sm font-bold text-gold-strong hover:underline">
                   <MessageCircle size={16} aria-hidden /> اسأل عنها على واتساب
                 </a>
               </div>
@@ -69,7 +69,7 @@ export function ServiceExplorer() {
           );
         })}
       </div>
-      <p className="mt-6 text-xs leading-6 text-muted">«متى تحتاجها» شرح عام كتبته هذه المنصة لمساعدتك على الاختيار، وليس وصفاً رسمياً لنطاق عمل غنى ميديا أو أسعارها.</p>
+      <p className="mt-6 text-xs leading-6 text-muted">«متى تحتاجها» شرح كتبته هذه المنصة لاختيار المسار. ليس عرض أسعار ولا نطاقاً رسمياً لمكتب العين.</p>
     </div>
   );
 }

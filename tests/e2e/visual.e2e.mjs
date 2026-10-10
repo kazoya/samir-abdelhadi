@@ -79,7 +79,7 @@ const ammanNow = () =>
   ok("desktop: reveal works after navigation", (await p.locator("[data-reveal].is-visible").count()) > 0);
   await p.goto(BASE + "/#founder", { waitUntil: "networkidle" });
   await p.waitForTimeout(1200);
-  ok("desktop: #founder anchor + photo", await p.locator("#founder").isVisible() && await p.locator('img[src*="ghina-fahmawi"]').isVisible());
+  ok("desktop: #founder anchor + photo", await p.locator("#founder").isVisible() && await p.locator('img[src*="samir-portrait"]').isVisible());
   await p.screenshot({ path: `${OUT}/v-desktop-founder.png` });
   await p.goto(BASE + "/", { waitUntil: "networkidle" });
   await p.waitForTimeout(1300);
@@ -127,7 +127,7 @@ const ammanNow = () =>
   await p.screenshot({ path: `${OUT}/v-mobile-hero.png` });
   await p.goto(BASE + "/#founder", { waitUntil: "networkidle" });
   await p.waitForTimeout(1300);
-  const ib = await p.locator('img[src*="ghina-fahmawi"]').boundingBox();
+  const ib = await p.locator('img[src*="samir-portrait"]').boundingBox();
   ok("touch: #founder lands on the photo", ib && ib.y >= 0 && ib.y < 844 * 0.6, ib && String(Math.round(ib.y)));
   await p.screenshot({ path: `${OUT}/v-mobile-founder.png` });
   await p.evaluate(() => scrollTo(0, document.body.scrollHeight));

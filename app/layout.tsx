@@ -17,9 +17,9 @@ const kufi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: { default: "غنى ميديا — تصوّر تجريبي مستقل", template: "%s | تصوّر تجريبي لغنى ميديا" },
+  title: { default: "حضور عبدالهادي — تصوّر تجريبي مستقل", template: "%s | حضور عبدالهادي" },
   description:
-    "تصوّر تجريبي مستقل غير تابع للموقع الرسمي لغنى ميديا: مخطِّط حملة بتوصيات أولية، وعرض للخدمات والتدريب والأنشطة كما نُشرت على ghinamedia.com.",
+    "تصور مستقل للحضور العام للمهندس سمير نعيم عبدالهادي: سجل علني منسوب إلى مصادره، واستوديو خطة لا يرسل شيئاً وحده. ليس موقع مجلس الأعيان.",
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
 };
 
@@ -40,10 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           تخطَّ إلى المحتوى
         </a>
         <div role="note" data-print-hide className="bg-gold px-4 py-1.5 text-center text-xs font-bold text-bg">
-          {disclaimer} ·{" "}
-          <a href="https://ghinamedia.com" target="_blank" rel="noopener noreferrer" className="underline">
-            الموقع الرسمي: ghinamedia.com
-          </a>
+          {disclaimer}. ليس صفحة مجلس الأعيان ولا موقعاً رسمياً للعين.
         </div>
         <SiteHeader />
         <main id="main" className="mx-auto max-w-6xl px-4 pb-24 pt-8">

@@ -200,7 +200,7 @@ test("storage: save/load/delete, unavailable and quota errors never throw", () =
   assert.deepEqual(saveDraft("A", d, null), { ok: false, reason: "unavailable" });
   const full = { ...s, setItem: () => { throw Object.assign(new Error("full"), { name: "QuotaExceededError" }); } };
   assert.deepEqual(saveDraft("B", d, full), { ok: false, reason: "quota" });
-  mem.set("ghina-studio:v1:draft:B", "{broken");
+  mem.set("abdelhadi-studio:v1:draft:B", "{broken");
   const broken = loadDraft("B", s);
   assert.ok(broken && !broken.success);
   assert.ok(!JSON.stringify([...mem.values()]).includes('"name"'));
@@ -224,7 +224,7 @@ test("whatsapp message: known recipient content, concept origin, no plan dump", 
 
 test("site data: every activity has a source and a relationship type; training paths reference existing trainings", () => {
   for (const a of activities) {
-    assert.match(a.sourceUrl, /^https:\/\/ghinamedia\.com\//);
+    assert.match(a.sourceUrl, /^https?:\/\//);
     assert.ok(a.relationship.length > 0);
     assert.equal(a.evidence, "published");
   }

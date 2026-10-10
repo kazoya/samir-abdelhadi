@@ -12,7 +12,7 @@ export function Recommendations({ plan, onEdit }: { plan: PlanV1; onEdit: () => 
       <div className="grid content-start gap-4">
         <p className="rounded-2xl border border-line bg-bg/40 px-4 py-3 text-xs leading-6 text-muted">
           توصيات أولية ناتجة عن قواعد ثابتة معلنة (إصدار القواعد {RULE_VERSION}) تربط كل خدمة بإجابة محددة — ليست تحليلاً بالذكاء الاصطناعي
-          ولا رأي خبير من غنى ميديا. أعلى {plan.recommendations.filter((r) => r.tier === "core").length} خدمات أساسية وخدمة اختيارية كحد أقصى.
+          ولا بياناً من مكتب العين. أعلى {plan.recommendations.filter((r) => r.tier === "core").length} مسارات أساسية ومسار اختياري كحد أقصى.
         </p>
         <ol className="grid gap-4">
           {plan.recommendations.map((r) => {

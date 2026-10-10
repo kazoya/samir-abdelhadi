@@ -10,7 +10,7 @@ export default function PlannerPage() {
   return (
     <>
       <div className="print:hidden">
-        <PageHead kicker="استوديو خطة النمو" title="من خمسة أسئلة إلى خطة 30 يوماً تناقشها مع غنى ميديا">
+        <PageHead kicker="استوديو الحضور" title="من خمسة أسئلة إلى خطة 30 يوماً تراجعها بنفسك">
           <p>
             أجب عن وضع مشروعك الآن. ستحصل على توصيات أولية مفسّرة (بقواعد ثابتة)، وخطة من أربع مراحل، وتقويم محتوى قابل للتعديل،
             ثم تصدّر موجزك أو تفتحه في واتساب وترسله بنفسك. لا حساب ولا خادم: كل شيء يبقى في متصفحك إلا إذا صدّرته.
@@ -25,7 +25,7 @@ export default function PlannerPage() {
               <p className="mt-2">
                 الاستوديو يحتاج JavaScript. يمكنك التواصل مباشرة:{" "}
                 <a className="underline" href={brand.whatsappUrl}>
-                  واتساب غنى ميديا
+                  واتساب مطوّر التصور
                 </a>
                 .
               </p>

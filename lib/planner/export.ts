@@ -8,7 +8,7 @@ const serviceName = (id: string) => services.find((s) => s.id === id)?.ar ?? id;
 
 /** لا يتضمن الاسم أو أي معرّف للجهاز. */
 export function draftToJson(d: DraftV1): string {
-  return JSON.stringify({ ...d, exportedFrom: "ghina-media-concept" }, null, 2);
+  return JSON.stringify({ ...d, exportedFrom: "abdelhadi-presence" }, null, 2);
 }
 
 /** يمنع تفسير النص كصيغة في Excel/Sheets (=,+,-,@ بعد الفراغات، أو tab/CR في البداية). */
@@ -40,7 +40,7 @@ export function answersSummary(d: DraftV1): string[] {
 
 export function briefText(d: DraftV1, plan: PlanV1, name = ""): string {
   const lines = [
-    "موجز خطة نمو — من تصوّر تجريبي مستقل لغنى ميديا (ليس الموقع الرسمي)",
+    "موجز حضور عام. تصور تجريبي مستقل، ليس موقعاً رسمياً.",
     name.trim() ? `الاسم: ${name.trim()}` : "",
     ...answersSummary(d),
     "",
@@ -56,11 +56,11 @@ export function briefText(d: DraftV1, plan: PlanV1, name = ""): string {
 /** رسالة واتساب قصيرة للمراجعة قبل الإرسال — بلا تفاصيل الخطة الكاملة. */
 export function whatsappMessage(d: DraftV1, plan: PlanV1, name = ""): string {
   return [
-    "مرحباً غنى ميديا 👋",
+    "مرحباً، وصلت من تصور حضور عبدالهادي.",
     name.trim() ? `أنا ${name.trim()}.` : "",
     ...answersSummary(d),
-    `الخدمات المقترحة للنقاش: ${plan.recommendations.map((r) => serviceName(r.serviceId)).join("، ")}`,
-    "(وصلت من تصوّر تجريبي مستقل) أرغب بمكالمة قصيرة لتحديد الخطة والعرض المناسب.",
+    `المسارات المقترحة للنقاش: ${plan.recommendations.map((r) => serviceName(r.serviceId)).join("، ")}`,
+    "تصوّر تجريبي مستقل. أرغب بمراجعة الموجز مع مطوّر التصور، ولا أرسل هذا باسم العين.",
   ]
     .filter(Boolean)
     .join("\n");

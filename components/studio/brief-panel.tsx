@@ -46,7 +46,7 @@ export function BriefPanel({
   const [manual, setManual] = useState(false);
   const manualRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
-  const base = `ghina-plan-${draft.startDate}`;
+  const base = `abdelhadi-plan-${draft.startDate}`;
 
   const copy = async () => {
     try {

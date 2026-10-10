@@ -1,26 +1,28 @@
-// المصدر الوحيد لهذه البيانات: الموقع العلني https://ghinamedia.com (فُحص 2026-09-29)
-// الصفحات: الرئيسية، About Us، Services، Training، Our Activities، Contact.
-// لا تضف رقماً أو عميلاً أو شهادة أو سعراً غير منشور هناك قبل تأكيده من غنى ميديا.
+// السجل المكتوب من صفحات علنية فُحصت في 2026-10-10.
+// الصورة في public/samir-portrait.png زوّدها صاحب التصور، وليست من تلك الصفحات.
+// لا هاتف ولا بريد للعين هنا: خط النقاش هو مطوّر التصور فقط.
 import type { GoalId } from "./planner/types.ts";
 
+export const ZAD = "https://www.zadforarts.com/samir-abdul-hadi-fund-for-culture-and-arts";
+export const DIRECTORY = "http://www.jordanpolitics.org/ar/senate-member/199/%D8%B3%D9%85%D9%8A%D8%B1-%D9%86%D8%B9%D9%8A%D9%85-%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%87%D8%A7%D8%AF%D9%8A/9";
+export const SENATE_NOW = "https://senate.jo/Ar/List/%D8%A7%D8%B9%D8%B6%D8%A7%D8%A1_%D8%A7%D9%84%D9%85%D8%AC%D9%84%D8%B3_%D8%A7%D9%84%D8%AD%D8%A7%D9%84%D9%8A_%D9%88%D8%A7%D9%84%D8%B3%D9%8A%D8%B1_%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9";
+export const GHINA_ENGINE = "https://github.com/kazoya/ghina-media-concept";
+export const SKILLS_REPO = "https://github.com/coreyhaines31/marketingskills";
+
 export const brand = {
-  nameAr: "غنى ميديا",
-  nameEn: "Ghina Media",
-  lead: "غنى فحماوي",
-  site: "https://ghinamedia.com",
-  phoneDisplay: "+962 78 138 5015",
-  phoneDigits: "962781385015",
-  tel: "tel:+962781385015",
-  whatsappUrl: "https://wa.me/962781385015",
-  email: "ghina@ghinamedia.com",
-  addressAr: "شارع الملك عبدالله الثاني بن الحسين، إربد، الأردن",
-  addressEn: "King Abdullah II Eben Al Hussein, Irbid, Jordan",
-  hours: "غير منشورة على الموقع",
-  socials: [
-    { label: "Facebook", href: "https://www.facebook.com/ghinamedia" },
-    { label: "Instagram", href: "https://www.instagram.com/ghinafahmawi/" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/ghinamedia/" },
-  ],
+  nameAr: "حضور عبدالهادي",
+  nameEn: "Abdelhadi Presence",
+  lead: "سمير نعيم عبدالهادي",
+  site: ZAD,
+  phoneDisplay: "+962 78 752 3192",
+  phoneDigits: "962787523192",
+  tel: "tel:+962787523192",
+  whatsappUrl: "https://wa.me/962787523192",
+  email: "",
+  addressAr: "عمّان، الأردن",
+  addressEn: "Amman, Jordan",
+  hours: "غير منشورة",
+  socials: [] as { label: string; href: string }[],
 } as const;
 
 export const developer = {
@@ -33,26 +35,24 @@ export const disclaimer = "تصوّر تجريبي مستقل — غير تاب�
 
 export const nav = [
   { href: "/", label: "الرئيسية" },
-  { href: "/planner", label: "خطّط حملتك" },
-  { href: "/services", label: "الخدمات" },
-  { href: "/training", label: "التدريب" },
-  { href: "/activities", label: "الأنشطة" },
-  { href: "/opportunities", label: "فرص التطوير" },
+  { href: "/planner", label: "الاستوديو" },
+  { href: "/services", label: "المسارات" },
+  { href: "/activities", label: "السجل" },
+  { href: "/training", label: "المنهج" },
+  { href: "/opportunities", label: "الفرص" },
   { href: "/contact", label: "تواصل" },
 ] as const;
 
-export function waLink(text: string, digits: string = brand.phoneDigits) {
+export function waLink(text: string, digits: string = developer.whatsappDigits) {
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
 
-// نصوص مقتبسة كما نُشرت (مترجمة للعربية حيث كانت إنجليزية) — ليست ادعاءات جديدة
 export const published = {
-  experience: "أكثر من عقد من الخبرة كمحترفة معتمدة في تخطيط الإعلام (Certified Media Planning Professional)",
-  specialties: ["تحسين محركات البحث SEO", "الإعلان مدفوع النقرة PPC", "التواصل الاجتماعي", "رصد سمعة العلامة"],
-  vision:
-    "تطوير منظومة اتصال تسويقي متكاملة ومستدامة تغطي كل جانب، وتدرس كل الاحتمالات، وتجري أبحاث السوق اللازمة لإيصال الرسالة الصحيحة إلى جمهورك.",
-  mission: "نسعى لإنجاح مؤسستك عبر أفكار إبداعية، ومنظور جديد، وأخلاقيات عمل عالية الجودة تقود إلى رضا أكبر لعملائك.",
-  meta: "وُصفت غنى فحماوي في صفحة الأنشطة بأنها «مؤسسة شركة غنى ميديا والمدربة في شركة ميتا».",
+  experience: "المهندس سمير نعيم عبدالهادي، كما تصفه صفحة زاد الفنون: مواليد القدس، ومهندس مدني، ومؤسس شركة في الأردن عام 1980",
+  specialties: ["هندسة ومشاريع", "ثقافة وفنون", "تعليم", "عطاء موثّق"],
+  vision: "حضور عام يُقرأ من السجل قبل أن يُروى. الرسالة واحدة، والأدلة من صفحات منشورة، والدعوة واضحة.",
+  mission: "ترتيب ما يُقال عن الاسم حتى يصل الباحث إلى مصدر، لا إلى جملة عائمة.",
+  meta: "الصورة في هذه الصفحة زوّدها صاحب التصور. السجل المكتوب من الصفحات العلنية المذكورة، ولا ندّعي أن الصورة منشورة فيها.",
 };
 
 export type ServiceId =
@@ -68,111 +68,93 @@ export type ServiceId =
   | "consult"
   | "coaching";
 
-// قائمة الخدمات كما تظهر في صفحة Services — الوصف شرح عام للخدمة وليس وعداً بنتيجة
 export const services: { id: ServiceId; ar: string; en: string; desc: string; group: "grow" | "create" | "learn" }[] = [
-  { id: "sem", ar: "التسويق عبر محركات البحث", en: "Search Engine Marketing", desc: "إعلانات بحث مدفوعة تظهر لمن يبحث عن خدمتك الآن.", group: "grow" },
-  { id: "seo", ar: "تحسين محركات البحث", en: "Search Engine Optimization", desc: "ترتيب عضوي أفضل لموقعك دون الدفع مقابل كل نقرة.", group: "grow" },
-  { id: "social", ar: "التسويق عبر التواصل الاجتماعي", en: "Social Media Marketing", desc: "محتوى وإعلانات وإدارة صفحات على المنصات التي يعيش فيها جمهورك.", group: "grow" },
-  { id: "graphic", ar: "التصميم الجرافيكي", en: "Graphic Design", desc: "هوية بصرية ومنشورات ومواد مطبوعة ورقمية متسقة.", group: "create" },
-  { id: "photo", ar: "التصوير التجاري", en: "Commercial Photography", desc: "صور منتجات ومكان وفريق تصلح للإعلان والموقع.", group: "create" },
-  { id: "web", ar: "تصميم وتطوير المواقع والمتاجر", en: "Website Design & E-commerce", desc: "موقع أو متجر إلكتروني يحوّل الزيارة إلى طلب.", group: "create" },
-  { id: "training", ar: "التدريب وورش العمل", en: "Training", desc: "ورش تسويق رقمي وعلامة شخصية للمؤسسات والجامعات والبرامج.", group: "learn" },
-  { id: "meta", ar: "تدريب شهادات Meta", en: "Meta Certification Training", desc: "تحضير عملي لشهادات Meta في التسويق والإعلان.", group: "learn" },
-  { id: "courses", ar: "الدورات عبر الإنترنت", en: "Online Courses", desc: "تعلّم ذاتي مرن بالسرعة التي تناسبك.", group: "learn" },
-  { id: "consult", ar: "الاستشارات الرقمية للأعمال", en: "Digital Business Consultation", desc: "تشخيص حضورك الرقمي وخطة أولويات واضحة.", group: "grow" },
-  { id: "coaching", ar: "الإرشاد في التسويق الرقمي", en: "Digital Marketing Coaching", desc: "مرافقة فردية لصاحب المشروع أو فريق التسويق.", group: "learn" },
+  { id: "sem", ar: "ظهور عند البحث عن الاسم", en: "Name search", desc: "جملة واحدة تظهر لمن يبحث عن الاسم الآن، مع رابط إلى السجل.", group: "grow" },
+  { id: "seo", ar: "صفحة مرجع قابلة للاقتباس", en: "Citable record", desc: "حقائق منسوبة إلى مصادرها حتى يقتبسها البحث والمساعدات من صفحة واحدة.", group: "grow" },
+  { id: "social", ar: "حضور على المنصات", en: "Public channels", desc: "منصة أو منصتان، بإيقاع يحتمله المكتب، لا بنشر يومي مفروض.", group: "grow" },
+  { id: "graphic", ar: "قوالب بصرية هادئة", en: "Quiet templates", desc: "قالب واحد للنص والصورة، بلا حملة لونية تنافس الاسم.", group: "create" },
+  { id: "photo", ar: "أرشيف صور بإذن", en: "Permitted archive", desc: "لا تُنشر صورة إلا بإذن صاحبها. الصورة الحالية مرفقة من صاحب التصور.", group: "create" },
+  { id: "web", ar: "صفحة ثابتة للاسم", en: "Standing page", desc: "عنوان واحد يجمع السيرة والمصادر وطريقة المراسلة.", group: "create" },
+  { id: "training", ar: "لقاءات نقل خبرة", en: "Knowledge sessions", desc: "لقاء يشرح مشروعاً منشوراً، لا دورة بشهادة مخترعة.", group: "learn" },
+  { id: "meta", ar: "رصد ما يُقال", en: "What is being said", desc: "جمع ما يظهر عن الاسم وتصنيفه: مؤكد، مختلف فيه، أو غير مصدر.", group: "learn" },
+  { id: "courses", ar: "سلسلة شرح قصيرة", en: "Short explainers", desc: "قطع قصيرة تجيب سؤالاً واحداً، وكل قطعة تشير إلى مصدر.", group: "learn" },
+  { id: "consult", ar: "ترتيب الرسالة", en: "Message house", desc: "جملة وعد، وثلاثة أدلة، ودعوة واحدة. تُعتمد قبل أي نشر.", group: "grow" },
+  { id: "coaching", ar: "مرافقة المكتب", en: "Office rhythm", desc: "ساعة ثابتة لمراجعة ما سيُنشر، لا نشر من هذه الصفحة.", group: "learn" },
 ];
 
 export const groups = {
-  grow: "نموّ وظهور",
-  create: "إبداع وبناء",
+  grow: "ظهور ورسالة",
+  create: "مواد وأرشيف",
   learn: "تعلّم وتمكين",
 } as const;
 
-// صفحة Training — أزيلت التكرارات فقط، والأسماء كما نُشرت
 export const trainings = [
-  "Abdul Hameed Shoman Foundation",
-  "Boost With Meta BDC",
-  "برنامج انهض",
-  "Personal Branding — JUST University",
-  "SMEs Export Development Pilot Project",
-  "Startup Without Borders",
-  "Foras Palestine",
-  "4th NS JPSA’s Leaders In Training",
-  "5th NS JPSA’s Leaders In Training",
-  "دورة بناء العلامة والهوية التجارية الشخصية مع صندوق حياة التعليم",
-  "Creative Jordan — Project as a Marketing Trainer",
-  "كيف تبني حضوراً مؤثراً في القطاع الطبي — جامعة العلوم والتكنولوجيا مع مكتب الإرشاد الوظيفي",
-  "التسويق في المشاريع الناشئة مع روّاد التنمية",
+  "رسالة واحدة في الجملة الأولى",
+  "ثلاثة أدلة من السجل فقط",
+  "جمهور واحد في كل قطعة",
+  "دعوة واحدة: اقرأ المصدر أو راسل خط النقاش",
+  "ما اختلفت فيه المصادر يُعرض اختلافاً لا حقيقة",
+  "لا رقم ولا شريك ولا نتيجة بلا صفحة منشورة",
+  "الصورة بإذن، والتعليق يقول من زوّدها",
+  "الموجة التالية تنتظر اعتماد المكتب",
 ];
 
-// صفحة Our Activities — النصوص كما نُشرت. relationship يصف نوع العلاقة كما تدل عليه الصياغة المنشورة حرفياً:
-// المشاركة في فعالية أو حضور توقيع بين جهتين أخريين لا يُعرض كشراكة تجارية أو اعتماد.
-export type Relationship = "اتفاقية وقّعتها الشركة" | "مشاركة في فعالية" | "متحدثة أو ضيفة جلسة" | "لقاء واجتماع";
-export const relationships: Relationship[] = ["اتفاقية وقّعتها الشركة", "متحدثة أو ضيفة جلسة", "مشاركة في فعالية", "لقاء واجتماع"];
+export type Relationship = "سيرة منشورة" | "عطاء مذكور" | "عضوية مذكورة" | "ما اختلفت فيه المصادر";
+export const relationships: Relationship[] = ["سيرة منشورة", "عطاء مذكور", "عضوية مذكورة", "ما اختلفت فيه المصادر"];
 
-const ACT = "https://ghinamedia.com/our-activities/";
 export const activities: {
   text: string;
   relationship: Relationship;
-  theme: "تمكين المرأة" | "ريادة" | "تسويق" | "علاقات";
+  theme: "سيرة" | "عطاء" | "تعليم" | "عضوية";
   sourceUrl: string;
   evidence: "published";
 }[] = [
-  { text: "توقيع شراكة استراتيجية مع مؤسسة مساواة لتمكين المرأة وتعزيز دورها في سوق العمل", relationship: "اتفاقية وقّعتها الشركة", theme: "تمكين المرأة", sourceUrl: ACT, evidence: "published" },
-  { text: "توقيع مذكرة تفاهم مع جامعة اليرموك لدعم رؤية الجامعة في إخراج جيل قادر على العمل والبناء", relationship: "اتفاقية وقّعتها الشركة", theme: "ريادة", sourceUrl: ACT, evidence: "published" },
-  { text: "توقيع اتفاقية تعاون لإطلاق برنامج دعم المشاريع الريادية بالشراكة مع أكاديمية الأثال لتدريب أبناء المحافظات الأردنية", relationship: "اتفاقية وقّعتها الشركة", theme: "ريادة", sourceUrl: ACT, evidence: "published" },
-  { text: "جلسة حوارية بعنوان «التسويق في المشاريع الناشئة… التغيرات المتسارعة ومتطلبات السوق» استضافت غنى فحماوي", relationship: "متحدثة أو ضيفة جلسة", theme: "تسويق", sourceUrl: ACT, evidence: "published" },
-  { text: "المشاركة في Cross border e-commerce day للحديث عن الاستفادة من السوشال ميديا لزيادة مبيعات المتاجر الإلكترونية", relationship: "متحدثة أو ضيفة جلسة", theme: "تسويق", sourceUrl: ACT, evidence: "published" },
-  { text: "لقاء مع مركز الدستور للدراسات الاقتصادية حول التحول الرقمي ودوره في تمكين المرأة في سوق العمل", relationship: "متحدثة أو ضيفة جلسة", theme: "تمكين المرأة", sourceUrl: ACT, evidence: "published" },
-  { text: "المشاركة في توقيع ملحق اتفاقية بين ملتقى سيدات الأعمال والمهن الأردني وجمعية الأعمال الأردنية الأوروبية (جيبا)", relationship: "مشاركة في فعالية", theme: "تمكين المرأة", sourceUrl: ACT, evidence: "published" },
-  { text: "المشاركة في ختام أسبوع الريادة العالمي بمركز الملكة رانيا للريادة برعاية الأميرة سمية بنت الحسن", relationship: "مشاركة في فعالية", theme: "ريادة", sourceUrl: ACT, evidence: "published" },
-  { text: "الاحتفال بتخريج الدفعة الثانية من برنامج Orange Corners برعاية الأميرة سمية بنت الحسن", relationship: "مشاركة في فعالية", theme: "ريادة", sourceUrl: ACT, evidence: "published" },
-  { text: "المشاركة في فعالية «دعم المشاركة الاقتصادية للمرأة» التي نظّمتها جيبا بالشراكة مع هيئة الأمم المتحدة للمرأة", relationship: "مشاركة في فعالية", theme: "تمكين المرأة", sourceUrl: ACT, evidence: "published" },
-  { text: "المشاركة في تكريم رائدات الأعمال بالشراكة مع اللجنة الدولية للإغاثة بمناسبة يوم المرأة العالمي", relationship: "مشاركة في فعالية", theme: "تمكين المرأة", sourceUrl: ACT, evidence: "published" },
-  { text: "المشاركة في الحلقة النقاشية حول بيئة الابتكار والريادة في الأردن ضمن مشروعي MYSEA وU-SOLVE", relationship: "مشاركة في فعالية", theme: "ريادة", sourceUrl: ACT, evidence: "published" },
-  { text: "المشاركة في الغداء الخيري برعاية سمو الأميرة بسمة بنت علي في الحديقة النباتية الملكية", relationship: "مشاركة في فعالية", theme: "تمكين المرأة", sourceUrl: ACT, evidence: "published" },
-  { text: "الاجتماع الدوري لعقد التحالف الوطني «إنصاف»", relationship: "لقاء واجتماع", theme: "تمكين المرأة", sourceUrl: ACT, evidence: "published" },
-  { text: "لقاء سفير بعثة الاتحاد الأوروبي في الأردن", relationship: "لقاء واجتماع", theme: "علاقات", sourceUrl: ACT, evidence: "published" },
-  { text: "اجتماع أعضاء وفريق جمعية جيبا مع السفير البلغاري في الأردن", relationship: "لقاء واجتماع", theme: "علاقات", sourceUrl: ACT, evidence: "published" },
+  { text: "صفحة زاد الفنون تقول إن المهندس سمير عبدالهادي وُلد في القدس عام 1942، ودرس الهندسة المدنية في الجامعة الأميركية في بيروت.", relationship: "سيرة منشورة", theme: "سيرة", sourceUrl: ZAD, evidence: "published" },
+  { text: "الصفحة نفسها تقول إن والده نعيم عبدالهادي تولى مناصب سياسية وإدارية، وإن سمير تلقى تعليمه في مدارس الفرندز في رام الله.", relationship: "سيرة منشورة", theme: "سيرة", sourceUrl: ZAD, evidence: "published" },
+  { text: "في عام 1980 أسس شركة في الأردن باسم علمي وعبدالهادي، بعد عمل في ليبيا والإمارات مع الاتحاد الهندسي، خطيب وعلمي.", relationship: "سيرة منشورة", theme: "سيرة", sourceUrl: ZAD, evidence: "published" },
+  { text: "صندوق سمير عبدالهادي للثقافة والفنون قدّم منحة للجمعية الثقافية العربية ساهمت في تأسيس زاد الفنون عام 2023.", relationship: "عطاء مذكور", theme: "عطاء", sourceUrl: ZAD, evidence: "published" },
+  { text: "من العطاء المذكور في الصفحة: مركز فنون في الزرقاء مع وزارة الثقافة، ومبنى كلية الرياضيات في جامعة بيرزيت، وملعب ومركز لياقة في مخيم حطين، ومركز تدريب مهني في مخيم غزة بجرش، ومختبر عمارة في جامعة الحسين التقنية.", relationship: "عطاء مذكور", theme: "تعليم", sourceUrl: ZAD, evidence: "published" },
+  { text: "الصفحة تذكر تبرعاً لمركز الحسين للسرطان ومؤسسة نهر الأردن وصندوق أمان لرعاية الأيتام خلال عضويته في الأعيان.", relationship: "عطاء مذكور", theme: "عطاء", sourceUrl: ZAD, evidence: "published" },
+  { text: "تذكر الصفحة عضوية مجالس أمناء منها جامعة الحسين التقنية، وبيرزيت، والنجاح الوطنية، ومؤسسة التعاون، ومركز دراسات الوحدة العربية، والمنظمة العربية لمكافحة الفساد.", relationship: "عضوية مذكورة", theme: "تعليم", sourceUrl: ZAD, evidence: "published" },
+  { text: "جائزة نعيم عبدالهادي للأعمال الثقافية أُطلقت مع شقيقه الدكتور عمر عبدالهادي ضمن مؤسسة التعاون، حسب الصفحة نفسها.", relationship: "عضوية مذكورة", theme: "عطاء", sourceUrl: ZAD, evidence: "published" },
+  { text: "زاد الفنون تقول إنه عُيّن في مجلس الأعيان السابع عشر وترأس لجنة الصداقة مع الإمارات. دليل الحياة السياسية يدرجه في مجلس أعيان سابق (السابع والعشرون) ويذكر سنة تخرج 1962. لا نختار رقماً واحداً.", relationship: "ما اختلفت فيه المصادر", theme: "عضوية", sourceUrl: DIRECTORY, evidence: "published" },
+  { text: "صفحة أعضاء المجلس الحالي على موقع مجلس الأعيان، بما فيها التعديلات المنشورة حتى 2026، لم تُظهر اسم سمير نعيم عبدالهادي في النص الذي فُحص. لذلك لا يصفه هذا التصور عضواً حالياً.", relationship: "ما اختلفت فيه المصادر", theme: "عضوية", sourceUrl: SENATE_NOW, evidence: "published" },
 ];
 
-// مسارات استرشادية تقترحها هذه المنصة — ليست برامج معلنة من غنى ميديا. trainingIdx يشير إلى trainings أعلاه فقط.
 export const trainingPaths: { id: "beginner" | "owner" | "team"; title: string; forWho: string; trainingIdx: number[]; serviceIds: ServiceId[] }[] = [
   {
     id: "beginner",
-    title: "مسار المبتدئ وبناء العلامة الشخصية",
-    forWho: "لمن يبدأ حضوره الرقمي أو يبني اسمه المهني",
-    trainingIdx: [3, 9, 11],
-    serviceIds: ["coaching", "courses"],
+    title: "مسار الرسالة",
+    forWho: "لمن يريد جملة أولى يفهمها الزائر في عشر ثوانٍ",
+    trainingIdx: [0, 1, 3],
+    serviceIds: ["consult", "courses"],
   },
   {
     id: "owner",
-    title: "مسار صاحب المشروع",
-    forWho: "لمن يدير مشروعاً ناشئاً أو صغيراً ويريد قرارات تسويق أوضح",
-    trainingIdx: [12, 5, 4],
-    serviceIds: ["consult", "coaching"],
+    title: "مسار الدليل",
+    forWho: "لمن يريد أن يبقى كل ادعاء مربوطاً بصفحة",
+    trainingIdx: [4, 5, 6],
+    serviceIds: ["seo", "meta"],
   },
   {
     id: "team",
-    title: "مسار الفريق",
-    forWho: "لفريق يدير حسابات التواصل والإعلانات داخل المؤسسة",
-    trainingIdx: [1, 10],
-    serviceIds: ["training", "meta"],
+    title: "مسار المكتب",
+    forWho: "لفريق يعدّ المواد ثم ينتظر الاعتماد قبل النشر",
+    trainingIdx: [2, 7],
+    serviceIds: ["coaching", "social"],
   },
 ];
 
-// شرح عام لكل خدمة لمساعدة الزائر على الاختيار — كتبته هذه المنصة، ليس وصفاً رسمياً لنطاق عمل غنى ميديا.
 export const serviceGuide: Record<ServiceId, { when: string; needs: string; next: string; goal: GoalId }> = {
-  sem: { when: "تريد طلبات من أشخاص يبحثون عن خدمتك الآن.", needs: "صفحة أو رقم واتساب يستقبل الطلب، وميزانية تحددها أنت.", next: "حدد أهم 5 عبارات يكتبها عملاؤك في البحث.", goal: "leads" },
-  seo: { when: "لديك موقع ولا يظهر في نتائج البحث.", needs: "وصول لإدارة الموقع وصبر لأسابيع.", next: "افحص ظهور صفحاتك في Search Console.", goal: "search" },
-  social: { when: "جمهورك على فيسبوك أو إنستغرام أو لينكدإن.", needs: "من يرد على الرسائل والتعليقات.", next: "اختر منصة واحدة تبدأ بها.", goal: "social" },
-  graphic: { when: "منشوراتك غير متسقة أو هويتك قديمة.", needs: "الشعار والألوان الحالية إن وُجدت.", next: "اجمع 5 أمثلة لتصاميم تعجبك.", goal: "identity" },
-  photo: { when: "صورك الحالية لا تعكس جودة منتجك.", needs: "موعد ومكان للتصوير.", next: "حدد المنتجات أو الأماكن الأهم.", goal: "identity" },
-  web: { when: "لا تملك موقعاً أو موقعك لا يحوّل الزيارة إلى طلب.", needs: "نطاق واستضافة أو قرار بشأنهما، ومحتوى الصفحات.", next: "اكتب قائمة الصفحات التي يحتاجها عميلك.", goal: "website" },
-  training: { when: "تريد أن يدير فريقك التسويق بنفسه.", needs: "تحديد المشاركين وموعد.", next: "حدد مستوى كل مشارك.", goal: "training" },
-  meta: { when: "فريقك يدير حسابات Meta ويريد تحضيراً للشهادات.", needs: "أعضاء فريق يستخدمون أدوات Meta.", next: "حدد الشهادة المستهدفة.", goal: "training" },
-  courses: { when: "تفضّل التعلّم الذاتي بسرعتك.", needs: "وقت أسبوعي ثابت.", next: "اسأل عن الدورات المتاحة حالياً.", goal: "training" },
-  consult: { when: "لا تعرف من أين تبدأ أو ماذا تقيس.", needs: "روابط قنواتك الحالية.", next: "ابدأ بالمخطِّط ثم احجز مكالمة.", goal: "leads" },
-  coaching: { when: "تدير التسويق بنفسك وتحتاج مرافقة.", needs: "ساعة أسبوعية ثابتة.", next: "اكتب أكبر عائق تواجهه الآن.", goal: "social" },
+  sem: { when: "الاسم يُبحث عنه والنتيجة الأولى لا تشرح من هو.", needs: "جملة معتمدة ورابط السجل.", next: "اكتب الجملة وراجعها مع المكتب.", goal: "search" },
+  seo: { when: "الحقائق مبعثرة بين صفحات لا يتفق بعضها.", needs: "قائمة مصادر لا تُزاد عليها واقعة جديدة.", next: "افتح السجل وعلّم ما تريد إبرازه.", goal: "search" },
+  social: { when: "هناك منصة قائمة أو قرار بالبدء بواحدة.", needs: "من يرد، وإيقاع أسبوعي يحتمله.", next: "اختر منصة واحدة لهذا الشهر.", goal: "social" },
+  graphic: { when: "المواد تبدو من مكاتب مختلفة.", needs: "لون ونوع خط معتمدان.", next: "اجمع ثلاث مواد حالية قبل أي قالب.", goal: "identity" },
+  photo: { when: "ستُستخدم صورة في مادة عامة.", needs: "إذن مكتوب أو رسالة من صاحب الصورة.", next: "لا تجدول صورة قبل الإذن.", goal: "identity" },
+  web: { when: "لا يوجد عنوان ثابت يحيل إليه الناس.", needs: "اسم النطاق وقرار من يملكه.", next: "حدد الصفحات الثلاث الأولى فقط.", goal: "website" },
+  training: { when: "جهة تريد سماع مشروع منشور لا سيرة عامة.", needs: "مشروع واحد من السجل ومحور واحد.", next: "سمِّ الجهة والمدة قبل الموعد.", goal: "training" },
+  meta: { when: "يظهر كلام عن الاسم ولا تعرف مصدره.", needs: "روابط ما ظهر هذا الأسبوع.", next: "صنّف كل رابط: مؤكد، مختلف، أو بلا مصدر.", goal: "training" },
+  courses: { when: "الشرح الطويل لا يُقرأ.", needs: "سؤال واحد لكل قطعة.", next: "اكتب ثلاثة أسئلة يطرحها الزائر.", goal: "training" },
+  consult: { when: "الرسائل كثيرة والدعوة غير واضحة.", needs: "ساعة مع من يعتمد النص.", next: "ابدأ الاستوديو ثم أرسل الموجز بنفسك.", goal: "leads" },
+  coaching: { when: "المكتب صغير والنشر يتوقف على شخص واحد.", needs: "موعد أسبوعي ثابت.", next: "سمِّ المسؤول عن المسودة.", goal: "social" },
 };

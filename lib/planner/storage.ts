@@ -4,7 +4,7 @@ import type { DraftV1, ParseResult } from "./types.ts";
 
 export const SLOTS = ["A", "B"] as const;
 export type Slot = (typeof SLOTS)[number];
-const key = (s: Slot) => `ghina-studio:v1:draft:${s}`;
+const key = (s: Slot) => `abdelhadi-studio:v1:draft:${s}`;
 
 export type SaveResult = { ok: true } | { ok: false; reason: "unavailable" | "quota" | "unknown" };
 

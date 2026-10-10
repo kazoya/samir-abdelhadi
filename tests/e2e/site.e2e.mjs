@@ -15,7 +15,7 @@ const ok = (name, cond, extra = "") => {
 };
 
 const routes = ["/", "/planner", "/services", "/training", "/activities", "/opportunities", "/contact", "/developer"];
-const allowedExternal = ["wa.me", "ghinamedia.com", "www.facebook.com", "www.instagram.com", "www.linkedin.com", "www.google.com"];
+const allowedExternal = ["wa.me", "www.zadforarts.com", "www.jordanpolitics.org", "senate.jo", "github.com", "www.google.com"];
 const LABEL = "تصوّر تجريبي مستقل — غير تابع للموقع الرسمي";
 
 const b = await chromium.launch();
@@ -69,7 +69,7 @@ for (const [vp, w, h] of [["desktop", 1366, 900], ["mobile", 390, 844]]) {
 
   // المخطِّط: تغطيه tests/e2e/studio.e2e.mjs في المستودع؛ هنا فحص دخان فقط
   await p.goto(BASE + "/planner", { waitUntil: "networkidle" });
-  await p.getByRole("button", { name: "متجر إلكتروني" }).click();
+  await p.getByRole("button", { name: "جمهور عام" }).click();
   ok(`${vp} planner studio loads and advances`, (await p.locator("main").innerText()).includes("سؤال 2 من 5"));
 
   // الروابط
@@ -81,8 +81,8 @@ for (const [vp, w, h] of [["desktop", 1366, 900], ["mobile", 390, 844]]) {
   let bad = [];
   for (const l of links) {
     const u = new URL(l);
-    if (u.protocol === "tel:") { if (l !== "tel:+962781385015") bad.push(l); continue; }
-    if (u.protocol === "mailto:") { if (l !== "mailto:ghina@ghinamedia.com") bad.push(l); continue; }
+    if (u.protocol === "tel:") { if (l !== "tel:+962787523192") bad.push(l); continue; }
+    if (u.protocol === "mailto:") { bad.push(l); continue; }
     if (u.host === host) {
       const s = (await fetch(u.href.split("#")[0])).status;
       if (s !== 200) bad.push(`${l} → ${s}`);

@@ -9,7 +9,7 @@ export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1
   const svc = (id: string) => services.find((s) => s.id === id)?.ar ?? id;
   return (
     <article className="print-brief hidden print:block">
-      <p className="pb-note">تصوّر تجريبي مستقل — غير تابع للموقع الرسمي لغنى ميديا · ghinamedia.com</p>
+      <p className="pb-note">تصوّر تجريبي مستقل — غير تابع للموقع الرسمي</p>
       <h1>موجز خطة نمو — 30 يوماً</h1>
       {name.trim() && <p>الاسم: {name.trim()}</p>}
       <ul>
@@ -71,7 +71,7 @@ export function PrintBrief({ draft, plan, name }: { draft: DraftV1; plan: PlanV1
             ))}
         </tbody>
       </table>
-      <p className="pb-note">لا أسعار ولا وعود بنتائج. العرض والسعر يحددهما غنى ميديا بعد التواصل.</p>
+      <p className="pb-note">لا أسعار ولا وعود بنتائج. النشر لاحقاً يعتمد بشرياً.</p>
     </article>
   );
 }

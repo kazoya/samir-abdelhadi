@@ -12,19 +12,14 @@ export function SiteFooter() {
             {brand.nameAr} · {brand.nameEn}
           </p>
           <p className="mt-3 max-w-md text-sm leading-7 text-muted">
-            كل الأرقام والأسماء في هذه المنصة مأخوذة من الموقع العلني ghinamedia.com. العروض والأسعار والمواعيد تحددها غنى
-            ميديا وحدها بعد التواصل — لا يوجد تسعير آلي هنا، ولا تُحفظ أي بيانات على خادم.
+            السجل المكتوب من صفحات علنية مذكورة في صفحة السجل. الصورة زوّدها صاحب التصور. خط الواتساب لمطوّر الصفحة، وليس رقماً منشوراً للعين. لا تسعير ولا حفظ على خادم.
           </p>
           <ul className="mt-4 grid gap-1 text-sm">
-            <li>
-              <a className="hover:text-gold-strong" href={`mailto:${brand.email}`}>
-                {brand.email}
-              </a>
-            </li>
             <li>
               <a className="hover:text-gold-strong" href={brand.tel} dir="ltr">
                 {brand.phoneDisplay}
               </a>
+              <span className="text-muted"> مطوّر التصور</span>
             </li>
             <li className="text-muted">{brand.addressAr}</li>
           </ul>

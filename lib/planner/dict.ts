@@ -2,21 +2,21 @@
 import type { BusinessId, ChannelId, GoalId, PostChannel, PostStatus, TeamId, TimelineId } from "./types.ts";
 
 export const businessLabel: Record<BusinessId, string> = {
-  startup: "مشروع ناشئ",
-  sme: "شركة صغيرة أو متوسطة",
-  ecommerce: "متجر إلكتروني",
-  medical: "عيادة أو قطاع طبي",
-  education: "جهة تدريبية أو جامعة",
-  personal: "علامة شخصية",
+  startup: "شباب ومبادرات",
+  sme: "مؤسسة ثقافية",
+  ecommerce: "جمهور عام",
+  medical: "صحة وعطاء",
+  education: "تعليم وطلبة",
+  personal: "السيرة نفسها",
 };
 
 export const goalLabel: Record<GoalId, string> = {
-  leads: "مبيعات وطلبات أكثر",
-  search: "ظهور في بحث Google",
-  social: "حضور أقوى على السوشال ميديا",
-  identity: "هوية بصرية جديدة",
-  website: "موقع أو متجر جديد",
-  training: "تدريب فريقي",
+  leads: "حوار ومتابعة أوضح",
+  search: "ظهور موثّق في البحث",
+  social: "حضور على المنصات",
+  identity: "رسالة واحدة واضحة",
+  website: "صفحة مرجع ثابتة",
+  training: "نقل الخبرة",
 };
 
 export const channelLabel: Record<ChannelId, string> = {
@@ -29,10 +29,10 @@ export const channelLabel: Record<ChannelId, string> = {
 };
 
 export const teamLabel: Record<TeamId, string> = {
-  solo: "أنا وحدي",
-  one: "موظف واحد",
-  team: "فريق داخلي",
-  nobody: "لا أحد",
+  solo: "شخص واحد",
+  one: "مساعد واحد",
+  team: "مكتب صغير",
+  nobody: "لا أحد بعد",
 };
 
 export const timelineLabel: Record<TimelineId, string> = {
@@ -64,9 +64,9 @@ export const phaseLabel: Record<1 | 2 | 3 | 4, string> = {
 };
 
 export const questions = [
-  { key: "businessId", q: "ما نوع نشاطك؟", labels: businessLabel, multi: false },
+  { key: "businessId", q: "من تخاطب أولاً؟", labels: businessLabel, multi: false },
   { key: "goalId", q: "ما الهدف الأهم في الأشهر الثلاثة القادمة؟", labels: goalLabel, multi: false },
-  { key: "channelIds", q: "ما القنوات التي لديك الآن؟ (اختر كل ما ينطبق)", labels: channelLabel, multi: true },
-  { key: "teamId", q: "من يدير التسويق عندك اليوم؟", labels: teamLabel, multi: false },
+  { key: "channelIds", q: "ما القنوات القائمة الآن؟ (اختر كل ما ينطبق)", labels: channelLabel, multi: true },
+  { key: "teamId", q: "من يعدّ المواد اليوم؟", labels: teamLabel, multi: false },
   { key: "timelineId", q: "متى تريد البدء؟", labels: timelineLabel, multi: false },
 ] as const;
