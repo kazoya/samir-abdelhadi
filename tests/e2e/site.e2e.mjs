@@ -81,7 +81,7 @@ for (const [vp, w, h] of [["desktop", 1366, 900], ["mobile", 390, 844]]) {
   let bad = [];
   for (const l of links) {
     const u = new URL(l);
-    if (u.protocol === "tel:") { if (l !== "tel:+962787523192") bad.push(l); continue; }
+    if (u.protocol === "tel:") { if (l !== "tel:+962795555772") bad.push(l); continue; }
     if (u.protocol === "mailto:") { bad.push(l); continue; }
     if (u.host === host) {
       const s = (await fetch(u.href.split("#")[0])).status;
@@ -89,7 +89,7 @@ for (const [vp, w, h] of [["desktop", 1366, 900], ["mobile", 390, 844]]) {
       continue;
     }
     if (!allowedExternal.includes(u.host)) bad.push(l);
-    if (u.host === "wa.me" && !["/962781385015", "/962787523192"].includes(u.pathname)) bad.push(l);
+    if (u.host === "wa.me" && !["/962795555772", "/962787523192"].includes(u.pathname)) bad.push(l);
   }
   ok(`${vp} all ${links.size} links valid (internal 200, external whitelisted)`, bad.length === 0, bad.join(" | "));
 

@@ -58,7 +58,7 @@ export default function TrainingPage() {
       <section className="mt-12 flex flex-col items-start gap-4 rounded-3xl border border-gold/40 bg-gold-soft p-8 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-lg font-bold">تريد تطبيق المنهج على مادة محددة؟</p>
-          <p className="mt-1 text-sm text-muted">المراجعة مع مطوّر التصور. لا موعد يُحجز من هذه الصفحة.</p>
+          <p className="mt-1 text-sm text-muted">الرابط يفتح واتسابه. لا موعد يُحجز من هذه الصفحة.</p>
         </div>
         <CtaLink href={waLink("مرحباً، أريد مراجعة منهج حضور عبدالهادي على مادة محددة.")}>افتح واتساب</CtaLink>
       </section>

@@ -12,14 +12,14 @@ export function SiteFooter() {
             {brand.nameAr} · {brand.nameEn}
           </p>
           <p className="mt-3 max-w-md text-sm leading-7 text-muted">
-            السجل المكتوب من صفحات علنية مذكورة في صفحة السجل. الصورة زوّدها صاحب التصور. خط الواتساب لمطوّر الصفحة، وليس رقماً منشوراً للعين. لا تسعير ولا حفظ على خادم.
+            السجل المكتوب من صفحات علنية مذكورة في صفحة السجل. الصورة ورقم الواتساب زوّدهما صاحب التصور، وليسا من موقع المجلس. لا تسعير ولا حفظ على خادم.
           </p>
           <ul className="mt-4 grid gap-1 text-sm">
             <li>
               <a className="hover:text-gold-strong" href={brand.tel} dir="ltr">
                 {brand.phoneDisplay}
               </a>
-              <span className="text-muted"> مطوّر التصور</span>
+              <span className="text-muted"> واتسابه</span>
             </li>
             <li className="text-muted">{brand.addressAr}</li>
           </ul>

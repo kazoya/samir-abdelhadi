@@ -60,7 +60,7 @@ export function whatsappMessage(d: DraftV1, plan: PlanV1, name = ""): string {
     name.trim() ? `أنا ${name.trim()}.` : "",
     ...answersSummary(d),
     `المسارات المقترحة للنقاش: ${plan.recommendations.map((r) => serviceName(r.serviceId)).join("، ")}`,
-    "تصوّر تجريبي مستقل. أرغب بمراجعة الموجز مع مطوّر التصور، ولا أرسل هذا باسم العين.",
+    "تصوّر تجريبي مستقل. أرغب بمراجعة هذا الموجز.",
   ]
     .filter(Boolean)
     .join("\n");

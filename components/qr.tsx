@@ -13,8 +13,8 @@ export function DevQr() {
 export function BrandQr() {
   return (
     <figure className="w-fit rounded-2xl bg-white p-4">
-      <QRCodeSVG value={brand.whatsappUrl} size={168} fgColor="#110f0d" bgColor="#ffffff" level="M" title="واتساب مطوّر التصور" />
-      <figcaption className="mt-2 text-center text-xs font-bold text-[#110f0d]">واتساب مطوّر التصور، ليس رقماً للعين</figcaption>
+      <QRCodeSVG value={brand.whatsappUrl} size={168} fgColor="#110f0d" bgColor="#ffffff" level="M" title="واتساب سمير عبدالهادي" />
+      <figcaption className="mt-2 text-center text-xs font-bold text-[#110f0d]">واتساب سمير عبدالهادي</figcaption>
     </figure>
   );
 }

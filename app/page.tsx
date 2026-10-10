@@ -149,11 +149,11 @@ export default function Home() {
       </section>
 
       <section className="relative mt-20 overflow-hidden rounded-3xl bg-gold p-8 text-bg md:p-12">
-        <h2 className="text-2xl font-bold md:text-3xl">المراجعة مع مطوّر التصور، لا مع رقم لم يُنشر.</h2>
-        <p className="mt-3 max-w-2xl leading-8">لا هاتف للعين في المصادر التي فُحصت واعتمدناها هنا. الرسالة تفتح واتساب صهيب الصالح، وترسلها أنت.</p>
+        <h2 className="text-2xl font-bold md:text-3xl">راسله على واتساب عندما تجهز.</h2>
+        <p className="mt-3 max-w-2xl leading-8">الرابط يفتح محادثته. الرسالة لا تخرج حتى تضغط إرسال داخل واتساب.</p>
         <div className="mt-6">
-          <a href={waLink("مرحباً، رأيت تصور حضور عبدالهادي وأرغب بمراجعته.")} target="_blank" rel="noopener noreferrer" className="btn bg-bg text-gold-strong hover:bg-raised">
-            واتساب المطوّر
+          <a href={waLink("مرحباً، رأيت تصور الحضور وأرغب بمراجعته.")} target="_blank" rel="noopener noreferrer" className="btn bg-bg text-gold-strong hover:bg-raised">
+            واتسابه
           </a>
         </div>
       </section>

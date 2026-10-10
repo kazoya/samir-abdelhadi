@@ -25,7 +25,7 @@ export default function PlannerPage() {
               <p className="mt-2">
                 الاستوديو يحتاج JavaScript. يمكنك التواصل مباشرة:{" "}
                 <a className="underline" href={brand.whatsappUrl}>
-                  واتساب مطوّر التصور
+                  واتسابه
                 </a>
                 .
               </p>

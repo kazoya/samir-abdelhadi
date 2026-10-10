@@ -5,7 +5,7 @@ export function SalesBar() {
   return (
     <div data-sales-bar className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5">
-        <p className="hidden text-sm text-muted md:block">الموجز يُراجع مع مطوّر التصور. لا إرسال باسم العين.</p>
+        <p className="hidden text-sm text-muted md:block">الرسالة تفتح واتسابه. الإرسال يتم بيدك.</p>
         <div className="flex w-full gap-2 md:w-auto">
           <a
             href={waLink("مرحباً، رأيت تصور حضور عبدالهادي وأرغب بمراجعة الموجز.")}

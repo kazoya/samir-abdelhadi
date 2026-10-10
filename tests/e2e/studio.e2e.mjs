@@ -128,7 +128,7 @@ async function downloadText(p, trigger) {
   // واتساب: الرابط فقط، لا نقر
   const wa = await p.locator("[data-wa]").getAttribute("href");
   const msg = decodeURIComponent(wa.split("text=")[1]);
-  ok("whatsapp: concept line + encoded short message", wa.startsWith("https://wa.me/962787523192?text=") && msg.includes("أنا سارة.") && msg.includes("تصوّر تجريبي مستقل") && msg.length < 700);
+  ok("whatsapp: his line + encoded short message", wa.startsWith("https://wa.me/962795555772?text=") && msg.includes("أنا سارة.") && msg.includes("تصوّر تجريبي مستقل") && msg.length < 700);
 
   // reload → استعادة من المسودة
   await p.reload({ waitUntil: "networkidle" });

@@ -1,6 +1,6 @@
 // السجل المكتوب من صفحات علنية فُحصت في 2026-10-10.
 // الصورة في public/samir-portrait.png زوّدها صاحب التصور، وليست من تلك الصفحات.
-// لا هاتف ولا بريد للعين هنا: خط النقاش هو مطوّر التصور فقط.
+// واتساب العين زوّده صاحب التصور في 2026-10-10. ليس مأخوذاً من صفحة مجلس الأعيان.
 import type { GoalId } from "./planner/types.ts";
 
 export const ZAD = "https://www.zadforarts.com/samir-abdul-hadi-fund-for-culture-and-arts";
@@ -14,10 +14,10 @@ export const brand = {
   nameEn: "Abdelhadi Presence",
   lead: "سمير نعيم عبدالهادي",
   site: ZAD,
-  phoneDisplay: "+962 78 752 3192",
-  phoneDigits: "962787523192",
-  tel: "tel:+962787523192",
-  whatsappUrl: "https://wa.me/962787523192",
+  phoneDisplay: "+962 7 9555 5772",
+  phoneDigits: "962795555772",
+  tel: "tel:+962795555772",
+  whatsappUrl: "https://wa.me/962795555772",
   email: "",
   addressAr: "عمّان، الأردن",
   addressEn: "Amman, Jordan",
@@ -43,7 +43,7 @@ export const nav = [
   { href: "/contact", label: "تواصل" },
 ] as const;
 
-export function waLink(text: string, digits: string = developer.whatsappDigits) {
+export function waLink(text: string, digits: string = brand.phoneDigits) {
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
 
